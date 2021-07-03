@@ -1,0 +1,119 @@
+import { ForgotPasswordComponent } from './common/forgot-password/forgot-password.component';
+import { ChatComponent } from './common/chat/chat.component';
+import { RegisterComponent } from './common/register/register.component';
+import { LoginComponent } from './common/login/login.component';
+import { HomeComponent } from './core/home/home.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { AppointmentsComponent } from './doctor/appointments/appointments.component';
+import { DoctorDashboardComponent } from './doctor/doctor-dashboard/doctor-dashboard.component';
+import { MyPatientsComponent } from './doctor/my-patients/my-patients.component';
+import { ScheduleTimingsComponent } from './doctor/schedule-timings/schedule-timings.component';
+import { ChatDoctorComponent } from './doctor/chat-doctor/chat-doctor.component';
+import { DoctorAddBlogComponent } from './doctor/doctor-add-blog/doctor-add-blog.component';
+import { DoctorBlogComponent } from './doctor/doctor-blog/doctor-blog.component';
+import { DoctorProfileSettingsComponent } from './doctor/doctor-profile-settings/doctor-profile-settings.component';
+import { DoctorRegisterComponent } from './doctor/doctor-register/doctor-register.component';
+import { InvoicesComponent } from './doctor/invoices/invoices.component';
+import { ReviewsComponent } from './doctor/reviews/reviews.component';
+import { DoctorChangePasswordComponent } from './doctor/doctor-change-password/doctor-change-password.component';
+import { SocialMediaComponent } from './doctor/social-media/social-media.component';
+import { BookingSuccessComponent } from './patient/booking-success/booking-success.component';
+import { BookingComponent } from './patient/booking/booking.component';
+import { ChangePasswordComponent } from './patient/change-password/change-password.component';
+import { CheckoutComponent } from './patient/checkout/checkout.component';
+import { DoctorProfileComponent } from './patient/doctor-profile/doctor-profile.component';
+import { FavouritesComponent } from './patient/favourites/favourites.component';
+import { MapGridComponent } from './patient/map-grid/map-grid.component';
+import { MapListComponent } from './patient/map-list/map-list.component';
+import { PatientDashboardComponent } from './patient/patient-dashboard/patient-dashboard.component';
+import { ProfileSettingsComponent } from './patient/profile-settings/profile-settings.component';
+import { SearchComponent } from './patient/search/search.component';
+import { InvoiceViewComponent } from './patient/invoice-view/invoice-view.component';
+import { CartComponent } from './pharmacy/cart/cart.component';
+import { PaymentSuccessComponent } from './pharmacy/payment-success/payment-success.component';
+import { PharmacyDetailsComponent } from './pharmacy/pharmacy-details/pharmacy-details.component';
+import { PharmacySearchComponent } from './pharmacy/pharmacy-search/pharmacy-search.component';
+import { PharmacyComponent } from './pharmacy/pharmacy/pharmacy.component';
+import { ProductAllComponent } from './pharmacy/product-all/product-all.component';
+import { ProductCheckoutComponent } from './pharmacy/product-checkout/product-checkout.component';
+import { ProductDescriptionComponent } from './pharmacy/product-description/product-description.component';
+import { VoiceCallComponent } from './common/voice-call/voice-call.component';
+import { VideoCallComponent } from './common/video-call/video-call.component';
+import { CalendarComponent } from './common/calendar/calendar.component';
+import { ComponentsComponent } from './common/components/components.component';
+import { Home1Component } from './core/home1/home-1.component';
+import { Home2Component } from './core/home2/home-2.component';
+import { BlogDetailsComponent } from './blog/blog-details/blog-details.component';
+import { BlogGridComponent } from './blog/blog-grid/blog-grid.component';
+import { BlogListComponent } from './blog/blog-list/blog-list.component';
+
+const routes: Routes = [
+  // Home
+  { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'home1', component: Home1Component },
+  { path: 'home2', component: Home2Component },
+
+  // Doctor
+  { path: 'doctor-dashboard', component: DoctorDashboardComponent },
+  { path: 'appointments', component: AppointmentsComponent },
+  { path: 'schedule-timings', component: ScheduleTimingsComponent },
+  { path: 'my-patients', component: MyPatientsComponent },
+  { path: 'patient-profile', component: AppointmentsComponent },
+  { path: 'chat-doctor', component: ChatDoctorComponent },
+  { path: 'invoices', component: InvoicesComponent },
+  { path: 'doctor-profile-settings', component: DoctorProfileSettingsComponent},
+  { path: 'reviews', component: ReviewsComponent },
+  { path: 'social-media', component: SocialMediaComponent },
+  { path: 'doctor-change-password', component: DoctorChangePasswordComponent },
+  { path: 'doctor-register', component: DoctorRegisterComponent },
+  { path: 'doctor-blog', component: DoctorBlogComponent },
+  { path: 'doctor-add-blog', component: DoctorAddBlogComponent },
+
+  // Patient
+  { path: 'map-grid', component: MapGridComponent },
+  { path: 'map-list', component: MapListComponent },
+  { path: 'search', component: SearchComponent },
+  { path: 'doctor-profile', component: DoctorProfileComponent },
+  { path: 'booking', component: BookingComponent },
+  { path: 'checkout', component: CheckoutComponent },
+  { path: 'booking-success', component: BookingSuccessComponent },
+  { path: 'patient-dashboard', component: PatientDashboardComponent },
+  { path: 'favourites', component: FavouritesComponent },
+  { path: 'profile-settings', component: ProfileSettingsComponent },
+  { path: 'change-password', component: ChangePasswordComponent },
+  { path: 'invoice-view', component: InvoiceViewComponent },
+
+  // Pharmacy
+  { path: 'pharmacy', component: PharmacyComponent },
+  { path: 'pharmacy-details', component: PharmacyDetailsComponent },
+  { path: 'pharmacy-search', component: PharmacySearchComponent },
+  { path: 'product-all', component: ProductAllComponent },
+  { path: 'product-description', component: ProductDescriptionComponent },
+  { path: 'cart', component: CartComponent },
+  { path: 'product-checkout', component: ProductCheckoutComponent },
+  { path: 'payment-success', component: PaymentSuccessComponent },
+
+  // Blog
+  { path: 'blog-list', component: BlogListComponent },
+  { path: 'blog-grid', component: BlogGridComponent },
+  { path: 'blog-details', component: BlogDetailsComponent },
+
+  // Common
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'chat', component: ChatComponent },
+  { path: 'voice-call', component: VoiceCallComponent },
+  { path: 'video-call', component: VideoCallComponent },
+  { path: 'calendar', component: CalendarComponent },
+  { path: 'components', component: ComponentsComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent }
+
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
+})
+export class AppRoutingModule {}
