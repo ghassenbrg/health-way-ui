@@ -1,38 +1,38 @@
 <nav class="navbar navbar-expand-lg header-nav">
     <div class="navbar-header">
-        <a id="mobile_btn" href="javascript:void(0);">
+        <a id="mobile_btn" routerLink="javascript:void(0);">
             <span class="bar-icon">
                 <span></span>
                 <span></span>
                 <span></span>
             </span>
         </a>
-        <a href="" class="navbar-brand logo">
+        <a routerLink="" class="navbar-brand logo">
             <img src="assets/img/logo.png" class="img-fluid" alt="Logo">
         </a>
     </div>
     <div class="main-menu-wrapper">
         <div class="menu-header">
-            <a href="" class="menu-logo">
+            <a routerLink="" class="menu-logo">
                 <img src="assets/img/logo.png" class="img-fluid" alt="Logo">
             </a>
-            <a id="menu_close" class="menu-close" href="javascript:void(0);">
+            <a id="menu_close" class="menu-close" routerLink="javascript:void(0);">
                 <i class="fas fa-times"></i>
             </a>
         </div>
         <ul class="main-nav">
             <li class="has-submenu active">
-                <a href="#">Home <i class="fas fa-chevron-down"></i></a>
+                <a routerLink="#">Home <i class="fas fa-chevron-down"></i></a>
                 <ul class="submenu">
-                    <li class="active"><a href="home">Home</a></li>
-                    <li><a href="home1">Home 1</a></li>
-                    <li><a href="home2">Home 2</a></li>
-                    <!-- <li><a href="home3">Home slider 1</a></li>
-                    <li><a href="home-slide">Home slider 2</a></li> -->
+                    <li class="active"><a routerLink="home">Home</a></li>
+                    <li><a routerLink="home1">Home 1</a></li>
+                    <li><a routerLink="home2">Home 2</a></li>
+                    <!-- <li><a routerLink="home3">Home slider 1</a></li>
+                    <li><a routerLink="home-slide">Home slider 2</a></li> -->
                 </ul>
             </li>
             <li class="has-submenu">
-                <a href="#">Doctors <i class="fas fa-chevron-down"></i></a>
+                <a routerLink="#">Doctors <i class="fas fa-chevron-down"></i></a>
                 <ul class="submenu">
                     <li><a routerLink="doctor-dashboard">Doctor Dashboard</a></li>
                     <li><a routerLink="appointments">Appointments</a></li>
@@ -55,10 +55,10 @@
                 </ul>
             </li>	
             <li class="has-submenu">
-                <a href="#">Patients <i class="fas fa-chevron-down"></i></a>
+                <a routerLink="#">Patients <i class="fas fa-chevron-down"></i></a>
                 <ul class="submenu">
                     <li class="has-submenu">
-                        <a href="#">Doctors</a>
+                        <a routerLink="#">Doctors</a>
                         <ul class="submenu">
                             <li><a routerLink="map-grid">Map Grid</a></li>
                             <li><a routerLink="map-list">Map List</a></li>
@@ -77,56 +77,56 @@
                 </ul>
             </li>
             <li class="has-submenu">
-                <a href="#">Pharmacy <i class="fas fa-chevron-down"></i></a>
+                <a routerLink="#">Pharmacy <i class="fas fa-chevron-down"></i></a>
                 <ul class="submenu">
-                    <li><a href="pharmacy">Pharmacy</a></li>
-                    <li><a href="pharmacy-details">Pharmacy Details</a></li>
-                    <li><a href="pharmacy-search">Pharmacy Search</a></li>
-                    <li><a href="product-all">Product</a></li>
-                    <li><a href="product-description">Product Description</a></li>
-                    <li><a href="cart">Cart</a></li>
-                    <li><a href="product-checkout">Product Checkout</a></li>
-                    <li><a href="payment-success">Payment Success</a></li>
+                    <li><a routerLink="pharmacy">Pharmacy</a></li>
+                    <li><a routerLink="pharmacy-details">Pharmacy Details</a></li>
+                    <li><a routerLink="pharmacy-search">Pharmacy Search</a></li>
+                    <li><a routerLink="product-all">Product</a></li>
+                    <li><a routerLink="product-description">Product Description</a></li>
+                    <li><a routerLink="cart">Cart</a></li>
+                    <li><a routerLink="product-checkout">Product Checkout</a></li>
+                    <li><a routerLink="payment-success">Payment Success</a></li>
                 </ul>
             </li>
             <li class="has-submenu">
-                <a href="#">Pages <i class="fas fa-chevron-down"></i></a>
+                <a routerLink="#">Pages <i class="fas fa-chevron-down"></i></a>
                 <ul class="submenu">
-                    <li><a href="voice-call">Voice Call</a></li>
-                    <li><a href="video-call">Video Call</a></li>
-                    <li><a href="search">Search Doctors</a></li>
-                    <li><a href="calendar">Calendar</a></li>
-                    <li><a href="components">Components</a></li>
+                    <li><a routerLink="voice-call">Voice Call</a></li>
+                    <li><a routerLink="video-call">Video Call</a></li>
+                    <li><a routerLink="search">Search Doctors</a></li>
+                    <li><a routerLink="calendar">Calendar</a></li>
+                    <li><a routerLink="components">Components</a></li>
                     <li class="has-submenu">
-                        <a href="invoices">Invoices</a>
+                        <a routerLink="invoices">Invoices</a>
                         <ul class="submenu">
-                            <li><a href="invoices">Invoices</a></li>
-                            <li><a href="invoice-view">Invoice View</a></li>
+                            <li><a routerLink="invoices">Invoices</a></li>
+                            <li><a routerLink="invoice-view">Invoice View</a></li>
                         </ul>
                     </li>
-                    <li><a href="blank-page">Starter Page</a></li>
-                    <li><a href="login">Login</a></li>
-                    <li><a href="register">Register</a></li>
-                    <li><a href="forgot-password">Forgot Password</a></li>
+                    <li><a routerLink="blank-page">Starter Page</a></li>
+                    <li><a routerLink="login">Login</a></li>
+                    <li><a routerLink="register">Register</a></li>
+                    <li><a routerLink="forgot-password">Forgot Password</a></li>
                 </ul>
             </li>
             <li class="has-submenu">
-                <a href="#">Blog <i class="fas fa-chevron-down"></i></a>
+                <a routerLink="#">Blog <i class="fas fa-chevron-down"></i></a>
                 <ul class="submenu">
-                    <li><a href="blog-list">Blog List</a></li>
-                    <li><a href="blog-grid">Blog Grid</a></li>
-                    <li><a href="blog-details">Blog Details</a></li>
+                    <li><a routerLink="blog-list">Blog List</a></li>
+                    <li><a routerLink="blog-grid">Blog Grid</a></li>
+                    <li><a routerLink="blog-details">Blog Details</a></li>
                 </ul>
             </li>
             <!-- <li class="has-submenu">
-                <a href="#" target="_blank">Admin <i class="fas fa-chevron-down"></i></a>
+                <a routerLink="#" target="_blank">Admin <i class="fas fa-chevron-down"></i></a>
                 <ul class="submenu">
-                    <li><a href="" target="_blank">Admin</a></li>
-                    <li><a href="" target="_blank">Pharmacy Admin</a></li>
+                    <li><a routerLink="" target="_blank">Admin</a></li>
+                    <li><a routerLink="" target="_blank">Pharmacy Admin</a></li>
                 </ul>
             </li> -->
             <li class="login-link">
-                <a href="login">Login / Signup</a>
+                <a routerLink="login">Login / Signup</a>
             </li>
         </ul>		 
     </div>		 
@@ -141,9 +141,7 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link header-login" href="login">login / Signup </a>
+            <a class="nav-link header-login" routerLink="login">login / Signup </a>
         </li>
     </ul>
 </nav>
-
-<router-outlet></router-outlet>

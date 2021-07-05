@@ -11,7 +11,7 @@
                 <div class="col-md-12 col-12">
                     <nav aria-label="breadcrumb" class="page-breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="">Home</a></li>
+                            <li class="breadcrumb-item"><a routerLink="">Home</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
                         </ol>
                     </nav>
@@ -33,7 +33,7 @@
                     <div class="profile-sidebar">
                         <div class="widget-profile pro-widget-content">
                             <div class="profile-info-widget">
-                                <a href="#" class="booking-doc-img">
+                                <a routerLink="#" class="booking-doc-img">
                                     <img src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image">
                                 </a>
                                 <div class="profile-det-info">
@@ -49,68 +49,68 @@
                             <nav class="dashboard-menu">
                                 <ul>
                                     <li class="active">
-                                        <a href="doctor-dashboard">
+                                        <a routerLink="doctor-dashboard">
                                             <i class="fas fa-columns"></i>
                                             <span>Dashboard</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="appointments">
+                                        <a routerLink="appointments">
                                             <i class="fas fa-calendar-check"></i>
                                             <span>Appointments</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="my-patients">
+                                        <a routerLink="my-patients">
                                             <i class="fas fa-user-injured"></i>
                                             <span>My Patients</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="schedule-timings">
+                                        <a routerLink="schedule-timings">
                                             <i class="fas fa-hourglass-start"></i>
                                             <span>Schedule Timings</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="invoices">
+                                        <a routerLink="invoices">
                                             <i class="fas fa-file-invoice"></i>
                                             <span>Invoices</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="reviews">
+                                        <a routerLink="reviews">
                                             <i class="fas fa-star"></i>
                                             <span>Reviews</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="chat-doctor">
+                                        <a routerLink="chat-doctor">
                                             <i class="fas fa-comments"></i>
                                             <span>Message</span>
                                             <small class="unread-msg">23</small>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="doctor-profile-settings">
+                                        <a routerLink="doctor-profile-settings">
                                             <i class="fas fa-user-cog"></i>
                                             <span>Profile Settings</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="social-media">
+                                        <a routerLink="social-media">
                                             <i class="fas fa-share-alt"></i>
                                             <span>Social Media</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="doctor-change-password">
+                                        <a routerLink="doctor-change-password">
                                             <i class="fas fa-lock"></i>
                                             <span>Change Password</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="doctor-register">
+                                        <a routerLink="doctor-register">
                                             <i class="fas fa-sign-out-alt"></i>
                                             <span>Logout</span>
                                         </a>
@@ -188,10 +188,10 @@
                                 <!-- Appointment Tab -->
                                 <ul class="nav nav-tabs nav-tabs-solid nav-tabs-rounded">
                                     <li class="nav-item">
-                                        <a class="nav-link active" href="#upcoming-appointments" data-toggle="tab">Upcoming</a>
+                                        <a class="nav-link active" routerLink="#upcoming-appointments" data-toggle="tab">Upcoming</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#today-appointments" data-toggle="tab">Today</a>
+                                        <a class="nav-link" routerLink="#today-appointments" data-toggle="tab">Today</a>
                                     </li> 
                                 </ul>
                                 <!-- /Appointment Tab -->
@@ -218,8 +218,8 @@
                                                             <tr>
                                                                 <td>
                                                                     <h2 class="table-avatar">
-                                                                        <a href="patient-profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient.jpg" alt="User Image"></a>
-                                                                        <a href="patient-profile">Richard Wilson <span>#PT0016</span></a>
+                                                                        <a routerLink="patient-profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient.jpg" alt="User Image"></a>
+                                                                        <a routerLink="patient-profile">Richard Wilson <span>#PT0016</span></a>
                                                                     </h2>
                                                                 </td>
                                                                 <td>11 Nov 2019 <span class="d-block text-info">10.00 AM</span></td>
@@ -228,14 +228,14 @@
                                                                 <td class="text-center">$150</td>
                                                                 <td class="text-right">
                                                                     <div class="table-action">
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-info-light">
                                                                             <i class="far fa-eye"></i> View
                                                                         </a>
                                                                         
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-success-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
                                                                             <i class="fas fa-check"></i> Accept
                                                                         </a>
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-danger-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
                                                                             <i class="fas fa-times"></i> Cancel
                                                                         </a>
                                                                     </div>
@@ -244,8 +244,8 @@
                                                             <tr>
                                                                 <td>
                                                                     <h2 class="table-avatar">
-                                                                        <a href="patient-profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient1.jpg" alt="User Image"></a>
-                                                                        <a href="patient-profile">Charlene Reed <span>#PT0001</span></a>
+                                                                        <a routerLink="patient-profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient1.jpg" alt="User Image"></a>
+                                                                        <a routerLink="patient-profile">Charlene Reed <span>#PT0001</span></a>
                                                                     </h2>
                                                                 </td>
                                                                 <td>3 Nov 2019 <span class="d-block text-info">11.00 AM</span></td>
@@ -254,14 +254,14 @@
                                                                 <td class="text-center">$200</td>
                                                                 <td class="text-right">
                                                                     <div class="table-action">
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-info-light">
                                                                             <i class="far fa-eye"></i> View
                                                                         </a>
                                                                         
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-success-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
                                                                             <i class="fas fa-check"></i> Accept
                                                                         </a>
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-danger-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
                                                                             <i class="fas fa-times"></i> Cancel
                                                                         </a>
                                                                     </div>
@@ -270,8 +270,8 @@
                                                             <tr>
                                                                 <td>
                                                                     <h2 class="table-avatar">
-                                                                        <a href="patient-profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient2.jpg" alt="User Image"></a>
-                                                                        <a href="patient-profile">Travis Trimble  <span>#PT0002</span></a>
+                                                                        <a routerLink="patient-profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient2.jpg" alt="User Image"></a>
+                                                                        <a routerLink="patient-profile">Travis Trimble  <span>#PT0002</span></a>
                                                                     </h2>
                                                                 </td>
                                                                 <td>1 Nov 2019 <span class="d-block text-info">1.00 PM</span></td>
@@ -280,14 +280,14 @@
                                                                 <td class="text-center">$75</td>
                                                                 <td class="text-right">
                                                                     <div class="table-action">
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-info-light">
                                                                             <i class="far fa-eye"></i> View
                                                                         </a>
                                                                         
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-success-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
                                                                             <i class="fas fa-check"></i> Accept
                                                                         </a>
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-danger-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
                                                                             <i class="fas fa-times"></i> Cancel
                                                                         </a>
                                                                     </div>
@@ -296,8 +296,8 @@
                                                             <tr>
                                                                 <td>
                                                                     <h2 class="table-avatar">
-                                                                        <a href="patient-profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient3.jpg" alt="User Image"></a>
-                                                                        <a href="patient-profile">Carl Kelly <span>#PT0003</span></a>
+                                                                        <a routerLink="patient-profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient3.jpg" alt="User Image"></a>
+                                                                        <a routerLink="patient-profile">Carl Kelly <span>#PT0003</span></a>
                                                                     </h2>
                                                                 </td>
                                                                 <td>30 Oct 2019 <span class="d-block text-info">9.00 AM</span></td>
@@ -306,14 +306,14 @@
                                                                 <td class="text-center">$100</td>
                                                                 <td class="text-right">
                                                                     <div class="table-action">
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-info-light">
                                                                             <i class="far fa-eye"></i> View
                                                                         </a>
                                                                         
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-success-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
                                                                             <i class="fas fa-check"></i> Accept
                                                                         </a>
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-danger-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
                                                                             <i class="fas fa-times"></i> Cancel
                                                                         </a>
                                                                     </div>
@@ -322,8 +322,8 @@
                                                             <tr>
                                                                 <td>
                                                                     <h2 class="table-avatar">
-                                                                        <a href="patient-profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient4.jpg" alt="User Image"></a>
-                                                                        <a href="patient-profile">Michelle Fairfax <span>#PT0004</span></a>
+                                                                        <a routerLink="patient-profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient4.jpg" alt="User Image"></a>
+                                                                        <a routerLink="patient-profile">Michelle Fairfax <span>#PT0004</span></a>
                                                                     </h2>
                                                                 </td>
                                                                 <td>28 Oct 2019 <span class="d-block text-info">6.00 PM</span></td>
@@ -332,14 +332,14 @@
                                                                 <td class="text-center">$350</td>
                                                                 <td class="text-right">
                                                                     <div class="table-action">
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-info-light">
                                                                             <i class="far fa-eye"></i> View
                                                                         </a>
                                                                         
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-success-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
                                                                             <i class="fas fa-check"></i> Accept
                                                                         </a>
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-danger-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
                                                                             <i class="fas fa-times"></i> Cancel
                                                                         </a>
                                                                     </div>
@@ -348,8 +348,8 @@
                                                             <tr>
                                                                 <td>
                                                                     <h2 class="table-avatar">
-                                                                        <a href="patient-profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient5.jpg" alt="User Image"></a>
-                                                                        <a href="patient-profile">Gina Moore <span>#PT0005</span></a>
+                                                                        <a routerLink="patient-profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient5.jpg" alt="User Image"></a>
+                                                                        <a routerLink="patient-profile">Gina Moore <span>#PT0005</span></a>
                                                                     </h2>
                                                                 </td>
                                                                 <td>27 Oct 2019 <span class="d-block text-info">8.00 AM</span></td>
@@ -358,14 +358,14 @@
                                                                 <td class="text-center">$250</td>
                                                                 <td class="text-right">
                                                                     <div class="table-action">
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-info-light">
                                                                             <i class="far fa-eye"></i> View
                                                                         </a>
                                                                         
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-success-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
                                                                             <i class="fas fa-check"></i> Accept
                                                                         </a>
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-danger-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
                                                                             <i class="fas fa-times"></i> Cancel
                                                                         </a>
                                                                     </div>
@@ -399,8 +399,8 @@
                                                             <tr>
                                                                 <td>
                                                                     <h2 class="table-avatar">
-                                                                        <a href="patient-profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient6.jpg" alt="User Image"></a>
-                                                                        <a href="patient-profile">Elsie Gilley <span>#PT0006</span></a>
+                                                                        <a routerLink="patient-profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient6.jpg" alt="User Image"></a>
+                                                                        <a routerLink="patient-profile">Elsie Gilley <span>#PT0006</span></a>
                                                                     </h2>
                                                                 </td>
                                                                 <td>14 Nov 2019 <span class="d-block text-info">6.00 PM</span></td>
@@ -409,14 +409,14 @@
                                                                 <td class="text-center">$300</td>
                                                                 <td class="text-right">
                                                                     <div class="table-action">
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-info-light">
                                                                             <i class="far fa-eye"></i> View
                                                                         </a>
                                                                         
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-success-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
                                                                             <i class="fas fa-check"></i> Accept
                                                                         </a>
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-danger-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
                                                                             <i class="fas fa-times"></i> Cancel
                                                                         </a>
                                                                     </div>
@@ -425,8 +425,8 @@
                                                             <tr>
                                                                 <td>
                                                                     <h2 class="table-avatar">
-                                                                        <a href="patient-profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient7.jpg" alt="User Image"></a>
-                                                                        <a href="patient-profile">Joan Gardner <span>#PT0006</span></a>
+                                                                        <a routerLink="patient-profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient7.jpg" alt="User Image"></a>
+                                                                        <a routerLink="patient-profile">Joan Gardner <span>#PT0006</span></a>
                                                                     </h2>
                                                                 </td>
                                                                 <td>14 Nov 2019 <span class="d-block text-info">5.00 PM</span></td>
@@ -435,14 +435,14 @@
                                                                 <td class="text-center">$100</td>
                                                                 <td class="text-right">
                                                                     <div class="table-action">
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-info-light">
                                                                             <i class="far fa-eye"></i> View
                                                                         </a>
                                                                         
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-success-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
                                                                             <i class="fas fa-check"></i> Accept
                                                                         </a>
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-danger-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
                                                                             <i class="fas fa-times"></i> Cancel
                                                                         </a>
                                                                     </div>
@@ -451,8 +451,8 @@
                                                             <tr>
                                                                 <td>
                                                                     <h2 class="table-avatar">
-                                                                        <a href="patient-profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient8.jpg" alt="User Image"></a>
-                                                                        <a href="patient-profile">Daniel Griffing <span>#PT0007</span></a>
+                                                                        <a routerLink="patient-profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient8.jpg" alt="User Image"></a>
+                                                                        <a routerLink="patient-profile">Daniel Griffing <span>#PT0007</span></a>
                                                                     </h2>
                                                                 </td>
                                                                 <td>14 Nov 2019 <span class="d-block text-info">3.00 PM</span></td>
@@ -461,14 +461,14 @@
                                                                 <td class="text-center">$75</td>
                                                                 <td class="text-right">
                                                                     <div class="table-action">
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-info-light">
                                                                             <i class="far fa-eye"></i> View
                                                                         </a>
                                                                         
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-success-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
                                                                             <i class="fas fa-check"></i> Accept
                                                                         </a>
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-danger-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
                                                                             <i class="fas fa-times"></i> Cancel
                                                                         </a>
                                                                     </div>
@@ -477,8 +477,8 @@
                                                             <tr>
                                                                 <td>
                                                                     <h2 class="table-avatar">
-                                                                        <a href="patient-profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient9.jpg" alt="User Image"></a>
-                                                                        <a href="patient-profile">Walter Roberson <span>#PT0008</span></a>
+                                                                        <a routerLink="patient-profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient9.jpg" alt="User Image"></a>
+                                                                        <a routerLink="patient-profile">Walter Roberson <span>#PT0008</span></a>
                                                                     </h2>
                                                                 </td>
                                                                 <td>14 Nov 2019 <span class="d-block text-info">1.00 PM</span></td>
@@ -487,14 +487,14 @@
                                                                 <td class="text-center">$350</td>
                                                                 <td class="text-right">
                                                                     <div class="table-action">
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-info-light">
                                                                             <i class="far fa-eye"></i> View
                                                                         </a>
                                                                         
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-success-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
                                                                             <i class="fas fa-check"></i> Accept
                                                                         </a>
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-danger-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
                                                                             <i class="fas fa-times"></i> Cancel
                                                                         </a>
                                                                     </div>
@@ -503,8 +503,8 @@
                                                             <tr>
                                                                 <td>
                                                                     <h2 class="table-avatar">
-                                                                        <a href="patient-profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient10.jpg" alt="User Image"></a>
-                                                                        <a href="patient-profile">Robert Rhodes <span>#PT0010</span></a>
+                                                                        <a routerLink="patient-profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient10.jpg" alt="User Image"></a>
+                                                                        <a routerLink="patient-profile">Robert Rhodes <span>#PT0010</span></a>
                                                                     </h2>
                                                                 </td>
                                                                 <td>14 Nov 2019 <span class="d-block text-info">10.00 AM</span></td>
@@ -513,14 +513,14 @@
                                                                 <td class="text-center">$175</td>
                                                                 <td class="text-right">
                                                                     <div class="table-action">
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-info-light">
                                                                             <i class="far fa-eye"></i> View
                                                                         </a>
                                                                         
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-success-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
                                                                             <i class="fas fa-check"></i> Accept
                                                                         </a>
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-danger-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
                                                                             <i class="fas fa-times"></i> Cancel
                                                                         </a>
                                                                     </div>
@@ -529,8 +529,8 @@
                                                             <tr>
                                                                 <td>
                                                                     <h2 class="table-avatar">
-                                                                        <a href="patient-profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient11.jpg" alt="User Image"></a>
-                                                                        <a href="patient-profile">Harry Williams <span>#PT0011</span></a>
+                                                                        <a routerLink="patient-profile" class="avatar avatar-sm mr-2"><img class="avatar-img rounded-circle" src="assets/img/patients/patient11.jpg" alt="User Image"></a>
+                                                                        <a routerLink="patient-profile">Harry Williams <span>#PT0011</span></a>
                                                                     </h2>
                                                                 </td>
                                                                 <td>14 Nov 2019 <span class="d-block text-info">11.00 AM</span></td>
@@ -539,14 +539,14 @@
                                                                 <td class="text-center">$450</td>
                                                                 <td class="text-right">
                                                                     <div class="table-action">
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-info-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-info-light">
                                                                             <i class="far fa-eye"></i> View
                                                                         </a>
                                                                         
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-success-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
                                                                             <i class="fas fa-check"></i> Accept
                                                                         </a>
-                                                                        <a href="javascript:void(0);" class="btn btn-sm bg-danger-light">
+                                                                        <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
                                                                             <i class="fas fa-times"></i> Cancel
                                                                         </a>
                                                                     </div>

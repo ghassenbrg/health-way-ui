@@ -1,8 +1,8 @@
+import { NotFoundComponent } from './core/components/not-found/not-found.component';
 import { ForgotPasswordComponent } from './common/forgot-password/forgot-password.component';
 import { ChatComponent } from './common/chat/chat.component';
 import { RegisterComponent } from './common/register/register.component';
 import { LoginComponent } from './common/login/login.component';
-import { HomeComponent } from './core/home/home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppointmentsComponent } from './doctor/appointments/appointments.component';
@@ -42,11 +42,12 @@ import { VoiceCallComponent } from './common/voice-call/voice-call.component';
 import { VideoCallComponent } from './common/video-call/video-call.component';
 import { CalendarComponent } from './common/calendar/calendar.component';
 import { ComponentsComponent } from './common/components/components.component';
-import { Home1Component } from './core/home1/home-1.component';
-import { Home2Component } from './core/home2/home-2.component';
 import { BlogDetailsComponent } from './blog/blog-details/blog-details.component';
 import { BlogGridComponent } from './blog/blog-grid/blog-grid.component';
 import { BlogListComponent } from './blog/blog-list/blog-list.component';
+import { Home1Component } from './core/components/home1/home-1.component';
+import { Home2Component } from './core/components/home2/home-2.component';
+import { HomeComponent } from './core/components/home/home.component';
 
 const routes: Routes = [
   // Home
@@ -108,8 +109,10 @@ const routes: Routes = [
   { path: 'video-call', component: VideoCallComponent },
   { path: 'calendar', component: CalendarComponent },
   { path: 'components', component: ComponentsComponent },
-  { path: 'forgot-password', component: ForgotPasswordComponent }
+  { path: 'forgot-password', component: ForgotPasswordComponent },
 
+  // 404 Not Found
+  {path: '**', component: NotFoundComponent}
 ];
 
 @NgModule({

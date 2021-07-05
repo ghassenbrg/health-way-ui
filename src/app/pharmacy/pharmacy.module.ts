@@ -8,6 +8,7 @@ import { ProductDescriptionComponent } from './product-description/product-descr
 import { CartComponent } from './cart/cart.component';
 import { ProductCheckoutComponent } from './product-checkout/product-checkout.component';
 import { PaymentSuccessComponent } from './payment-success/payment-success.component';
+import { CoreModule } from '../core/core.module';
 
 
 
@@ -23,7 +24,8 @@ import { PaymentSuccessComponent } from './payment-success/payment-success.compo
     PaymentSuccessComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    CoreModule
   ]
 })
 export class PharmacyModule { }

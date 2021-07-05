@@ -12,6 +12,7 @@ import { FavouritesComponent } from './favourites/favourites.component';
 import { ProfileSettingsComponent } from './profile-settings/profile-settings.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { InvoiceViewComponent } from './invoice-view/invoice-view.component';
+import { CoreModule } from '../core/core.module';
 
 
 
@@ -31,7 +32,8 @@ import { InvoiceViewComponent } from './invoice-view/invoice-view.component';
     InvoiceViewComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    CoreModule
   ]
 })
 export class PatientModule { }

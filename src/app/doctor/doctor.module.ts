@@ -15,6 +15,7 @@ import { DoctorBlogComponent } from './doctor-blog/doctor-blog.component';
 import { DoctorAddBlogComponent } from './doctor-add-blog/doctor-add-blog.component';
 import { SocialMediaComponent } from './social-media/social-media.component';
 import { DoctorChangePasswordComponent } from './doctor-change-password/doctor-change-password.component';
+import { CoreModule } from '../core/core.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { DoctorChangePasswordComponent } from './doctor-change-password/doctor-c
   ],
   imports: [
     CommonModule,
-    AppModule
+    CoreModule
   ]
 })
 export class DoctorModule { }
