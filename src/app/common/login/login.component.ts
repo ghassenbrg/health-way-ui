@@ -11,7 +11,8 @@ import { ToastService } from './../../core/services/toast.service';
 export class LoginComponent implements OnInit {
   
   credentials: {username: any, password: any} = {username: '', password: ''};
-  
+  showLoader: boolean;
+
   constructor(
     private _auth: AuthenticationService,
     private _toastService: ToastService,
@@ -23,12 +24,16 @@ export class LoginComponent implements OnInit {
   }
 
   authentificate() {
+    this.showLoader = true;
     this._auth.login(this.credentials.username, this.credentials.password).subscribe(res => {
+      this.showLoader = false;
       let redirectTo: string = this.route.snapshot.queryParams.returnUrl;
       this._toastService.showSuccess('Success', 'Login successfully with user: ' + this.credentials.username);
       this.router.navigate([redirectTo ? redirectTo :'/']);
     },
-    err => this._toastService.showError('Error', 'Login failed with user: ' + this.credentials.username)
-    );
+    err =>  {
+      this.showLoader = false;
+      this._toastService.showError('Error', 'Login failed with user: ' + this.credentials.username);
+    });
   }
 }

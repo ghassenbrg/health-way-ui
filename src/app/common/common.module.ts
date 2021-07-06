@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { VideoCallComponent } from './video-call/video-call.component';
 import { VoiceCallComponent } from './voice-call/voice-call.component';
+import { LoaderComponent } from './loader/loader.component';
 
 
 
@@ -22,7 +23,8 @@ import { VoiceCallComponent } from './voice-call/voice-call.component';
     VideoCallComponent,
     CalendarComponent,
     ComponentsComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    LoaderComponent
   ],
   imports: [
     SharedModule
