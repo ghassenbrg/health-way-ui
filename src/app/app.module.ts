@@ -1,24 +1,24 @@
-import { PatientModule } from './patient/patient.module';
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 import { AppComponent } from './app.component';
-import { CoreModule } from './core/core.module';
-import { SharedModule } from './shared/shared.module';
 import { CommonModule } from './common/common.module';
+import { CoreModule } from './core/core.module';
+import { MainComponent } from './main/main.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MainComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
     SharedModule,
     CoreModule,
-    CommonModule
+    CommonModule,
+    ToastModule
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

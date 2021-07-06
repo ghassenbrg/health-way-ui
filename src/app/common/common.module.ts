@@ -25,8 +25,6 @@ import { VoiceCallComponent } from './voice-call/voice-call.component';
     ForgotPasswordComponent
   ],
   imports: [
-    BrowserModule,
-    FormsModule,
     SharedModule
   ]
 })
