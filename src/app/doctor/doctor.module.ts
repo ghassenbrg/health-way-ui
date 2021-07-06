@@ -1,3 +1,5 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppointmentsComponent } from './appointments/appointments.component';
@@ -16,6 +18,7 @@ import { DoctorAddBlogComponent } from './doctor-add-blog/doctor-add-blog.compon
 import { SocialMediaComponent } from './social-media/social-media.component';
 import { DoctorChangePasswordComponent } from './doctor-change-password/doctor-change-password.component';
 import { CoreModule } from '../core/core.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,8 @@ import { CoreModule } from '../core/core.module';
     DoctorChangePasswordComponent
   ],
   imports: [
-    CommonModule,
+    BrowserModule,
+    SharedModule,
     CoreModule
   ]
 })
