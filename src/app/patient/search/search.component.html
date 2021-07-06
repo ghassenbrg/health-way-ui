@@ -8,11 +8,11 @@
                 <div class="col-md-8 col-12">
                     <nav aria-label="breadcrumb" class="page-breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a routerLink="">Home</a></li>
+                            <li class="breadcrumb-item"><a routerLink="home">Home</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Search</li>
                         </ol>
                     </nav>
-                    <h2 class="breadcrumb-title">2245 matches found for : Dentist In Bangalore</h2>
+                    <h2 class="breadcrumb-title">{{doctors.length}} matches found</h2>
                 </div>
                 <div class="col-md-4 col-12 d-md-block d-none">
                     <div class="sort-by">
@@ -117,367 +117,91 @@
                 <div class="col-md-12 col-lg-8 col-xl-9">
 
                     <!-- Doctor Widget -->
-                    <div class="card">
-                        <div class="card-body">
+                    <div *ngFor="let doctor of doctors; let i=index">
+                    <div class="card" *ngIf="i < pageSize">
+                        <div class="card-body" >
                             <div class="doctor-widget">
                                 <div class="doc-info-left">
                                     <div class="doctor-img">
-                                        <a routerLink="doctor-profile">
-                                            <img src="assets/img/doctors/doctor-thumb-01.jpg" class="img-fluid" alt="User Image">
+                                        <a (click)="viewDoctorProfile(doctor.id)">
+                                            <img src="{{doctor.avatar}}" class="img-fluid" alt="User Image">
                                         </a>
                                     </div>
                                     <div class="doc-info-cont">
-                                        <h4 class="doc-name"><a routerLink="doctor-profile">Dr. Ruby Perrin</a></h4>
-                                        <p class="doc-speciality">MDS - Periodontology and Oral Implantology, BDS</p>
-                                        <h5 class="doc-department"><img src="assets/img/specialities/specialities-05.png" class="img-fluid" alt="Speciality">Dentist</h5>
+                                        <h4 class="doc-name">
+                                            <a (click)="viewDoctorProfile(doctor.id)">
+                                                Dr. {{doctor.firstName}} {{doctor.lastName}}
+                                            </a>
+                                        </h4>
+                                        <p class="doc-department">{{doctor.jobTitle}}</p>
+                                        <!-- <h5 class="doc-department"><img src="assets/img/specialities/specialities-05.png" class="img-fluid" alt="Speciality">
+                                            Dentist
+                                        </h5> -->
                                         <div class="rating">
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star"></i>
-                                            <span class="d-inline-block average-rating">(17)</span>
+                                            <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 1 ? 'filled' : ''"></i>
+                                            <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 2 ? 'filled' : ''"></i>
+                                            <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 3 ? 'filled' : ''"></i>
+                                            <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 4 ? 'filled' : ''"></i>
+                                            <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 5 ? 'filled' : ''"></i>
+                                            <span class="d-inline-block average-rating">({{doctor.feedBacks.length}})</span>
                                         </div>
                                         <div class="clinic-details">
-                                            <p class="doc-location"><i class="fas fa-map-marker-alt"></i> Florida, USA</p>
+                                            <p class="doc-location"><i class="fas fa-map-marker-alt"></i> {{doctor.city}}, {{doctor.country}}</p>
                                             <ul class="clinic-gallery">
                                                 <li>
-                                                    <a routerLink="assets/img/features/feature-01.jpg" data-fancybox="gallery">
+                                                    <a href="assets/img/features/feature-01.jpg" data-fancybox="gallery">
                                                         <img src="assets/img/features/feature-01.jpg" alt="Feature">
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a routerLink="assets/img/features/feature-02.jpg" data-fancybox="gallery">
+                                                    <a href="assets/img/features/feature-02.jpg" data-fancybox="gallery">
                                                         <img  src="assets/img/features/feature-02.jpg" alt="Feature">
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a routerLink="assets/img/features/feature-03.jpg" data-fancybox="gallery">
+                                                    <a href="assets/img/features/feature-03.jpg" data-fancybox="gallery">
                                                         <img src="assets/img/features/feature-03.jpg" alt="Feature">
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a routerLink="assets/img/features/feature-04.jpg" data-fancybox="gallery">
+                                                    <a href="assets/img/features/feature-04.jpg" data-fancybox="gallery">
                                                         <img src="assets/img/features/feature-04.jpg" alt="Feature">
                                                     </a>
                                                 </li>
                                             </ul>
                                         </div>
                                         <div class="clinic-services">
-                                            <span>Dental Fillings</span>
-                                            <span> Whitneing</span>
+                                            <span  *ngFor="let speciality of doctor.specialities">{{speciality.name}}</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="doc-info-right">
                                     <div class="clini-infos">
                                         <ul>
-                                            <li><i class="far fa-thumbs-up"></i> 98%</li>
-                                            <li><i class="far fa-comment"></i> 17 Feedback</li>
-                                            <li><i class="fas fa-map-marker-alt"></i> Florida, USA</li>
-                                            <li><i class="far fa-money-bill-alt"></i> $300 - $1000 <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i> </li>
+                                            <li><i class="far fa-comment"></i> {{doctor.feedBacks.length}} Feedback</li>
+                                            <li><i class="fas fa-map-marker-alt"></i> {{doctor.city}}, {{doctor.country}}</li>
+                                            <li><i class="fas fa-hand-holding-usd"></i> 
+                                                <span *ngFor="let insurance of doctor.insurances; let j = index">
+                                                    {{insurance.name}}<span *ngIf="j < doctor.insurances.length - 1">,</span> 
+                                                </span> 
+                                                <!-- <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>  -->
+                                            </li>
+                                            <li><i class="fas fa-phone"></i> {{doctor.phoneNumbers[0]}}</li>
                                         </ul>
                                     </div>
                                     <div class="clinic-booking">
-                                        <a class="view-pro-btn" routerLink="doctor-profile">View Profile</a>
-                                        <a class="apt-btn" routerLink="booking">Book Appointment</a>
+                                        <a class="view-pro-btn" (click)="viewDoctorProfile(doctor.id)">View Profile</a>
+                                        <a class="apt-btn" (click)="bookAppointment(doctor.id)">Book Appointment</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
                     <!-- /Doctor Widget -->
 
-                    <!-- Doctor Widget -->
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="doctor-widget">
-                                <div class="doc-info-left">
-                                    <div class="doctor-img">
-                                        <a routerLink="doctor-profile">
-                                            <img src="assets/img/doctors/doctor-thumb-02.jpg" class="img-fluid" alt="User Image">
-                                        </a>
-                                    </div>
-                                    <div class="doc-info-cont">
-                                        <h4 class="doc-name"><a routerLink="doctor-profile">Dr. Darren Elder</a></h4>
-                                        <p class="doc-speciality">BDS, MDS - Oral & Maxillofacial Surgery</p>
-                                        <h5 class="doc-department"><img src="assets/img/specialities/specialities-05.png" class="img-fluid" alt="Speciality">Dentist</h5>
-                                        <div class="rating">
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star"></i>
-                                            <span class="d-inline-block average-rating">(35)</span>
-                                        </div>
-                                        <div class="clinic-details">
-                                            <p class="doc-location"><i class="fas fa-map-marker-alt"></i> Newyork, USA</p>
-                                            <ul class="clinic-gallery">
-                                                <li>
-                                                    <a routerLink="assets/img/features/feature-01.jpg" data-fancybox="gallery">
-                                                        <img src="assets/img/features/feature-01.jpg" alt="Feature">
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a routerLink="assets/img/features/feature-02.jpg" data-fancybox="gallery">
-                                                        <img  src="assets/img/features/feature-02.jpg" alt="Feature">
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a routerLink="assets/img/features/feature-03.jpg" data-fancybox="gallery">
-                                                        <img src="assets/img/features/feature-03.jpg" alt="Feature">
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a routerLink="assets/img/features/feature-04.jpg" data-fancybox="gallery">
-                                                        <img src="assets/img/features/feature-04.jpg" alt="Feature">
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="clinic-services">
-                                            <span>Dental Fillings</span>
-                                            <span> Whitneing</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="doc-info-right">
-                                    <div class="clini-infos">
-                                        <ul>
-                                            <li><i class="far fa-thumbs-up"></i> 100%</li>
-                                            <li><i class="far fa-comment"></i> 35 Feedback</li>
-                                            <li><i class="fas fa-map-marker-alt"></i> Newyork, USA</li>
-                                            <li><i class="far fa-money-bill-alt"></i> $50 - $300 <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i></li>
-                                        </ul>
-                                    </div>
-                                    <div class="clinic-booking">
-                                        <a class="view-pro-btn" routerLink="doctor-profile">View Profile</a>
-                                        <a class="apt-btn" routerLink="booking">Book Appointment</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /Doctor Widget -->
-
-                    <!-- Doctor Widget -->
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="doctor-widget">
-                                <div class="doc-info-left">
-                                    <div class="doctor-img">
-                                        <a routerLink="doctor-profile">
-                                            <img src="assets/img/doctors/doctor-thumb-03.jpg" class="img-fluid" alt="User Image">
-                                        </a>
-                                    </div>
-                                    <div class="doc-info-cont">
-                                        <h4 class="doc-name"><a routerLink="doctor-profile">Dr. Deborah Angel</a></h4>
-                                        <p class="doc-speciality">MBBS, MD - General Medicine, DNB - Cardiology</p>
-                                        <p class="doc-department"><img src="assets/img/specialities/specialities-04.png" class="img-fluid" alt="Speciality">Cardiology</p>
-                                        <div class="rating">
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star"></i>
-                                            <span class="d-inline-block average-rating">(27)</span>
-                                        </div>
-                                        <div class="clinic-details">
-                                            <p class="doc-location"><i class="fas fa-map-marker-alt"></i> Georgia, USA</p>
-                                            <ul class="clinic-gallery">
-                                                <li>
-                                                    <a routerLink="assets/img/features/feature-01.jpg" data-fancybox="gallery">
-                                                        <img src="assets/img/features/feature-01.jpg" alt="Feature">
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a routerLink="assets/img/features/feature-02.jpg" data-fancybox="gallery">
-                                                        <img  src="assets/img/features/feature-02.jpg" alt="Feature">
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a routerLink="assets/img/features/feature-03.jpg" data-fancybox="gallery">
-                                                        <img src="assets/img/features/feature-03.jpg" alt="Feature">
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a routerLink="assets/img/features/feature-04.jpg" data-fancybox="gallery">
-                                                        <img src="assets/img/features/feature-04.jpg" alt="Feature">
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="clinic-services">
-                                            <span>Dental Fillings</span>
-                                            <span> Whitneing</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="doc-info-right">
-                                    <div class="clini-infos">
-                                        <ul>
-                                            <li><i class="far fa-thumbs-up"></i> 99%</li>
-                                            <li><i class="far fa-comment"></i> 35 Feedback</li>
-                                            <li><i class="fas fa-map-marker-alt"></i> Newyork, USA</li>
-                                            <li><i class="far fa-money-bill-alt"></i> $100 - $400 <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i></li>
-                                        </ul>
-                                    </div>
-                                    <div class="clinic-booking">
-                                        <a class="view-pro-btn" routerLink="doctor-profile">View Profile</a>
-                                        <a class="apt-btn" routerLink="booking">Book Appointment</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /Doctor Widget -->
-
-                    <!-- Doctor Widget -->
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="doctor-widget">
-                                <div class="doc-info-left">
-                                    <div class="doctor-img">
-                                        <a routerLink="doctor-profile">
-                                            <img src="assets/img/doctors/doctor-thumb-04.jpg" class="img-fluid" alt="User Image">
-                                        </a>
-                                    </div>
-                                    <div class="doc-info-cont">
-                                        <h4 class="doc-name"><a routerLink="doctor-profile">Dr. Sofia Brient</a></h4>
-                                        <p class="doc-speciality">MBBS, MS - General Surgery, MCh - Urology</p>
-                                        <p class="doc-department"><img src="assets/img/specialities/specialities-01.png" class="img-fluid" alt="Speciality">Urology</p>
-                                        <div class="rating">
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star"></i>
-                                            <span class="d-inline-block average-rating">(4)</span>
-                                        </div>
-                                        <div class="clinic-details">
-                                            <p class="doc-location"><i class="fas fa-map-marker-alt"></i> Louisiana, USA</p>
-                                            <ul class="clinic-gallery">
-                                                <li>
-                                                    <a routerLink="assets/img/features/feature-01.jpg" data-fancybox="gallery">
-                                                        <img src="assets/img/features/feature-01.jpg" alt="Feature">
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a routerLink="assets/img/features/feature-02.jpg" data-fancybox="gallery">
-                                                        <img  src="assets/img/features/feature-02.jpg" alt="Feature">
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a routerLink="assets/img/features/feature-03.jpg" data-fancybox="gallery">
-                                                        <img src="assets/img/features/feature-03.jpg" alt="Feature">
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a routerLink="assets/img/features/feature-04.jpg" data-fancybox="gallery">
-                                                        <img src="assets/img/features/feature-04.jpg" alt="Feature">
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="clinic-services">
-                                            <span>Dental Fillings</span>
-                                            <span> Whitneing</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="doc-info-right">
-                                    <div class="clini-infos">
-                                        <ul>
-                                            <li><i class="far fa-thumbs-up"></i> 97%</li>
-                                            <li><i class="far fa-comment"></i> 4 Feedback</li>
-                                            <li><i class="fas fa-map-marker-alt"></i> Newyork, USA</li>
-                                            <li><i class="far fa-money-bill-alt"></i> $150 - $250 <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i></li>
-                                        </ul>
-                                    </div>
-                                    <div class="clinic-booking">
-                                        <a class="view-pro-btn" routerLink="doctor-profile">View Profile</a>
-                                        <a class="apt-btn" routerLink="booking">Book Appointment</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /Doctor Widget -->
-
-                    <!-- Doctor Widget -->
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="doctor-widget">
-                                <div class="doc-info-left">
-                                    <div class="doctor-img">
-                                        <a routerLink="doctor-profile">
-                                            <img src="assets/img/doctors/doctor-thumb-06.jpg" class="img-fluid" alt="User Image">
-                                        </a>
-                                    </div>
-                                    <div class="doc-info-cont">
-                                        <h4 class="doc-name"><a routerLink="doctor-profile">Dr. Katharine Berthold</a></h4>
-                                        <p class="doc-speciality">MS - Orthopaedics, MBBS, M.Ch - Orthopaedics</p>
-                                        <p class="doc-department"><img src="assets/img/specialities/specialities-03.png" class="img-fluid" alt="Speciality">Orthopaedics</p>
-                                        <div class="rating">
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star"></i>
-                                            <span class="d-inline-block average-rating">(52)</span>
-                                        </div>
-                                        <div class="clinic-details">
-                                            <p class="doc-location"><i class="fas fa-map-marker-alt"></i> Texas, USA</p>
-                                            <ul class="clinic-gallery">
-                                                <li>
-                                                    <a routerLink="assets/img/features/feature-01.jpg" data-fancybox="gallery">
-                                                        <img src="assets/img/features/feature-01.jpg" alt="Feature">
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a routerLink="assets/img/features/feature-02.jpg" data-fancybox="gallery">
-                                                        <img  src="assets/img/features/feature-02.jpg" alt="Feature">
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a routerLink="assets/img/features/feature-03.jpg" data-fancybox="gallery">
-                                                        <img src="assets/img/features/feature-03.jpg" alt="Feature">
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a routerLink="assets/img/features/feature-04.jpg" data-fancybox="gallery">
-                                                        <img src="assets/img/features/feature-04.jpg" alt="Feature">
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="clinic-services">
-                                            <span>Dental Fillings</span>
-                                            <span> Whitneing</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="doc-info-right">
-                                    <div class="clini-infos">
-                                        <ul>
-                                            <li><i class="far fa-thumbs-up"></i> 100%</li>
-                                            <li><i class="far fa-comment"></i> 52 Feedback</li>
-                                            <li><i class="fas fa-map-marker-alt"></i> Texas, USA</li>
-                                            <li><i class="far fa-money-bill-alt"></i> $100 - $500 <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i></li>
-                                        </ul>
-                                    </div>
-                                    <div class="clinic-booking">
-                                        <a class="view-pro-btn" routerLink="doctor-profile">View Profile</a>
-                                        <a class="apt-btn" routerLink="booking">Book Appointment</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /Doctor Widget -->
-
-                    <div class="load-more text-center">
-                        <a class="btn btn-primary btn-sm" routerLink="javascript:void(0);">Load More</a>	
+                    <div class="load-more text-center" *ngIf="doctors.length + 1 != pageSize">
+                        <a class="btn btn-primary btn-sm" (click)="loadMore()">Load More</a>	
                     </div>	
                 </div>
             </div>

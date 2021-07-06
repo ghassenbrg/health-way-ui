@@ -1,3 +1,4 @@
+import { PatientModule } from './patient/patient.module';
 import { NgModule } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
@@ -16,7 +17,8 @@ import { SharedModule } from './shared/shared.module';
     SharedModule,
     CoreModule,
     CommonModule,
-    ToastModule
+    ToastModule,
+    PatientModule
   ],
   providers: [MessageService],
   bootstrap: [AppComponent]
