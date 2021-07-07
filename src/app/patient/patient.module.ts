@@ -13,6 +13,7 @@ import { ProfileSettingsComponent } from './profile-settings/profile-settings.co
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { InvoiceViewComponent } from './invoice-view/invoice-view.component';
 import { CoreModule } from '../core/core.module';
+import { AgmCoreModule } from '@agm/core';
 
 
 
@@ -33,7 +34,10 @@ import { CoreModule } from '../core/core.module';
   ],
   imports: [
     CommonModule,
-    CoreModule
+    CoreModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDpxI-NDCHBmyyAARt-5e5m_zfhmIBUsPw'
+    })
   ]
 })
 export class PatientModule { }

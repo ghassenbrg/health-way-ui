@@ -1,14 +1,5 @@
-<!-- Loader -->
-<div id="loader">
-<div class="loader">
-    <span></span>
-    <span></span>
-</div>
-</div>
-<!-- /Loader  -->
-
 <!-- Main Wrapper -->
-<div class="main-wrapper">
+<div class="main-wrapper" >
     
     <!-- Page Content -->
     <div class="content">
@@ -623,8 +614,9 @@
         </div>
         <!-- /content-left-->
         <div class="col-xl-6 col-lg-12 map-right">
-            <div id="map" class="map-listing"></div>
             <!-- map-->
+            <div id="map" class="map-listing">
+            <agm-map [latitude]="lat" [longitude]="lng"></agm-map></div>
         </div>
         <!-- /map-right-->
     </div>
@@ -636,4 +628,5 @@
     <!-- /Page Content -->
     
 </div>
+<!-- </body> -->
 <!-- /Main Wrapper -->
