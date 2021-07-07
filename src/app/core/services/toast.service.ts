@@ -9,19 +9,19 @@ export class ToastService {
   constructor(private _messageService: MessageService) { }
 
   showSuccess(summary: string, detail: string) {
-    this._messageService.add({ severity: 'success', summary: summary, detail: detail});
+    this._messageService.add({ severity: 'success', summary: summary, detail: detail, styleClass: 'toast-success',sticky: true });
   }
 
   showInfo(summary: string, detail: string) {
-    this._messageService.add({ severity: 'info', summary: summary, detail: detail });
+    this._messageService.add({ severity: 'info', summary: summary, detail: detail, styleClass: 'custom-toast' });
   }
 
   showWarn(summary: string, detail: string) {
-    this._messageService.add({ severity: 'warn', summary: summary, detail: detail });
+    this._messageService.add({ severity: 'warn', summary: summary, detail: detail, styleClass: 'custom-toast' });
   }
 
   showError(summary: string, detail: string) {
-    this._messageService.add({ severity: 'error', summary: summary, detail: detail });
+    this._messageService.add({ severity: 'error', summary: summary, detail: detail, styleClass: 'toast-error' });
   }
 
   showTopLeft(message: Message) {
@@ -41,7 +41,7 @@ export class ToastService {
 
   showConfirm(summary: string, detail: string) {
     this._messageService.clear();
-    this._messageService.add({ key: 'c', sticky: true, severity: 'warn', summary: summary, detail: detail });
+    this._messageService.add({ key: 'c', sticky: true, severity: 'warn', summary: summary, detail: detail, styleClass: 'custom-toast' });
   }
 
   showSticky(message: Message) {

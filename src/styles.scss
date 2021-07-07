@@ -1,4 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
 a {
-    cursor: pointer;
+  cursor: pointer;
 }
+
+//toast custom style
+
+.p-toast-message {
+  color: black !important;
+  background-color: white !important;
+
+  .p-toast-icon-close {
+    color: black !important;
+  }
+}
+
+.toast-error {
+
+  .p-toast-message-icon,
+  .p-toast-summary {
+    color: #ff0040 !important;
+  }
+}
+
+.p-toast-message-error {
+    border-left: 3px solid #ff0040 !important;
+  }
+
+.toast-success {
+
+  .p-toast-message-icon,
+  .p-toast-summary {
+    color: #2bd480 !important;
+  }
+}
+
+.p-toast-message-success {
+  border-left: 3px solid #2bd480 !important;
+}
+
+//********************************
