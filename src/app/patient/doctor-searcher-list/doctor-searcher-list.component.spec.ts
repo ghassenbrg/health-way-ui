@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MapListComponent } from './map-list.component';
+import { DoctorSearcherListComponent } from './doctor-searcher-list.component';
 
-describe('MapListComponent', () => {
-  let component: MapListComponent;
-  let fixture: ComponentFixture<MapListComponent>;
+describe('DoctorSearcherListComponent', () => {
+  let component: DoctorSearcherListComponent;
+  let fixture: ComponentFixture<DoctorSearcherListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MapListComponent ]
+      declarations: [ DoctorSearcherListComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MapListComponent);
+    fixture = TestBed.createComponent(DoctorSearcherListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

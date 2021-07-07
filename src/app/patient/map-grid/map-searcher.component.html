@@ -1,0 +1,79 @@
+<!-- Main Wrapper -->
+<div class="main-wrapper" >
+    
+    <!-- Page Content -->
+    <div class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-xl-6 col-lg-12 order-md-last order-sm-last order-last map-left">
+
+                    <div class="row align-items-center mb-4">
+                        <div class="col-md-6 col">
+                            <h4>{{doctors.length}} matches found</h4>
+                        </div>
+
+                        <div class="col-md-6 col-auto">
+                            <div class="view-icons ">
+                                <a class="grid-view" [ngClass]="isListMode == false ? 'active' : ''" (click)="isListMode = false">
+                                    <i class="fas fa-th-large"></i>
+                                </a>
+                                <a class="list-view" [ngClass]="isListMode == true ? 'active' : ''"(click)="isListMode = true">
+                                    <i class="fas fa-bars"></i>
+                                </a>
+                            </div>
+                            <div class="sort-by d-sm-block d-none">
+                                <span class="sortby-fliter">
+                                    <select class="select">
+                                        <option>Sort by</option>
+                                        <option class="sorting">Rating</option>
+                                        <option class="sorting">Popular</option>
+                                        <option class="sorting">Latest</option>
+                                        <option class="sorting">Free</option>
+                                    </select>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <app-doctor-searcher-grid *ngIf="!isListMode" [doctors]="doctors" [pageSize]="pageSize"></app-doctor-searcher-grid>
+                    <app-doctor-searcher-list *ngIf="isListMode" [doctors]="doctors" [pageSize]="pageSize"></app-doctor-searcher-list>
+
+                    <div class="load-more text-center">
+                        <a class="btn btn-primary btn-sm" (click)="loadMore()" *ngIf="doctors.length + 1 != pageSize">Load More</a>	
+                    </div>
+                </div>
+                <!-- /content-left-->
+
+                <div class="col-xl-6 col-lg-12 map-right">
+                    <!-- map-->
+
+                    <div id="map" class="map-listing">
+                        <agm-map [latitude]="lat" [longitude]="lng">
+                            <agm-marker 
+                                *ngFor="let m of markers; let i = index"
+                                (markerClick)="clickedMarker(m.label, i)"
+                                [latitude]="m.lat"
+                                [longitude]="m.lng"
+                                [label]="m.label">
+                                
+                                <agm-info-window>
+                                    <strong>InfoWindow content</strong>
+                                </agm-info-window>
+                            
+                            </agm-marker>
+                        </agm-map>
+                    </div>
+                </div>
+                <!-- /map-right-->
+            </div>
+            <!-- /row-->
+
+        </div>
+
+    </div>		
+    <!-- /Page Content -->
+    
+</div>
+<!-- </body> -->
+<!-- /Main Wrapper -->

@@ -37,8 +37,7 @@ import { CheckoutComponent } from './patient/checkout/checkout.component';
 import { DoctorProfileComponent } from './patient/doctor-profile/doctor-profile.component';
 import { FavouritesComponent } from './patient/favourites/favourites.component';
 import { InvoiceViewComponent } from './patient/invoice-view/invoice-view.component';
-import { MapGridComponent } from './patient/map-grid/map-grid.component';
-import { MapListComponent } from './patient/map-list/map-list.component';
+import { MapSearcherComponent } from './patient/map-grid/map-searcher.component';
 import { PatientDashboardComponent } from './patient/patient-dashboard/patient-dashboard.component';
 import { ProfileSettingsComponent } from './patient/profile-settings/profile-settings.component';
 import { SearchComponent } from './patient/search/search.component';
@@ -80,8 +79,7 @@ const routes: Routes = [
       { path: 'doctor-add-blog', component: DoctorAddBlogComponent },
 
       // Patient
-      { path: 'map-grid', component: MapGridComponent },
-      { path: 'map-list', component: MapListComponent },
+      { path: 'map-grid', component: MapSearcherComponent },
       { path: 'search', component: SearchComponent },
       { path: 'doctor-profile', component: DoctorProfileComponent },
       { path: 'booking', component: BookingComponent },

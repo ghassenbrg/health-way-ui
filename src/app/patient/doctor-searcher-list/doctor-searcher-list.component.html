@@ -1,0 +1,78 @@
+
+<div *ngFor="let doctor of doctors; let i=index">
+    <div class="card" *ngIf="i < pageSize">
+        <div class="card-body">
+            <div class="doctor-widget">
+                <div class="doc-info-left">
+                    <div class="doctor-img">
+                        <a (click)="viewDoctorProfile(doctor.id)">
+                            <img src="{{doctor.avatar}}" class="img-fluid" alt="User Image">
+                        </a>
+                    </div>
+                    <div class="doc-info-cont">
+                        <h4 class="doc-name">
+                            <a (click)="viewDoctorProfile(doctor.id)">Dr. {{doctor.firstName}} {{doctor.lastName}}</a>
+                        </h4>
+                        <p class="doc-department">{{doctor.jobTitle}}</p>
+                        <!-- <h5 class="doc-department"><img src="assets/img/specialities/specialities-05.png" class="img-fluid" alt="Speciality">Dentist</h5> -->
+                        <div class="rating">
+                            <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 1 ? 'filled' : ''"></i>
+                            <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 2 ? 'filled' : ''"></i>
+                            <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 3 ? 'filled' : ''"></i>
+                            <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 4 ? 'filled' : ''"></i>
+                            <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 5 ? 'filled' : ''"></i>
+                            <span class="d-inline-block average-rating">({{doctor.feedBacks.length}})</span>
+                        </div>
+                        <div class="clinic-details">
+                            <p class="doc-location"><i class="fas fa-map-marker-alt"></i> {{doctor.city}}, {{doctor.country}}</p>
+                            <ul class="clinic-gallery">
+                                <li>
+                                    <a routerLink="assets/img/features/feature-01.jpg" data-fancybox="gallery">
+                                        <img src="assets/img/features/feature-01.jpg" alt="Feature">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a routerLink="assets/img/features/feature-02.jpg" data-fancybox="gallery">
+                                        <img  src="assets/img/features/feature-02.jpg" alt="Feature">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a routerLink="assets/img/features/feature-03.jpg" data-fancybox="gallery">
+                                        <img src="assets/img/features/feature-03.jpg" alt="Feature">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a routerLink="assets/img/features/feature-04.jpg" data-fancybox="gallery">
+                                        <img src="assets/img/features/feature-04.jpg" alt="Feature">
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="clinic-services">
+                            <span *ngFor="let speciality of doctor.specialities">{{speciality.name}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="doc-info-right">
+                    <div class="clini-infos">
+                        <ul>
+                            <li><i class="far fa-comment"></i> {{doctor.feedBacks.length}} Feedback</li>
+                            <li><i class="fas fa-map-marker-alt"></i> {{doctor.city}}, {{doctor.country}}</li>
+                            <li>
+                                <i class="fas fa-hand-holding-usd"></i> 
+                                <span *ngFor="let insurance of doctor.insurances; let j = index">
+                                    {{insurance.name}}<span *ngIf="j < doctor.insurances.length - 1">,</span> 
+                                </span>
+                            </li>
+                            <li><i class="fas fa-phone"></i> {{doctor.phoneNumbers[0]}}</li>
+                        </ul>
+                    </div>
+                    <div class="clinic-booking">
+                        <a class="view-pro-btn" (click)="viewDoctorProfile(doctor.id)">View Profile</a>
+                        <a class="apt-btn" (click)="bookAppointment(doctor.id)">Book Appointment</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

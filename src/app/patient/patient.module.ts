@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MapGridComponent } from './map-grid/map-grid.component';
-import { MapListComponent } from './map-list/map-list.component';
 import { SearchComponent } from './search/search.component';
 import { DoctorProfileComponent } from './doctor-profile/doctor-profile.component';
 import { BookingComponent } from './booking/booking.component';
@@ -14,13 +12,15 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { InvoiceViewComponent } from './invoice-view/invoice-view.component';
 import { CoreModule } from '../core/core.module';
 import { AgmCoreModule } from '@agm/core';
+import { DoctorSearcherGridComponent } from './doctor-searcher-grid/doctor-searcher-grid.component';
+import { DoctorSearcherListComponent } from './doctor-searcher-list/doctor-searcher-list.component';
+import { MapSearcherComponent } from './map-grid/map-searcher.component';
 
 
 
 @NgModule({
   declarations: [
-    MapGridComponent,
-    MapListComponent,
+    MapSearcherComponent,
     SearchComponent,
     DoctorProfileComponent,
     BookingComponent,
@@ -30,7 +30,9 @@ import { AgmCoreModule } from '@agm/core';
     FavouritesComponent,
     ProfileSettingsComponent,
     ChangePasswordComponent,
-    InvoiceViewComponent
+    InvoiceViewComponent,
+    DoctorSearcherGridComponent,
+    DoctorSearcherListComponent
   ],
   imports: [
     CommonModule,
