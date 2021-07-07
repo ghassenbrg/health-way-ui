@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     if (this._auth.currentUserValue) {
-
+      this.router.navigate(['/']);
     }
   }
 
