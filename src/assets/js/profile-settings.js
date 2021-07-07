@@ -1,6 +1,6 @@
 /*
 Author       : Dreamguys
-Template Name: Doccure - Bootstrap Template
+Template Name: Health Way - Bootstrap Template
 Version      : 1.0
 */
 
