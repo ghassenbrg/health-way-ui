@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
@@ -9,7 +10,8 @@ import { PrimeNGConfig } from 'primeng/api';
 export class AppComponent {
   title = 'health-ui';
 
-  constructor(private primengConfig: PrimeNGConfig) {}
+  constructor(private primengConfig: PrimeNGConfig, private titleService: Title) {
+  }
 
     ngOnInit() {
         this.primengConfig.ripple = true;
