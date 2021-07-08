@@ -175,11 +175,20 @@
           </div>
           <div class="user-text">
             <h6>Richard Wilson</h6>
-            <p class="text-muted mb-0">Patient</p>
+            <p class="text-muted mb-0" >
+              <span *ifAuthorized="['ROLE_PATIENT']">Patient</span>
+              <span *ifAuthorized="['ROLE_DOCTOR']">Doctor</span>
+              <span *ifAuthorized="['ROLE_ADMIN']">Admin</span>
+            </p>
           </div>
         </div>
-        <a class="dropdown-item" routerLink="patient-dashboard">Dashboard</a>
-        <a class="dropdown-item" routerLink="profile-settings">Profile Settings</a>
+        
+        <ng-container *ngFor="let userMenuItem of userMenuItems">
+          <a *ifAuthorized=" userMenuItem.authorizedRoles ? userMenuItem.authorizedRoles : ['ROLE_GUEST']" class="dropdown-item" 
+            [routerLink]="userMenuItem.path">
+            {{userMenuItem.label}}
+          </a>
+        </ng-container>
         <a class="dropdown-item" (click)="logout()">Logout</a>
       </div>
     </li>

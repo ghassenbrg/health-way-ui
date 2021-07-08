@@ -92,3 +92,38 @@ export const NAV_ITEMS: NavItem[] = [
         path: 'pharmacy-search'
     }
 ];
+
+
+export const USER_MENU_ITEMS: NavItem[] = [
+    {
+        label: 'Patient Dashboard',
+        path: 'patient-dashboard',
+        authorizedRoles: ['ROLE_ADMIN'],
+    },
+    {
+        label: 'Doctor Dashboard',
+        path: 'doctor-dashboard',
+        authorizedRoles: ['ROLE_ADMIN'],
+    },
+    {
+        label: 'Dashboard',
+        path: 'doctor-dashboard',
+        authorizedRoles: ['ROLE_DOCTOR'],
+    },
+    {
+        label: 'Dashboard',
+        path: 'patient-dashboard',
+        authorizedRoles: ['ROLE_DOCTOR'],
+    },
+    {
+        label: 'Profile Settings',
+        path: 'doctor-profile-settings',
+        authorizedRoles: ['ROLE_DOCTOR'],
+    },
+    {
+        label: 'Profile Settings',
+        path: 'profile-settings',
+        authorizedRoles: ['ROLE_PATIENT'],
+    },
+
+];

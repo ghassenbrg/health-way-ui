@@ -1,3 +1,4 @@
+import { USER_MENU_ITEMS } from './../../config/nav_items';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '@auth/_services/authentication.service';
@@ -12,6 +13,8 @@ import { NavItem } from '@models/navItem.model';
 export class NavbarComponent implements OnInit {
 
   navItems: NavItem[] = NAV_ITEMS;
+  userMenuItems: NavItem[] = USER_MENU_ITEMS;
+
   currentPath: string = '';
 
   constructor(private _auth: AuthenticationService, private router: Router) { }
