@@ -6,11 +6,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from '@app/app-routing.module';
-
+import { IfAuthorizedDirective } from './if-authorized.directive';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    IfAuthorizedDirective
+  ],
   imports: [
     CommonModule,
     BrowserModule,
@@ -29,7 +31,9 @@ import { AppRoutingModule } from '@app/app-routing.module';
     AppRoutingModule,
     RouterModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    //diectives
+    IfAuthorizedDirective
   ]
 })
 export class SharedModule { }
