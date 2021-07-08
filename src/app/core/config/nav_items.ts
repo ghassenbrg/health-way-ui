@@ -1,4 +1,5 @@
 import { NavItem } from "@models/navItem.model";
+import { roles } from "./roles";
 
 export const NAV_ITEMS: NavItem[] = [
     {
@@ -7,7 +8,33 @@ export const NAV_ITEMS: NavItem[] = [
     },
     {
         label: 'Doctors',
-        authorizedRoles: ['ROLE_ADMIN'],
+        children: [
+            {
+                label: 'Simple Search',
+                path: 'search'
+            },
+            {
+                label: 'Map Search',
+                path: 'map-grid'
+            }
+        ]
+    },
+    {
+        label: 'Pharmacy',
+        children: [
+            {
+                label: 'Simple Search',
+                path: 'search'
+            },
+            {
+                label: 'Map Search',
+                path: 'map-grid'
+            }
+        ]
+    },
+    {
+        label: 'Doctor workspace',
+        authorizedRoles: [roles.ROLE_DOCTOR],
         children: [
             {
                 label: 'Doctor Dashboard',
@@ -28,20 +55,12 @@ export const NAV_ITEMS: NavItem[] = [
         ]
     },
     {
-        label: 'Patients',
-        authorizedRoles: ['ROLE_ADMIN'],
+        label: 'Patient workspace',
+        authorizedRoles: [roles.ROLE_USER],
         children: [
             {
                 label: 'Patient Dashboard',
                 path: 'patient-dashboard'
-            },
-            {
-                label: 'Simple Search',
-                path: 'search'
-            },
-            {
-                label: 'Map Search',
-                path: 'map-grid'
             },
             {
                 label: 'Favourites',
@@ -51,7 +70,7 @@ export const NAV_ITEMS: NavItem[] = [
     },
     {
         label: 'Schedule Timings',
-        authorizedRoles: ['ROLE_DOCTOR'],
+        authorizedRoles: [roles.ROLE_DOCTOR],
         children: [
             {
                 label: 'My Available timings',
@@ -65,12 +84,12 @@ export const NAV_ITEMS: NavItem[] = [
     },
     {
         label: 'My patients',
-        authorizedRoles: ['ROLE_DOCTOR'],
+        authorizedRoles: [roles.ROLE_DOCTOR],
         path: 'my-patients'
     },
     {
         label: 'Search Doctor',
-        authorizedRoles: ['ROLE_PATIENT'],
+        authorizedRoles: [roles.ROLE_USER],
         children: [
             {
                 label: 'Simple Search',
@@ -84,7 +103,7 @@ export const NAV_ITEMS: NavItem[] = [
     },
     {
         label: 'My Appointments',
-        authorizedRoles: ['ROLE_PATIENT'],
+        authorizedRoles: [roles.ROLE_USER],
         path: 'patient-dashboard'
     },
     {
@@ -98,32 +117,32 @@ export const USER_MENU_ITEMS: NavItem[] = [
     {
         label: 'Patient Dashboard',
         path: 'patient-dashboard',
-        authorizedRoles: ['ROLE_ADMIN'],
+        authorizedRoles: [roles.ROLE_ADMIN],
     },
     {
         label: 'Doctor Dashboard',
         path: 'doctor-dashboard',
-        authorizedRoles: ['ROLE_ADMIN'],
+        authorizedRoles: [roles.ROLE_ADMIN],
     },
     {
         label: 'Dashboard',
         path: 'doctor-dashboard',
-        authorizedRoles: ['ROLE_DOCTOR'],
+        authorizedRoles: [roles.ROLE_DOCTOR],
     },
     {
         label: 'Dashboard',
         path: 'patient-dashboard',
-        authorizedRoles: ['ROLE_DOCTOR'],
+        authorizedRoles: [roles.ROLE_USER],
     },
     {
         label: 'Profile Settings',
         path: 'doctor-profile-settings',
-        authorizedRoles: ['ROLE_DOCTOR'],
+        authorizedRoles: [roles.ROLE_DOCTOR],
     },
     {
         label: 'Profile Settings',
         path: 'profile-settings',
-        authorizedRoles: ['ROLE_PATIENT'],
+        authorizedRoles: [roles.ROLE_USER],
     },
 
 ];

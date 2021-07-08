@@ -1,9 +1,12 @@
-import { USER_MENU_ITEMS } from './../../config/nav_items';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MainComponent } from '@app/main/main.component';
 import { AuthenticationService } from '@auth/_services/authentication.service';
 import { NAV_ITEMS } from '@core/config/nav_items';
+import { roles } from '@core/config/roles';
 import { NavItem } from '@models/navItem.model';
+import { User } from '@models/user.model';
+import { USER_MENU_ITEMS } from './../../config/nav_items';
 
 @Component({
   selector: 'app-navbar',
@@ -12,12 +15,18 @@ import { NavItem } from '@models/navItem.model';
 })
 export class NavbarComponent implements OnInit {
 
+  @Input() currentUser: User;
+
+  rolesEnum = roles;
   navItems: NavItem[] = NAV_ITEMS;
   userMenuItems: NavItem[] = USER_MENU_ITEMS;
 
   currentPath: string = '';
 
-  constructor(private _auth: AuthenticationService, private router: Router) { }
+  constructor(
+    private _auth: AuthenticationService,
+    private router: Router,
+    private mainComponent: MainComponent) { }
 
   ngOnInit(): void {
     this.navItems.forEach(navItem => {
@@ -30,7 +39,6 @@ export class NavbarComponent implements OnInit {
 
   checkActiveRoute() {
     const currentUrl = this.router.url;
-    console.log(currentUrl)
     if (this.navItems) {
       this.navItems.forEach(navItem => {
         navItem.isActive = false;
@@ -44,7 +52,7 @@ export class NavbarComponent implements OnInit {
             } else {
               childItem.isActive = false;
             }
-            })
+          })
         }
         if (!navItem.isActive && itemPath == currentUrl) {
           navItem.isActive = true;
@@ -55,6 +63,7 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this._auth.logout();
+    this.mainComponent.refreshCurrentUser();
     this.router.navigate(['/login']);
   }
 
