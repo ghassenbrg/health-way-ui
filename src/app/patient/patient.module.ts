@@ -1,20 +1,19 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { SearchComponent } from './search/search.component';
-import { DoctorProfileComponent } from './doctor-profile/doctor-profile.component';
-import { BookingComponent } from './booking/booking.component';
-import { CheckoutComponent } from './checkout/checkout.component';
-import { BookingSuccessComponent } from './booking-success/booking-success.component';
-import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
-import { FavouritesComponent } from './favourites/favourites.component';
-import { ProfileSettingsComponent } from './profile-settings/profile-settings.component';
-import { ChangePasswordComponent } from './change-password/change-password.component';
-import { InvoiceViewComponent } from './invoice-view/invoice-view.component';
-import { CoreModule } from '../core/core.module';
 import { AgmCoreModule } from '@agm/core';
+import { NgModule } from '@angular/core';
+import { SharedModule } from '@shared/shared.module';
+import { BookingSuccessComponent } from './booking-success/booking-success.component';
+import { BookingComponent } from './booking/booking.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { DoctorProfileComponent } from './doctor-profile/doctor-profile.component';
 import { DoctorSearcherGridComponent } from './doctor-searcher-grid/doctor-searcher-grid.component';
 import { DoctorSearcherListComponent } from './doctor-searcher-list/doctor-searcher-list.component';
+import { FavouritesComponent } from './favourites/favourites.component';
+import { InvoiceViewComponent } from './invoice-view/invoice-view.component';
 import { MapSearcherComponent } from './map-grid/map-searcher.component';
+import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
+import { ProfileSettingsComponent } from './profile-settings/profile-settings.component';
+import { SearchComponent } from './search/search.component';
 
 
 
@@ -35,8 +34,7 @@ import { MapSearcherComponent } from './map-grid/map-searcher.component';
     DoctorSearcherListComponent
   ],
   imports: [
-    CommonModule,
-    CoreModule,
+    SharedModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDpxI-NDCHBmyyAARt-5e5m_zfhmIBUsPw'
     })
