@@ -9,7 +9,7 @@ export class ToastService {
   constructor(private _messageService: MessageService) { }
 
   showSuccess(summary: string, detail: string) {
-    this._messageService.add({ severity: 'success', summary: summary, detail: detail, styleClass: 'toast-success',sticky: true });
+    this._messageService.add({ severity: 'success', summary: summary, detail: detail, styleClass: 'toast-success' });
   }
 
   showInfo(summary: string, detail: string) {

@@ -1,5 +1,6 @@
-import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MainComponent } from '@app/main/main.component';
 import { AuthenticationService } from '@auth/_services/authentication.service';
 import { ToastService } from './../../core/services/toast.service';
 
@@ -9,19 +10,20 @@ import { ToastService } from './../../core/services/toast.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  
-  credentials: {username: any, password: any} = {username: '', password: ''};
+
+  credentials: { username: any, password: any } = { username: '', password: '' };
   showLoader: boolean;
 
   constructor(
     private _auth: AuthenticationService,
     private _toastService: ToastService,
-    private router: Router, 
-    private route:ActivatedRoute
-    ) { }
+    private router: Router,
+    private route: ActivatedRoute,
+    private mainComponent: MainComponent
+  ) { }
 
   ngOnInit(): void {
-    if (this._auth.currentUserValue) {
+    if (this._auth.currentUserToken) {
       this.router.navigate(['/']);
     }
   }
@@ -32,10 +34,11 @@ export class LoginComponent implements OnInit {
       this.showLoader = false;
       let redirectTo: string = this.route.snapshot.queryParams.returnUrl;
       this._toastService.showSuccess('Success', 'Login successfully with user: ' + this.credentials.username);
-      this.router.navigate([redirectTo ? redirectTo :'/']);
+      this.mainComponent.refreshCurrentUser();
+      this.router.navigate([redirectTo ? redirectTo : '/']);
     },
-    err =>  {
-      this.showLoader = false;
-    });
+      err => {
+        this.showLoader = false;
+      });
   }
 }

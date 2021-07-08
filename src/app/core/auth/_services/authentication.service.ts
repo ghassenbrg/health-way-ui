@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import { User } from '@models/user.model';
 import jwt_decode from 'jwt-decode';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { UserService } from './user.service';
 
 const basePath = environment.basePath;
 const PREFIX = environment.prefix;
@@ -17,13 +18,19 @@ const REFRESH_TOKEN = `${PREFIX}_refresh_token`;
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
+    public decodedTokenSubject: BehaviorSubject<any>;
 
-    constructor(private http: HttpClient) {
-        this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem(ACCESS_TOKEN)));
+    constructor(private http: HttpClient, private _userService: UserService) {
+        let token = localStorage.getItem(ACCESS_TOKEN);
+        this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(token));
         this.currentUser = this.currentUserSubject.asObservable();
+        this.decodedTokenSubject= new BehaviorSubject<any>(token ? jwt_decode(token) : null);
     }
 
-    public get currentUserValue(): User {
+    public get currentUserToken(): User {
+        return this.currentUserSubject.value;
+    }
+    public get currentDecodedToken(): any {
         return this.currentUserSubject.value;
     }
 
@@ -34,6 +41,7 @@ export class AuthenticationService {
                 localStorage.setItem(ACCESS_TOKEN, JSON.stringify(res.token));
                 localStorage.setItem(REFRESH_TOKEN, JSON.stringify(res.refresh_token));
                 this.currentUserSubject.next(res.token);
+                this.decodedTokenSubject.next(jwt_decode(res.token));
                 return res.token;
             }));
     }
@@ -43,20 +51,27 @@ export class AuthenticationService {
         localStorage.removeItem(ACCESS_TOKEN);
         localStorage.removeItem(REFRESH_TOKEN);
         this.currentUserSubject.next(null);
+        this.decodedTokenSubject.next(null);
     }
 
     getDecodedAccessToken(token: string): any {
-        try{
+        try {
             return jwt_decode(token);
         }
-        catch(Error){
+        catch (Error) {
             return null;
         }
-      }
+    }
 
-      getRoles(): string[] {
-          let token = localStorage.getItem(ACCESS_TOKEN);
-          let decodedToken = this.getDecodedAccessToken(token);
-          return decodedToken.roles ? decodedToken.roles : [];
-      }
+    getRoles(): string[] {
+        let token = localStorage.getItem(ACCESS_TOKEN);
+        let decodedToken = this.getDecodedAccessToken(token);
+        return decodedToken && decodedToken.roles ? decodedToken.roles : [];
+    }
+
+    getMail(): string {
+        let token = localStorage.getItem(ACCESS_TOKEN);
+        let decodedToken = this.getDecodedAccessToken(token);
+        return decodedToken && decodedToken.username ? decodedToken.username : '';
+    }
 }

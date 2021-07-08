@@ -14,7 +14,7 @@ export class RequestInterceptorInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // add authorization header with jwt token if available
-    let token = this.authenticationService.currentUserValue;
+    let token = this.authenticationService.currentUserToken;
 
     let headers = request.headers.append('Accept: "*/*"', 'no-cache');
     headers = request.headers.append('Cache-control', 'no-store');
@@ -26,8 +26,6 @@ export class RequestInterceptorInterceptor implements HttpInterceptor {
     const clonedReq = request.clone({ headers: headers });
 
     return next.handle(clonedReq).pipe(catchError(err => {
-      console.log('err')
-      console.log(err)
       if (err.status === 401) {
         // auto logout if 401 response returned from api
         this.authenticationService.logout();

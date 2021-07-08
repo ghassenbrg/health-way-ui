@@ -12,4 +12,12 @@ export class UserService {
     getAll() {
         return this.http.get<User[]>(`${basePath}/users`);
     }
+
+    getUserById(id: string) {
+        return this.http.get<User>(`${basePath}/users/${id}`);
+    }
+
+    getUserByMail(mail: string) {
+        return this.http.get<User>(`${basePath}/users?email=${mail}`);
+    }
 }

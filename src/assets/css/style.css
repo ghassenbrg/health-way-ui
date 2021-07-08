@@ -2409,9 +2409,9 @@ button.bg-danger:hover {
 }
 
 .user-img>img {
-  height: 31px;
+  height: 40px;
   object-fit: cover;
-  width: 31px;
+  width: 40px;
 }
 
 .user-menu.nav>li>a.mobile_btn {

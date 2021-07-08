@@ -55,7 +55,6 @@ const routes: Routes = [
   {
     path: '',
     component: MainComponent,
-    canActivate: [AuthGuard],
     children: [
       { path: '', component: HomeComponent },
       { path: 'home', component: HomeComponent },
@@ -63,14 +62,14 @@ const routes: Routes = [
       { path: 'home2', component: Home2Component },
 
       // Doctor
-      { path: 'doctor-dashboard', component: DoctorDashboardComponent },
+      { path: 'doctor-dashboard', component: DoctorDashboardComponent, canActivate: [AuthGuard]},
       { path: 'appointments', component: AppointmentsComponent },
       { path: 'schedule-timings', component: ScheduleTimingsComponent },
       { path: 'my-patients', component: MyPatientsComponent },
       { path: 'patient-profile', component: AppointmentsComponent },
       { path: 'chat-doctor', component: ChatDoctorComponent },
       { path: 'invoices', component: InvoicesComponent },
-      { path: 'doctor-profile-settings', component: DoctorProfileSettingsComponent },
+      { path: 'doctor-profile-settings', component: DoctorProfileSettingsComponent, canActivate: [AuthGuard] },
       { path: 'reviews', component: ReviewsComponent },
       { path: 'social-media', component: SocialMediaComponent },
       { path: 'doctor-change-password', component: DoctorChangePasswordComponent },
@@ -111,17 +110,17 @@ const routes: Routes = [
       { path: 'voice-call', component: VoiceCallComponent },
       { path: 'video-call', component: VideoCallComponent },
       { path: 'calendar', component: CalendarComponent },
-      { path: 'components', component: ComponentsComponent }
+      { path: 'components', component: ComponentsComponent },
+
+      //auth
+      { path: 'login', component: LoginComponent },
+      { path: 'register', component: RegisterComponent },
+      { path: 'forgot-password', component: ForgotPasswordComponent },
+
+      // 404 Not Found
+      { path: '**', component: NotFoundComponent }
     ]
   },
-
-  //auth
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'forgot-password', component: ForgotPasswordComponent },
-
-  // 404 Not Found
-  { path: '**', component: NotFoundComponent }
 ];
 
 @NgModule({
