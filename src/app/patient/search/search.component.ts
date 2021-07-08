@@ -5,29 +5,35 @@ import { DOCTORS_MOCK } from '@app/common/models/Doctor.model';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss']
+  styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
   
   doctors: any[] = DOCTORS_MOCK;
   pageSize: number = 2;
+  filters: any[] = [
+    { name: 'Rating', code: 'NY' },
+    { name: 'Popular', code: 'RM' },
+    { name: 'Latest', code: 'LDN' },
+    { name: 'Free', code: 'IST' },
+  ];
 
-  constructor(private route: Router) { }
+  constructor(private route: Router) {}
 
   ngOnInit(): void {
     this.initializeRating();
   }
 
   initializeRating() {
-    this.doctors.forEach(doctor => {
+    this.doctors.forEach((doctor) => {
       doctor.ratingAverage = this.calculateRateAverage(doctor.feedBacks);
-    })
+    });
   }
 
   calculateRateAverage(feedBacks: any) {
     let raitingSum = 0;
-    feedBacks.forEach(feedBack => {
-      raitingSum += feedBack.rating; 
+    feedBacks.forEach((feedBack) => {
+      raitingSum += feedBack.rating;
     });
     return raitingSum / feedBacks.length;
   }
@@ -43,5 +49,4 @@ export class SearchComponent implements OnInit {
   bookAppointment(id: number) {
     this.route.navigate(['/booking', { identifier: id }]);
   }
-
 }

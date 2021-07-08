@@ -23,15 +23,7 @@
                                 </a>
                             </div>
                             <div class="sort-by d-sm-block d-none">
-                                <span class="sortby-fliter">
-                                    <select class="select">
-                                        <option>Sort by</option>
-                                        <option class="sorting">Rating</option>
-                                        <option class="sorting">Popular</option>
-                                        <option class="sorting">Latest</option>
-                                        <option class="sorting">Free</option>
-                                    </select>
-                                </span>
+                                <p-dropdown [options]="filters" optionLabel="name" ></p-dropdown>
                             </div>
                         </div>
                     </div>

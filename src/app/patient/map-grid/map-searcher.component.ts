@@ -8,6 +8,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 })
 export class MapSearcherComponent implements OnInit {
 
+  filters: any[] = [
+    { name: 'Rating', code: 'NY' },
+    { name: 'Popular', code: 'RM' },
+    { name: 'Latest', code: 'LDN' },
+    { name: 'Free', code: 'IST' },
+  ];
+
   isListMode: boolean = false;
   lat = 35.720065;
   lng = 10.649893;
