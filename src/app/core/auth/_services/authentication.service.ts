@@ -53,4 +53,10 @@ export class AuthenticationService {
             return null;
         }
       }
+
+      getRoles(): string[] {
+          let token = localStorage.getItem(ACCESS_TOKEN);
+          let decodedToken = this.getDecodedAccessToken(token);
+          return decodedToken.roles ? decodedToken.roles : [];
+      }
 }
