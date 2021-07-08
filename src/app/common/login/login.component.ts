@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
     },
     err =>  {
       this.showLoader = false;
-      this._toastService.showError('Error', 'You have entered an invalid username or password.');
     });
   }
 }
