@@ -41,7 +41,7 @@ export const NAV_ITEMS: NavItem[] = [
             },
             {
                 label: 'Map Search',
-                path: 'grid-map'
+                path: 'map-grid'
             },
             {
                 label: 'Favourites',
@@ -78,7 +78,7 @@ export const NAV_ITEMS: NavItem[] = [
             },
             {
                 label: 'Map Search',
-                path: 'grid-map'
+                path: 'map-grid'
             }
         ]
     },
