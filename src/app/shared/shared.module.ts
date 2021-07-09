@@ -9,8 +9,7 @@ import { AppRoutingModule } from '@app/app-routing.module';
 import { DropdownModule } from 'primeng/dropdown';
 import { IfAuthorizedDirective } from './if-authorized.directive';
 import { LoaderComponent } from './loader/loader.component';
-
-
+import {CarouselModule} from 'primeng/carousel';
 @NgModule({
   declarations: [
     IfAuthorizedDirective,
@@ -25,7 +24,8 @@ import { LoaderComponent } from './loader/loader.component';
     RouterModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    DropdownModule
+    DropdownModule,
+    CarouselModule
   ],
   exports: [
     CommonModule,
@@ -38,7 +38,8 @@ import { LoaderComponent } from './loader/loader.component';
     BrowserAnimationsModule,
     IfAuthorizedDirective,
     DropdownModule,
-    LoaderComponent
+    LoaderComponent,
+    CarouselModule
   ]
 })
 export class SharedModule { }
