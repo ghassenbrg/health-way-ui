@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { DOCTORS_MOCK } from '@app/common/models/Doctor.model';
+import { DOCTORS_MOCK } from '@app/common/mocks/doctor.mock';
 
 @Component({
   selector: 'app-search',

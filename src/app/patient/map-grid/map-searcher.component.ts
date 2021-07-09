@@ -1,4 +1,4 @@
-import { DOCTORS_MOCK } from '../../common/models/Doctor.model';
+import { DOCTORS_MOCK } from '../../common/mocks/doctor.mock';
 import { AgmMap } from '@agm/core';
 import { Component, OnInit, ViewChild } from '@angular/core';
 @Component({
