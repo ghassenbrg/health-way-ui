@@ -10,7 +10,7 @@ import { DoctorSearcherGridComponent } from './doctor-searcher-grid/doctor-searc
 import { DoctorSearcherListComponent } from './doctor-searcher-list/doctor-searcher-list.component';
 import { FavouritesComponent } from './favourites/favourites.component';
 import { InvoiceViewComponent } from './invoice-view/invoice-view.component';
-import { MapSearcherComponent } from './map-grid/map-searcher.component';
+import { MapSearcherComponent } from './map-searcher/map-searcher.component';
 import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
 import { ProfileSettingsComponent } from './profile-settings/profile-settings.component';
 import { SearchComponent } from './search/search.component';

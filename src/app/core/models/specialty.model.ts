@@ -3,4 +3,5 @@ export class Speciality {
     name: string;
     description: string;
     doctors: string[];
+    logo?: any;
 }
