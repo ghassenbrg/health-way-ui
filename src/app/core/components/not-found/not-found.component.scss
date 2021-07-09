@@ -1,0 +1,25 @@
+.not-found-msg h1 {
+  font-size: 4em;
+}
+
+.featured-text {
+  color: #2e91e2;
+}
+
+a.go-home-btn {
+  border: 2px solid #2e91e2;
+  border-radius: 4px;
+  padding: 10px 15px !important;
+  text-align: center;
+  font-size: 15px;
+  color: #2e91e2;
+  text-transform: uppercase;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+a.go-home-btn:hover {
+  background-color: #2e91e2;
+  border-color: #2e91e2;
+  color: #fff;
+}
