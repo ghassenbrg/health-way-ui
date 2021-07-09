@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Event, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { MainComponent } from '@app/main/main.component';
 import { AuthenticationService } from '@auth/_services/authentication.service';
 import { NAV_ITEMS } from '@core/config/nav_items';
@@ -26,7 +26,27 @@ export class NavbarComponent implements OnInit {
   constructor(
     private _auth: AuthenticationService,
     private router: Router,
-    private mainComponent: MainComponent) { }
+    private mainComponent: MainComponent) {
+
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationStart) {
+        // Show loading indicator
+      }
+
+      if (event instanceof NavigationEnd) {
+        this.checkActiveRoute();
+        // Hide loading indicator
+      }
+
+      if (event instanceof NavigationError) {
+        // Hide loading indicator
+
+        // Present error to user
+        console.log(event.error);
+      }
+    });
+
+  }
 
   ngOnInit(): void {
     this.navItems.forEach(navItem => {
