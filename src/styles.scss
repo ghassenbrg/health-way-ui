@@ -78,3 +78,9 @@ a {
 .btn-social {
   color: white !important;
 }
+
+
+.p-carousel .p-carousel-content .p-carousel-prev:enabled:hover, .p-carousel .p-carousel-content .p-carousel-next:enabled:hover {
+  background: #0de0fe !important;
+  color: white !important;
+}
