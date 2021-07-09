@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { environment } from '@env/environment';
 import { User } from '@models/user.model';
 import jwt_decode from 'jwt-decode';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { UserService } from './user.service';
 
 const basePath = environment.basePath;
 const PREFIX = environment.prefix;
@@ -20,11 +20,11 @@ export class AuthenticationService {
     public currentUser: Observable<User>;
     public decodedTokenSubject: BehaviorSubject<any>;
 
-    constructor(private http: HttpClient, private _userService: UserService) {
+    constructor(private http: HttpClient, private router: Router) {
         let token = localStorage.getItem(ACCESS_TOKEN);
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(token));
         this.currentUser = this.currentUserSubject.asObservable();
-        this.decodedTokenSubject= new BehaviorSubject<any>(token ? jwt_decode(token) : null);
+        this.decodedTokenSubject = new BehaviorSubject<any>(token ? jwt_decode(token) : null);
     }
 
     public get currentUserToken(): User {
@@ -52,6 +52,7 @@ export class AuthenticationService {
         localStorage.removeItem(REFRESH_TOKEN);
         this.currentUserSubject.next(null);
         this.decodedTokenSubject.next(null);
+        this.router.navigate(['/login']);
     }
 
     getDecodedAccessToken(token: string): any {
