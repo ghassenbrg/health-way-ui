@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
+  doctorRegisterScreen: boolean;
+  
   constructor() { }
 
   ngOnInit(): void {
