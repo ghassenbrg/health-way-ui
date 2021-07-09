@@ -73,10 +73,32 @@ a {
 //********************************
 .p-dropdown {
   height: 44px !important;
+
+}
+.form-group {
+  .p-dropdown {
+    height: 50px !important;
+    width: 100%;
+    align-items: center;
+
+
+  }
+  .p-dropdown .p-dropdown-label.p-placeholder {
+    color: #b8b8b8 ;
+    align-self: center;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .p-calendar {
+    height: 50px !important;
+    width: 100%;
+  }
+
 }
 
 .btn-social {
-  color: white !important;
+  color: rgb(170, 166, 166) !important;
 }
 
 

@@ -3,6 +3,9 @@ export class User {
     email: string;
     firstName: string;
     lastName: string;
+    username: string;
+    gender: string;
+    birthDate?: string;
     roles: string[];
     isActive: boolean;
     createdAt: Date;

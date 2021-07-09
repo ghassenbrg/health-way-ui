@@ -10,6 +10,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { IfAuthorizedDirective } from './if-authorized.directive';
 import { LoaderComponent } from './loader/loader.component';
 import {CarouselModule} from 'primeng/carousel';
+import {CalendarModule} from 'primeng/calendar';
 @NgModule({
   declarations: [
     IfAuthorizedDirective,
@@ -25,7 +26,8 @@ import {CarouselModule} from 'primeng/carousel';
     HttpClientModule,
     BrowserAnimationsModule,
     DropdownModule,
-    CarouselModule
+    CarouselModule,
+    CalendarModule
   ],
   exports: [
     CommonModule,
@@ -39,7 +41,8 @@ import {CarouselModule} from 'primeng/carousel';
     IfAuthorizedDirective,
     DropdownModule,
     LoaderComponent,
-    CarouselModule
+    CarouselModule,
+    CalendarModule
   ]
 })
 export class SharedModule { }
