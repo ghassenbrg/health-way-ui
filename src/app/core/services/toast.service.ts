@@ -13,11 +13,11 @@ export class ToastService {
   }
 
   showInfo(summary: string, detail: string) {
-    this._messageService.add({ severity: 'info', summary: summary, detail: detail, styleClass: 'custom-toast' });
+    this._messageService.add({ severity: 'info', summary: summary, detail: detail, styleClass: 'toast-info' });
   }
 
   showWarn(summary: string, detail: string) {
-    this._messageService.add({ severity: 'warn', summary: summary, detail: detail, styleClass: 'custom-toast' });
+    this._messageService.add({ severity: 'warn', summary: summary, detail: detail, styleClass: 'toast-warn' });
   }
 
   showError(summary: string, detail: string) {

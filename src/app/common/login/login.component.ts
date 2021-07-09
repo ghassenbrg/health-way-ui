@@ -28,17 +28,25 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  authentificate() {
-    this.showLoader = true;
-    this._auth.login(this.credentials.username, this.credentials.password).subscribe(res => {
-      this.showLoader = false;
-      let redirectTo: string = this.route.snapshot.queryParams.returnUrl;
-      this._toastService.showSuccess('Success', 'Login successfully with user: ' + this.credentials.username);
-      this.mainComponent.refreshCurrentUser();
-      this.router.navigate([redirectTo ? redirectTo : '/']);
-    },
-      err => {
-        this.showLoader = false;
-      });
+  authentificate(authType?: string) {
+    switch (authType) {
+      case 'facebook':
+        case 'google':
+        this._toastService.showInfo('Info', 'Sorry, the authentication via social networks is not yet available.');
+        break;
+      default:
+        this.showLoader = true;
+        this._auth.login(this.credentials.username, this.credentials.password).subscribe(res => {
+          this.showLoader = false;
+          let redirectTo: string = this.route.snapshot.queryParams.returnUrl;
+          this._toastService.showSuccess('Success', 'Login successfully with user: ' + this.credentials.username);
+          this.mainComponent.refreshCurrentUser();
+          this.router.navigate([redirectTo ? redirectTo : '/']);
+        },
+          err => {
+            this.showLoader = false;
+          });
+        break;
+    }
   }
 }

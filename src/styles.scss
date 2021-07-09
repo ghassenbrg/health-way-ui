@@ -14,6 +14,8 @@ a {
   }
 }
 
+//toast-error
+
 .toast-error {
 
   .p-toast-message-icon,
@@ -23,8 +25,10 @@ a {
 }
 
 .p-toast-message-error {
-    border-left: 3px solid #ff0040 !important;
-  }
+  border-color: #ff0040 !important;
+}
+
+//toast-success
 
 .toast-success {
 
@@ -35,10 +39,42 @@ a {
 }
 
 .p-toast-message-success {
-  border-left: 3px solid #2bd480 !important;
+  border-color: #2bd480 !important;
+}
+
+//toast-info
+
+.toast-info {
+
+  .p-toast-message-icon,
+  .p-toast-summary {
+    color: #48b6ff !important;
+  }
+}
+
+.p-toast-message-info {
+  border-color: #48b6ff !important;
+}
+
+//toast-warn
+
+.toast-warn {
+
+  .p-toast-message-icon,
+  .p-toast-summary {
+    color: #FF9404 !important;
+  }
+}
+
+.p-toast-message-warn {
+  border-color: #FF9404 !important;
 }
 
 //********************************
 .p-dropdown {
   height: 44px !important;
+}
+
+.btn-social {
+  color: white !important;
 }
