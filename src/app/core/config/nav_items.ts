@@ -20,15 +20,11 @@ export const NAV_ITEMS: NavItem[] = [
         ]
     },
     {
-        label: 'Pharmacy',
+        label: 'Patients',
         children: [
             {
-                label: 'Simple Search',
-                path: 'search'
-            },
-            {
-                label: 'Map Search',
-                path: 'map-grid'
+                label: 'Patients List',
+                path: 'patients-list'
             }
         ]
     },

@@ -12,6 +12,7 @@ import { FavouritesComponent } from './favourites/favourites.component';
 import { InvoiceViewComponent } from './invoice-view/invoice-view.component';
 import { MapSearcherComponent } from './map-searcher/map-searcher.component';
 import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
+import { PatientsListComponent } from './patients-list/patients-list.component';
 import { ProfileSettingsComponent } from './profile-settings/profile-settings.component';
 import { SearchComponent } from './search/search.component';
 
@@ -31,7 +32,8 @@ import { SearchComponent } from './search/search.component';
     ChangePasswordComponent,
     InvoiceViewComponent,
     DoctorSearcherGridComponent,
-    DoctorSearcherListComponent
+    DoctorSearcherListComponent,
+    PatientsListComponent  
   ],
   imports: [
     SharedModule,

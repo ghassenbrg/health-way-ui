@@ -8,7 +8,7 @@ import { PrimeNGConfig } from 'primeng/api';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'health-ui';
+  title = 'health-way-ui';
 
   constructor(private primengConfig: PrimeNGConfig, private titleService: Title) {
   }

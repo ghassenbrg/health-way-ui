@@ -26,6 +26,7 @@ import { DoctorProfileSettingsComponent } from './doctor/doctor-profile-settings
 import { DoctorRegisterComponent } from './doctor/doctor-register/doctor-register.component';
 import { InvoicesComponent } from './doctor/invoices/invoices.component';
 import { MyPatientsComponent } from './doctor/my-patients/my-patients.component';
+import { PatientsListComponent } from './patient/patients-list/patients-list.component';
 import { ReviewsComponent } from './doctor/reviews/reviews.component';
 import { ScheduleTimingsComponent } from './doctor/schedule-timings/schedule-timings.component';
 import { SocialMediaComponent } from './doctor/social-media/social-media.component';
@@ -89,6 +90,7 @@ const routes: Routes = [
       { path: 'profile-settings', component: ProfileSettingsComponent },
       { path: 'change-password', component: ChangePasswordComponent },
       { path: 'invoice-view', component: InvoiceViewComponent },
+      { path: 'patients-list', component: PatientsListComponent },
 
       // Pharmacy
       { path: 'pharmacy', component: PharmacyComponent },
