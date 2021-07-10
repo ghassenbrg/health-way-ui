@@ -7,6 +7,7 @@ import { AuthenticationService } from '@auth/_services/authentication.service';
 import { User } from '@models/user.model';
 import * as moment from 'moment';
 import { PatientService } from '@app/patient/patient.service';
+import { roles } from '@core/config/roles';
 
 
 @Component({
@@ -48,7 +49,7 @@ export class RegisterComponent implements OnInit {
           this._doctorService.createDoctor(this.userInput).subscribe(res => {
             this.showLoader = false;
             this._toastService.showSuccess('Success', 'Doctor successfully registred with user: ' + res.username);
-            this.login(res.username,res.password);
+            this.login(res.username,this.userInput.password);
           },
             err => {
               this.showLoader = false;
@@ -58,7 +59,7 @@ export class RegisterComponent implements OnInit {
           this._patientService.createPatient(this.userInput).subscribe(res => {
             this.showLoader = false;
             this._toastService.showSuccess('Success', 'Patient successfully registred with user: ' + res.username);
-            this.login(res.username,res.password);
+            this.login(res.username,this.userInput.password);
           },
             err => {
               this.showLoader = false;
@@ -73,7 +74,7 @@ export class RegisterComponent implements OnInit {
     this.birthDate = undefined;
     if (role == 'doctor') {
       this.doctorRegisterScreen = true;
-      this.userInput.roles = ['ROLE_DOCTOR'];
+      this.userInput.roles = [roles.ROLE_DOCTOR];
     }
     else {
       this.doctorRegisterScreen = false;
