@@ -63,7 +63,7 @@ const routes: Routes = [
       { path: 'home2', component: Home2Component },
 
       // Doctor
-      { path: 'doctor-dashboard', component: DoctorDashboardComponent, canActivate: [AuthGuard]},
+      { path: 'doctor-dashboard', component: DoctorDashboardComponent, canActivate: [AuthGuard] },
       { path: 'appointments', component: AppointmentsComponent },
       { path: 'schedule-timings', component: ScheduleTimingsComponent },
       { path: 'my-patients', component: MyPatientsComponent },
@@ -126,7 +126,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })],
   exports: [RouterModule],
 })
 export class AppRoutingModule { }
