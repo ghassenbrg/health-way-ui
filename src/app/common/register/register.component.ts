@@ -54,7 +54,7 @@ export class RegisterComponent implements OnInit {
             this._doctorService.createDoctor(this.userInput).subscribe(res => {
               this.showLoader = false;
               this._toastService.showSuccess('Success', 'Doctor successfully registred with user: ' + res.username);
-              this.login(res.username, this.userInput.password);
+              this.login(res.username, this.userInput.plainPassword);
             },
               err => {
                 this.showLoader = false;
@@ -64,7 +64,7 @@ export class RegisterComponent implements OnInit {
             this._patientService.createPatient(this.userInput).subscribe(res => {
               this.showLoader = false;
               this._toastService.showSuccess('Success', 'Patient successfully registred with user: ' + res.username);
-              this.login(res.username, this.userInput.password);
+              this.login(res.username, this.userInput.plainPassword);
             },
               err => {
                 this.showLoader = false;
@@ -83,7 +83,7 @@ export class RegisterComponent implements OnInit {
     } else {
       specificCheck = this.userInput && !!this.birthDate;
     }
-    return specificCheck && !!this.userInput.password && this.userInput.password == this.confirmPassword
+    return specificCheck && !!this.userInput.plainPassword && this.userInput.plainPassword == this.confirmPassword
       && !!this.userInput.firstName && !!this.userInput.lastName && !!this.selectedGender
       && !!this.userInput.email;
   }
@@ -111,6 +111,7 @@ export class RegisterComponent implements OnInit {
   }
 
   login(username: string, password: string) {
+    this.showLoader = true;
     this._auth.login(username, password).subscribe(res => {
       this.showLoader = false;
       this.mainComponent.refreshCurrentUser();

@@ -12,5 +12,6 @@ export class User {
     createdAt: Date;
     updatedAt: Date;
     password?: string;
+    plainPassword?: string;
     token?: string;
 }
