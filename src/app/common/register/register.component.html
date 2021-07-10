@@ -18,10 +18,10 @@
               <div class="col-md-12 col-lg-6 login-right">
                 <div class="login-header">
                   <div *ngIf="!doctorRegisterScreen">
-                    <h3>Patient Register <a (click)="doctorRegisterScreen = true">Are you a Doctor?</a></h3>
+                    <h3>Patient Register <a (click)="changeUserRole('doctor')">Are you a Doctor?</a></h3>
                   </div>
                   <div *ngIf="doctorRegisterScreen">
-                    <h3>Doctor Register <a (click)="doctorRegisterScreen = false">Not a Doctor?</a></h3>
+                    <h3>Doctor Register <a (click)="changeUserRole('patient')">Not a Doctor?</a></h3>
                   </div>
 
                 </div>
@@ -39,21 +39,21 @@
                     </div>
                   </div>
                   <div class="form-group form-focus">
-                    <p-dropdown [options]="genders" [(ngModel)]="userInput.gender" name="gender" placeholder="Gender" >
+                    <p-dropdown [options]="genders" [(ngModel)]="selectedGender" name="gender" placeholder="Gender" >
                       <ng-template let-gender pTemplate="item">
                         {{gender}}
                     </ng-template>
                     </p-dropdown>
                   </div>
                   <div class="form-group form-focus" *ngIf="!doctorRegisterScreen">
-                    <p-calendar [(ngModel)]="userInput.birthDate" placeholder="Birth Date" [showIcon]="true" name="birthDate"></p-calendar>
+                    <p-calendar [(ngModel)]="birthDate" placeholder="Birth Date" [showIcon]="true" name="birthDate"></p-calendar>
                   </div>
                   <div class="form-group form-focus">
                     <input type="text" class="form-control floating" name="email" [(ngModel)]="userInput.email">
                     <label class="focus-label">Email</label>
                   </div>
                   <div class="form-group form-focus" *ngIf="doctorRegisterScreen">
-                    <input type="text" class="form-control floating" name="email" [(ngModel)]="userInput.email">
+                    <input type="text" class="form-control floating" name="jobTitle" [(ngModel)]="userInput.jobTitle">
                     <label class="focus-label">Job Title</label>
                   </div>
                   <div class="form-group form-focus">

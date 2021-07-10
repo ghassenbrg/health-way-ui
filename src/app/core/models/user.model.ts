@@ -6,6 +6,7 @@ export class User {
     username: string;
     gender: string;
     birthDate?: string;
+    jobTitle?: string;
     roles: string[];
     isActive: boolean;
     createdAt: Date;
