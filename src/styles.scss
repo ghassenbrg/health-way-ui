@@ -75,6 +75,7 @@ a {
   height: 44px !important;
 
 }
+
 .form-group {
   .p-dropdown {
     height: 50px !important;
@@ -83,8 +84,9 @@ a {
 
 
   }
+
   .p-dropdown .p-dropdown-label.p-placeholder {
-    color: #b8b8b8 ;
+    color: #b8b8b8;
     align-self: center;
     font-size: 14px;
     font-weight: 400;
@@ -102,7 +104,26 @@ a {
 }
 
 
-.p-carousel .p-carousel-content .p-carousel-prev:enabled:hover, .p-carousel .p-carousel-content .p-carousel-next:enabled:hover {
+.p-carousel .p-carousel-content .p-carousel-prev:enabled:hover,
+.p-carousel .p-carousel-content .p-carousel-next:enabled:hover {
   background: #0de0fe !important;
   color: white !important;
+}
+
+.custom-form-error {
+  color: #ff0040;
+  font-size: 0.85em;
+  margin-top: 1px;
+}
+
+.invalid-input {
+  input, p-dropdown > div {
+    border: 1px solid #ff0040;
+  }
+}
+
+.valid-input {
+  input, p-dropdown > div {
+    border: 1px solid #2bd480;
+  }
 }

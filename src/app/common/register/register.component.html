@@ -13,7 +13,8 @@
           <div class="account-content">
             <div class="row align-items-center justify-content-center">
               <div class="col-md-7 col-lg-6 login-left">
-                <img src="assets/img/{{doctorRegisterScreen ? 'doctor' : 'patient'}}_illustration.png" class="img-fluid" alt="Health Way Register">
+                <img src="assets/img/{{doctorRegisterScreen ? 'doctor' : 'patient'}}_illustration.png" class="img-fluid"
+                  alt="Health Way Register">
               </div>
               <div class="col-md-12 col-lg-6 login-right">
                 <div class="login-header">
@@ -29,51 +30,110 @@
                 <!-- Register Form -->
                 <form>
                   <div style="display: flex;">
-                    <div class="form-group form-focus">
-                      <input type="text" class="form-control floating" [(ngModel)]="userInput.firstName" name="firstName">
+                    <div class="form-group form-focus" [ngClass]="{'invalid-input': (submitTouched || firstName.touched) && firstName.invalid,
+                       'valid-input': (submitTouched || firstName.touched) && firstName.valid}">
+                      <input type="text" class="form-control floating" [(ngModel)]="userInput.firstName"
+                        name="firstName" #firstName="ngModel" required>
                       <label class="focus-label">First Name</label>
+                      <!-- <div *ngIf="(submitTouched || firstName.touched) && firstName.invalid" class="custom-form-error">
+                        * Mandatory field.
+                      </div> -->
                     </div>
-                    <div class="form-group form-focus" style="margin-left: 25px;">
-                      <input type="text" class="form-control floating" [(ngModel)]="userInput.lastName" name="lastName">
+                    <div class="form-group form-focus" [ngClass]="{'invalid-input': (submitTouched || lastName.touched) && lastName.invalid,
+                       'valid-input': (submitTouched || lastName.touched) && lastName.valid}"
+                      style="margin-left: 25px;">
+                      <input type="text" class="form-control floating" [(ngModel)]="userInput.lastName" name="lastName"
+                        #lastName="ngModel" required>
                       <label class="focus-label">Last Name</label>
+                      <!-- <div *ngIf="(submitTouched || lastName.touched) && lastName.invalid" class="custom-form-error">
+                        * Mandatory field.
+                      </div> -->
                     </div>
                   </div>
-                  <div class="form-group form-focus">
-                    <p-dropdown [options]="genders" [(ngModel)]="selectedGender" name="gender" placeholder="Gender" >
+                  <div class="form-group form-focus" [ngClass]="{'invalid-input': (submitTouched || gender.touched) && gender.invalid,
+                     'valid-input': (submitTouched || gender.touched) && gender.valid}">
+                    <p-dropdown [options]="genders" [(ngModel)]="selectedGender" name="gender" placeholder="Gender"
+                      #gender="ngModel" required>
                       <ng-template let-gender pTemplate="item">
                         {{gender}}
-                    </ng-template>
+                      </ng-template>
                     </p-dropdown>
+                    <!-- <div *ngIf="(submitTouched || gender.touched) && gender.invalid" class="custom-form-error">
+                      * Mandatory field.
+                    </div> -->
                   </div>
-                  <div class="form-group form-focus" *ngIf="!doctorRegisterScreen">
-                    <p-calendar [(ngModel)]="birthDate" placeholder="Birth Date" [showIcon]="true" name="birthDate"></p-calendar>
+                  <div class="form-group form-focus" [ngClass]="{'invalid-input': (submitTouched || birthDateForm.touched) && birthDateForm.invalid, 
+                    'valid-input': (submitTouched || birthDateForm.touched) && birthDateForm.valid}"
+                    *ngIf="!doctorRegisterScreen">
+                    <p-calendar [yearRange]="yearRange" [yearNavigator]="true" [monthNavigator]="true"
+                      [(ngModel)]="birthDate" placeholder="Birth Date" [showIcon]="true" name="birthDate"
+                      #birthDateForm="ngModel" required></p-calendar>
+                    <!-- <div *ngIf="(submitTouched || birthDateForm.touched && birthDateForm.invalid)"
+                      class="custom-form-error">
+                      * Mandatory field.
+                    </div> -->
                   </div>
-                  <div class="form-group form-focus">
-                    <input type="text" class="form-control floating" name="email" [(ngModel)]="userInput.email">
+                  <div class="form-group form-focus" [ngClass]="{'invalid-input': (submitTouched || email.touched) && email.invalid,
+                     'valid-input': (submitTouched || email.touched) && email.valid}">
+                    <input type="text" class="form-control floating" name="email" [(ngModel)]="userInput.email"
+                      #email="ngModel" required>
                     <label class="focus-label">Email</label>
+                    <!-- <div *ngIf="(submitTouched || email.touched) && email.invalid" class="custom-form-error">
+                      * Mandatory field.
+                    </div> -->
                   </div>
-                  <div class="form-group form-focus" *ngIf="doctorRegisterScreen">
-                    <input type="text" class="form-control floating" name="jobTitle" [(ngModel)]="userInput.jobTitle">
+                  <div class="form-group form-focus" [ngClass]="{'invalid-input': (submitTouched || jobTitle.touched) && jobTitle.invalid,
+                     'valid-input': (submitTouched || jobTitle.touched) && jobTitle.valid}"
+                    *ngIf="doctorRegisterScreen">
+                    <input type="text" class="form-control floating" name="jobTitle" [(ngModel)]="userInput.jobTitle"
+                      #jobTitle="ngModel" required>
                     <label class="focus-label">Job Title</label>
+                    <!-- <div *ngIf="(submitTouched || jobTitle.touched) && jobTitle.invalid" class="custom-form-error">
+                      * Mandatory field.
+                    </div> -->
                   </div>
-                  <div class="form-group form-focus">
-                    <input type="password" class="form-control floating" name="password" [(ngModel)]="userInput.password">
+                  <div class="form-group form-focus" [ngClass]="{'invalid-input': (submitTouched || password.touched) && password.invalid,
+                     'valid-input': (submitTouched || password.touched) && password.valid}">
+                    <input type="password" class="form-control floating" name="password"
+                      [(ngModel)]="userInput.password" #password="ngModel" required>
                     <label class="focus-label">Create Password</label>
+                    <!-- <div *ngIf="(submitTouched || password.touched) && password.invalid" class="custom-form-error">
+                      * Mandatory field.
+                    </div> -->
+                  </div>
+                  <div class="form-group form-focus" [ngClass]="{'invalid-input': (submitTouched || confirmPasswordForm.touched) && (confirmPasswordForm.invalid || userInput.password != confirmPassword),
+                     'valid-input': (submitTouched || confirmPasswordForm.touched) && (confirmPasswordForm.valid && userInput.password == confirmPassword)}">
+                    <input type="password" class="form-control floating" name="confirm-password"
+                      [(ngModel)]="confirmPassword" #confirmPasswordForm="ngModel" required>
+                    <label class="focus-label">Confirm Password</label>
+                    <div *ngIf="submitTouched || confirmPasswordForm.touched" class="custom-form-error">
+                      <span
+                        *ngIf="confirmPasswordForm.invalid && (submitTouched || password.dirty || password.touched)">
+                        * Please confirm your password.
+                      </span>
+                      <span
+                        *ngIf="confirmPassword && (userInput.password != confirmPassword) && (submitTouched || confirmPasswordForm.dirty || confirmPasswordForm.touched)">
+                        * Passwords do not match.
+                      </span>
+                    </div>
                   </div>
                   <div class="text-right">
                     <a class="forgot-link" routerLink="/login">Already have an account?</a>
                   </div>
-                  <button class="btn btn-primary btn-block btn-lg login-btn" type="submit" (click)="register()">Signup</button>
+                  <button class="btn btn-primary btn-block btn-lg login-btn" type="submit"
+                    (click)="register()">Signup</button>
                   <div class="login-or">
                     <span class="or-line"></span>
                     <span class="span-or">or</span>
                   </div>
                   <div class="row form-row social-login">
                     <div class="col-6">
-                      <a class="btn btn-social btn-facebook btn-block" (click)="register('facebook')"><i class="fab fa-facebook-f mr-1"></i> Login</a>
+                      <a class="btn btn-social btn-facebook btn-block" (click)="register('facebook')"><i
+                          class="fab fa-facebook-f mr-1"></i> Login</a>
                     </div>
                     <div class="col-6">
-                      <a class="btn btn-social btn-google btn-block" (click)="register('google')"><i class="fab fa-google mr-1"></i> Login</a>
+                      <a class="btn btn-social btn-google btn-block" (click)="register('google')"><i
+                          class="fab fa-google mr-1"></i> Login</a>
                     </div>
                   </div>
                 </form>

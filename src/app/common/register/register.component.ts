@@ -20,9 +20,12 @@ export class RegisterComponent implements OnInit {
   doctorRegisterScreen: boolean;
   userInput: User = new User();
   showLoader: boolean;
-  genders: any = [ "Male", "Female"];
+  genders: any = ["Male", "Female"];
   birthDate: Date;
   selectedGender: string;
+  yearRange: string;
+  confirmPassword: string;
+  submitTouched: boolean;
   
   constructor(
     private _toastService: ToastService,
@@ -34,39 +37,55 @@ export class RegisterComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.yearRange = this.getYearRange();
   }
 
   register(registerType?: string) {
-    this.prepareUserInput();
-    switch (registerType) {
-      case 'facebook':
-      case 'google':
-        this._toastService.showInfo('Info', 'Sorry, signUp via social networks is not yet available.');
-        break;
-      default:
-        this.showLoader = true;
-        if (this.doctorRegisterScreen) {
-          this._doctorService.createDoctor(this.userInput).subscribe(res => {
-            this.showLoader = false;
-            this._toastService.showSuccess('Success', 'Doctor successfully registred with user: ' + res.username);
-            this.login(res.username,this.userInput.password);
-          },
-            err => {
+    if (this.validateForm()) {
+      this.prepareUserInput();
+      switch (registerType) {
+        case 'facebook':
+        case 'google':
+          this._toastService.showInfo('Info', 'Sorry, signUp via social networks is not yet available.');
+          break;
+        default:
+          this.showLoader = true;
+          if (this.doctorRegisterScreen) {
+            this._doctorService.createDoctor(this.userInput).subscribe(res => {
               this.showLoader = false;
-            });
-        }
-        else {
-          this._patientService.createPatient(this.userInput).subscribe(res => {
-            this.showLoader = false;
-            this._toastService.showSuccess('Success', 'Patient successfully registred with user: ' + res.username);
-            this.login(res.username,this.userInput.password);
-          },
-            err => {
+              this._toastService.showSuccess('Success', 'Doctor successfully registred with user: ' + res.username);
+              this.login(res.username, this.userInput.password);
+            },
+              err => {
+                this.showLoader = false;
+              });
+          }
+          else {
+            this._patientService.createPatient(this.userInput).subscribe(res => {
               this.showLoader = false;
-            });
-        }
-        break;
+              this._toastService.showSuccess('Success', 'Patient successfully registred with user: ' + res.username);
+              this.login(res.username, this.userInput.password);
+            },
+              err => {
+                this.showLoader = false;
+              });
+          }
+          break;
+      }
     }
+  }
+
+  validateForm(): boolean {
+    this.submitTouched = true;
+    let specificCheck: boolean;
+    if (this.doctorRegisterScreen) {
+      specificCheck = this.userInput && !!this.userInput.jobTitle;
+    } else {
+      specificCheck = this.userInput && !!this.birthDate;
+    }
+    return specificCheck && !!this.userInput.password && this.userInput.password == this.confirmPassword
+      && !!this.userInput.firstName && !!this.userInput.lastName && !!this.selectedGender
+      && !!this.userInput.email;
   }
 
   changeUserRole(role: string) {
@@ -100,6 +119,12 @@ export class RegisterComponent implements OnInit {
       err => {
         this.showLoader = false;
       });
+  }
+
+  getYearRange(): string {
+    const start = moment().subtract(90, 'years').year();
+    const end = moment().subtract(13, 'years').year();
+    return `${start}:${end}`;
   }
 
 }
