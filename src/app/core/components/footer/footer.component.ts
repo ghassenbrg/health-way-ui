@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FOOTER_ITEMS } from '@core/config/nav_items';
+import { roles } from '@core/config/roles';
+import { NavItem } from '@models/navItem.model';
 
 @Component({
   selector: 'app-footer',
@@ -7,6 +10,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
+  rolesEnum = roles;
+  navItems: NavItem[] = FOOTER_ITEMS;
+  
   constructor() { }
 
   ngOnInit(): void {

@@ -39,43 +39,27 @@
                     
                 </div>
                 
-                <div class="col-lg-3 col-md-6">
-                
-                    <!-- Footer Widget -->
-                    <div class="footer-widget footer-menu">
-                        <h2 class="footer-title">For Patients</h2>
-                        <ul>
-                            <li><a routerLink="search">Search for Doctors</a></li>
-                            <li><a routerLink="login">Login</a></li>
-                            <li><a routerLink="register">Register</a></li>
-                            <li><a routerLink="booking">Booking</a></li>
-                            <li><a routerLink="patient-dashboard">Patient Dashboard</a></li>
-                        </ul>
+                <ng-container *ngFor="let item of navItems;">
+
+                    <div class="col-lg-3 col-md-6" *ifAuthorized=" item.authorizedRoles ? item.authorizedRoles : ['ROLE_GUEST']">
+
+                        <div class="footer-widget footer-menu">
+                            <h2 class="footer-title">{{item.label}}</h2>
+                            <ul>
+                                <ng-container *ngFor="let childItem of item.children">
+                                    <li *ifAuthorized=" childItem.authorizedRoles ? childItem.authorizedRoles : ['ROLE_GUEST']">
+                                        <a routerLink="{{childItem.path}}">{{childItem.label}}</a>
+                                    </li>
+                                </ng-container>
+                            </ul>
+                        </div>
+                        
                     </div>
-                    <!-- /Footer Widget -->
-                    
-                </div>
-                
+
+                </ng-container>
+
                 <div class="col-lg-3 col-md-6">
                 
-                    <!-- Footer Widget -->
-                    <div class="footer-widget footer-menu">
-                        <h2 class="footer-title">For Doctors</h2>
-                        <ul>
-                            <li><a routerLink="appointments">Appointments</a></li>
-                            <li><a routerLink="chat">Chat</a></li>
-                            <li><a routerLink="login">Login</a></li>
-                            <li><a routerLink="doctor-register">Register</a></li>
-                            <li><a routerLink="doctor-dashboard">Doctor Dashboard</a></li>
-                        </ul>
-                    </div>
-                    <!-- /Footer Widget -->
-                    
-                </div>
-                
-                <div class="col-lg-3 col-md-6">
-                
-                    <!-- Footer Widget -->
                     <div class="footer-widget footer-contact">
                         <h2 class="footer-title">Contact Us</h2>
                         <div class="footer-contact-info">
@@ -89,13 +73,12 @@
                             </p>
                             <p class="mb-0">
                                 <i class="fas fa-envelope"></i>
-                                Health Way@example.com
+                                healthway@example.com
                             </p>
                         </div>
                     </div>
-                    <!-- /Footer Widget -->
                     
-                </div>
+                </div> 
                 
             </div>
         </div>
