@@ -1,8 +1,13 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from '@auth/_services/authentication.service';
+import { UserService } from '@auth/_services/user.service';
 import { NavbarComponent } from '@core/components/navbar/navbar.component';
+import { roles } from '@core/config/roles';
+import { Doctor } from '@core/models/doctor.model';
+import { Patient } from '@core/models/patient.model';
 import { User } from '@models/user.model';
-import { UserService } from './../core/auth/_services/user.service';
+import { DoctorService } from '@services-api/doctor.service';
+import { PatientService } from '@services-api/patient.service';
 
 @Component({
   selector: 'app-main',
@@ -15,14 +20,18 @@ export class MainComponent implements OnInit {
 
   showLoader: boolean;
 
-  currentUser: User;
+  currentUser: User | Doctor | Patient;
   footerCustomStyle: string = '';
   navbarCustomStyle: string = '';
 
   componentsWithoutFooter: string[] = ['MapSearcherComponent'];
   componentsWithStickyNavbar: string[] = ['MapSearcherComponent'];
 
-  constructor(private _userService: UserService, private _auth: AuthenticationService) { }
+  constructor(
+    private _userService: UserService,
+    private _doctorService: DoctorService,
+    private _patientService: PatientService,
+    private _auth: AuthenticationService) { }
 
   ngOnInit(): void {
     this.refreshCurrentUser();
@@ -39,12 +48,27 @@ export class MainComponent implements OnInit {
   refreshCurrentUser() {
     this.showLoader = true;
     this.currentUser = undefined;
+    let currentRoles = this._auth.getRoles();
+    let isDoctor: boolean = currentRoles.indexOf(roles.ROLE_DOCTOR) > -1;
+    let isPatient: boolean = currentRoles.indexOf(roles.ROLE_PATIENT) > -1;
     let mail: string = this._auth.getMail();
     if (mail) {
-      this._userService.getUserByMail(mail).subscribe(res => {
-        this.showLoader = false;
-        this.currentUser = res[0]
-      });
+      if (isDoctor) {
+        this._doctorService.getDoctorByMail(mail).subscribe(res => {
+          this.showLoader = false;
+          this.currentUser = res[0]
+        });
+      } else if (isPatient) {
+        this._patientService.getPatientByMail(mail).subscribe(res => {
+          this.showLoader = false;
+          this.currentUser = res[0]
+        });
+      } else {
+        this._userService.getUserByMail(mail).subscribe(res => {
+          this.showLoader = false;
+          this.currentUser = res[0]
+        });
+      }
     } else {
       this.showLoader = false;
     }

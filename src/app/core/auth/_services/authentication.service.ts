@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { roles } from '@core/config/roles';
 import { environment } from '@env/environment';
 import { User } from '@models/user.model';
 import jwt_decode from 'jwt-decode';
@@ -68,6 +69,20 @@ export class AuthenticationService {
         let token = localStorage.getItem(ACCESS_TOKEN);
         let decodedToken = this.getDecodedAccessToken(token);
         return decodedToken && decodedToken.roles ? decodedToken.roles : [];
+    }
+
+    isDocotor(): boolean {
+        let token = localStorage.getItem(ACCESS_TOKEN);
+        let decodedToken = this.getDecodedAccessToken(token);
+        let rolesList: string[] = decodedToken && decodedToken.roles ? decodedToken.roles : [];
+        return rolesList.indexOf(roles.ROLE_DOCTOR) > -1;
+    }
+
+    isPatient(): boolean {
+        let token = localStorage.getItem(ACCESS_TOKEN);
+        let decodedToken = this.getDecodedAccessToken(token);
+        let rolesList: string[] = decodedToken && decodedToken.roles ? decodedToken.roles : [];
+        return rolesList.indexOf(roles.ROLE_PATIENT) > -1;
     }
 
     getMail(): string {

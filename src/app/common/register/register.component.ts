@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { DoctorService } from '@app/doctor/doctor.service';
+import { DoctorService } from '@services-api/doctor.service';
 import { ToastService } from '@services/toast.service';
 import { Router } from '@angular/router';
 import { MainComponent } from '@app/main/main.component';
 import { AuthenticationService } from '@auth/_services/authentication.service';
 import { User } from '@models/user.model';
 import * as moment from 'moment';
-import { PatientService } from '@app/patient/patient.service';
+import { PatientService } from '@services-api/patient.service';
 import { roles } from '@core/config/roles';
 
 
