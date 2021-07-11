@@ -15,6 +15,7 @@ import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard
 import { PatientsListComponent } from './patients-list/patients-list.component';
 import { ProfileSettingsComponent } from './profile-settings/profile-settings.component';
 import { SearchComponent } from './search/search.component';
+import { PatientSummaryComponent } from './patient-summary/patient-summary.component';
 
 
 
@@ -33,7 +34,8 @@ import { SearchComponent } from './search/search.component';
     InvoiceViewComponent,
     DoctorSearcherGridComponent,
     DoctorSearcherListComponent,
-    PatientsListComponent  
+    PatientsListComponent,
+    PatientSummaryComponent  
   ],
   imports: [
     SharedModule,
