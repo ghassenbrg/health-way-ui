@@ -86,9 +86,9 @@ const routes: Routes = [
       { path: 'checkout', component: CheckoutComponent },
       { path: 'booking-success', component: BookingSuccessComponent },
       { path: 'patient-dashboard', component: PatientDashboardComponent },
-      { path: 'favourites', component: FavouritesComponent },
-      { path: 'profile-settings', component: ProfileSettingsComponent },
-      { path: 'change-password', component: ChangePasswordComponent },
+      { path: 'favourites', component: PatientDashboardComponent },
+      { path: 'profile-settings', component: PatientDashboardComponent },
+      { path: 'change-password', component: PatientDashboardComponent },
       { path: 'invoice-view', component: InvoiceViewComponent },
       { path: 'patients-list', component: PatientsListComponent },
 
