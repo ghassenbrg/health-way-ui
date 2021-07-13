@@ -1,4 +1,4 @@
-import { Timing } from "./timing.model";
+import { Slot } from "./slot.model";
 
 export class TimeSheet {
     id: number;
@@ -6,5 +6,6 @@ export class TimeSheet {
     startTime: Date;
     endTime: Date;
     doctor: string;
-    timings?: Timing[];
+    slots?: Slot[];
+    isDisabled?: boolean;
 }
