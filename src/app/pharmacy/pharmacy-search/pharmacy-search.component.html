@@ -1,7 +1,7 @@
 <!-- Main Wrapper -->
 <div class="main-wrapper">
 
-    
+
     <!-- Breadcrumb -->
     <div class="breadcrumb-bar">
         <div class="container-fluid">
@@ -33,14 +33,14 @@
         </div>
     </div>
     <!-- /Breadcrumb -->
-    
+
     <!-- Page Content -->
     <div class="content">
         <div class="container-fluid">
 
             <div class="row">
                 <div class="col-md-12 col-lg-4 col-xl-3 theiaStickySidebar">
-                
+
                     <!-- Search Filter -->
                     <div class="card search-filter">
                         <div class="card-header">
@@ -48,58 +48,52 @@
                         </div>
                         <div class="card-body">
                         <div class="filter-widget">
-                            <label>Location</label>
-                            <input type="text" class="form-control" placeholder="Select Location">
+                          <p-dropdown [options]="items" [(ngModel)]="selectedCity" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="Filtre par couvernerat">
+                            <ng-template pTemplate="selectedItem">
+                                <div class="country-item country-item-value" *ngIf="selectedCity">
+
+                                    <div>{{selectedCity.name}}</div>
+                                </div>
+                            </ng-template>
+                            <ng-template let-city pTemplate="item">
+                                <div class="country-item">
+
+                                    <div>{{city.name}}</div>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
                         </div>
                         <div class="filter-widget">
-                            <h4>Categories</h4>
+                            <h4>Filtring by timesheet</h4>
                             <div>
                                 <label class="custom_check">
                                     <input type="checkbox" name="gender_type">
-                                    <span class="checkmark"></span> Popular
+                                    <span class="checkmark"></span> Day pharmacy
                                 </label>
                             </div>
                             <div>
                                 <label class="custom_check">
                                     <input type="checkbox" name="gender_type">
-                                    <span class="checkmark"></span> Latest
+                                    <span class="checkmark"></span> Night pharmacy
                                 </label>
                             </div>
                             <div>
                                 <label class="custom_check">
                                     <input type="checkbox" name="gender_type">
-                                    <span class="checkmark"></span> Ratings
-                                </label>
-                            </div>
-                            <div>
-                                <label class="custom_check">
-                                    <input type="checkbox" name="gender_type">
-                                    <span class="checkmark"></span> Availability
-                                </label>
-                            </div>
-                            <div>
-                                <label class="custom_check">
-                                    <input type="checkbox" name="gender_type" checked>
-                                    <span class="checkmark"></span> Open 24 Hrs
-                                </label>
-                            </div>
-                            <div>
-                                <label class="custom_check">
-                                    <input type="checkbox" name="gender_type">
-                                    <span class="checkmark"></span> Home Delivery
+                                    <span class="checkmark"></span> Duty pharmacy (week-ends)
                                 </label>
                             </div>
                         </div>
-                        
+
                             <div class="btn-search">
                                 <button type="button" class="btn btn-block">Search</button>
-                            </div>	
+                            </div>
                         </div>
                     </div>
                     <!-- /Search Filter -->
-                    
+
                 </div>
-                
+
                 <div class="col-md-12 col-lg-8 col-xl-9">
 
                     <!-- Doctor Widget -->
@@ -113,24 +107,16 @@
                                         </a>
                                     </div>
                                     <div class="doc-info-cont">
-                                        <h4 class="doc-name mb-2"><a routerLink="pharmacy-details">Medlife Medical</a></h4>
-                                        <div class="rating mb-2">
-                                            <span class="badge badge-primary">4.0</span>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star"></i>
-                                            <span class="d-inline-block average-rating">(17)</span>
-                                        </div>
+                                        <h4 class="doc-name mb-2"><a routerLink="pharmacy-details">pharmacy.name}}</a></h4>
+
                                         <div class="clinic-details">
                                             <div class="clini-infos pt-3">
-                                        
-                                            <p class="doc-location mb-2"><i class="fas fa-phone-volume mr-1"></i> 320-795-8815</p>
-                                            <p class="doc-location mb-2 text-ellipse"><i class="fas fa-map-marker-alt mr-1"></i> 96 Red Hawk Road Cyrus, MN 56323 </p>
-                                            <p class="doc-location mb-2"><i class="fas fa-chevron-right mr-1"></i> Chemists, Surgical Equipment Dealer</p>
-                                            
-                                            <p class="doc-location mb-2"><i class="fas fa-chevron-right mr-1"></i> Opens at 08.00 AM</p>
+
+                                            <p class="doc-location mb-2"><i class="fas fa-phone-volume mr-1"></i> pharmacy.phone}}</p>
+                                            <p class="doc-location mb-2 text-ellipse"><i class="fas fa-map-marker-alt mr-1"></i> pharmacy.city}} </p>
+                                            <p class="doc-location mb-2 text-ellipse"><i class="fas fa-map-marker-alt mr-1"></i> pharmacy.adress}} </p>
+
+                                            <p class="doc-location mb-2"><i class="fas fa-chevron-right mr-1"></i> pharmacy.timesheet}}</p>
 
                                             </div>
                                         </div>
@@ -138,8 +124,8 @@
                                 </div>
                                 <div class="doc-info-right">
                                     <div class="clinic-booking">
-                                        <a class="view-pro-btn" routerLink="pharmacy-details">View Details</a>
-                                        <a class="apt-btn" routerLink="product-all">Browse Products</a>
+                                        <a class="view-pro-btn" routerLink="pharmacy-details">PCR test</a>
+                                        <a class="apt-btn" routerLink="product-all">Vaccination</a>
                                     </div>
                                 </div>
                             </div>
@@ -147,108 +133,19 @@
                     </div>
                     <!-- /Doctor Widget -->
 
-                    <!-- Doctor Widget -->
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="doctor-widget">
-                                <div class="doc-info-left">
-                                    <div class="doctor-img1">
-                                        <a routerLink="pharmacy-details">
-                                            <img src="assets/img/medical-img2.jpg" class="img-fluid" alt="User Image">
-                                        </a>
-                                    </div>
-                                    <div class="doc-info-cont">
-                                        <h4 class="doc-name mb-2"><a routerLink="pharmacy-details">PharmaMed Medical</a></h4>
-                                        <div class="rating mb-2">
-                                            <span class="badge badge-primary">4.0</span>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star"></i>
-                                            <span class="d-inline-block average-rating">(17)</span>
-                                        </div>
-                                        <div class="clinic-details">
-                                            <div class="clini-infos pt-3">
-                                        
-                                            <p class="doc-location mb-2"><i class="fas fa-phone-volume mr-1"></i> 913-631-2538</p>
-                                            <p class="doc-location mb-2 text-ellipse"><i class="fas fa-map-marker-alt mr-1"></i> 3830 Poe Lane Kansas City, KS 66216 </p>
-                                            <p class="doc-location mb-2"><i class="fas fa-chevron-right mr-1"></i> Chemists, Surgical Equipment Dealer</p>
-                                            
-                                            <p class="doc-location mb-2"><i class="fas fa-chevron-right mr-1"></i> Opens at 08.00 AM</p>
 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="doc-info-right">
-                                    <div class="clinic-booking">
-                                        <a class="view-pro-btn" routerLink="pharmacy-details">View Details</a>
-                                        <a class="apt-btn" routerLink="product-all">Browse Products</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /Doctor Widget -->
 
-                    <!-- Doctor Widget -->
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="doctor-widget">
-                                <div class="doc-info-left">
-                                    <div class="doctor-img1">
-                                        <a routerLink="pharmacy-details">
-                                            <img src="assets/img/medical-img3.jpg" class="img-fluid" alt="User Image">
-                                        </a>
-                                    </div>
-                                    <div class="doc-info-cont">
-                                        <h4 class="doc-name mb-2"><a routerLink="pharmacy-details">The Pill Club Medical</a></h4>
-                                        <div class="rating mb-2">
-                                            <span class="badge badge-primary">4.0</span>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star filled"></i>
-                                            <i class="fas fa-star"></i>
-                                            <span class="d-inline-block average-rating">(17)</span>
-                                        </div>
-                                        <div class="clinic-details">
-                                            <div class="clini-infos pt-3">
-                                        
-                                            <p class="doc-location mb-2"><i class="fas fa-phone-volume mr-1"></i> 816-270-2336</p>
-                                            <p class="doc-location mb-2 text-ellipse"><i class="fas fa-map-marker-alt mr-1"></i> 3849 Nutter Street Ferrelview, MO 64163 </p>
-                                            <p class="doc-location mb-2"><i class="fas fa-chevron-right mr-1"></i> Chemists, Surgical Equipment Dealer</p>
-                                            
-                                            <p class="doc-location mb-2"><i class="fas fa-chevron-right mr-1"></i> Opens at 08.00 AM</p>
 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="doc-info-right">
-                                    
-                                    <div class="clinic-booking">
-                                        <a class="view-pro-btn" routerLink="pharmacy-details">View Details</a>
-                                        <a class="apt-btn" routerLink="product-all">Browse Products</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /Doctor Widget -->
-
-                    
 
                     <div class="load-more text-center">
-                        <a class="btn btn-primary btn-md" routerLink="javascript:void(0);">Load More</a>	
-                    </div>	
+                        <a class="btn btn-primary btn-md" routerLink="javascript:void(0);">Load More</a>
+                    </div>
                 </div>
             </div>
 
         </div>
 
-    </div>		
+    </div>
     <!-- /Page Content -->
 
 </div>
