@@ -13,7 +13,7 @@ export class CommonService {
   constructor(private _http: HttpClient) { }
 
   getCities() {
-    return this._http.get<City[]>(`${basePath}/citites`);
+    return this._http.get<City[]>(`${basePath}/cities`);
   }
 
 }
