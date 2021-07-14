@@ -1,6 +1,9 @@
+import { cloneDeep } from 'lodash/cloneDeep';
+import { Doctor } from './../../core/models/doctor.model';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { DOCTORS_MOCK } from '@app/common/mocks/doctor.mock';
+import { DoctorService } from '@services-api/doctor.service';
 
 @Component({
   selector: 'app-search',
@@ -9,7 +12,9 @@ import { DOCTORS_MOCK } from '@app/common/mocks/doctor.mock';
 })
 export class SearchComponent implements OnInit {
   
-  doctors: any[] = DOCTORS_MOCK;
+  showLoader: boolean;
+  doctors: Doctor[];
+  allDoctors: Doctor[];
   pageSize: number = 2;
   filters: any[] = [
     { name: 'Rating', code: 'NY' },
@@ -17,16 +22,32 @@ export class SearchComponent implements OnInit {
     { name: 'Latest', code: 'LDN' },
     { name: 'Free', code: 'IST' },
   ];
+  maleCriteria: boolean;
+  femaleCriteria: boolean;
 
-  constructor(private route: Router) {}
+  constructor(
+    private route: Router, 
+    private _doctorService: DoctorService) {}
 
   ngOnInit(): void {
-    this.initializeRating();
+    this.getAllDoctors();
+  }
+
+  getAllDoctors() {
+    this.showLoader = true;
+    this._doctorService.getAll().subscribe(res => {
+      this.showLoader = false;
+      this.doctors = res;
+      this.allDoctors = Object.assign([], this.doctors)
+      this.initializeRating();
+    }, err => {
+      this.showLoader = false;
+    })
   }
 
   initializeRating() {
     this.doctors.forEach((doctor) => {
-      doctor.ratingAverage = this.calculateRateAverage(doctor.feedBacks);
+      doctor.ratingAverage = this.calculateRateAverage(doctor.feedbacks);
     });
   }
 
@@ -36,6 +57,28 @@ export class SearchComponent implements OnInit {
       raitingSum += feedBack.rating;
     });
     return raitingSum / feedBacks.length;
+  }
+
+
+  filterDoctors() {
+    this.doctors = [];
+    if (this.maleCriteria && !this.femaleCriteria) {
+      this.allDoctors.forEach(doctor => {
+        if (doctor.gender == 'male') {
+          this.doctors.push(doctor)
+        }
+      });
+    }
+    else if (this.femaleCriteria && !this.maleCriteria) {
+      this.allDoctors.forEach(doctor => {
+        if (doctor.gender == 'female') {
+          this.doctors.push(doctor)
+        }
+      });
+    }
+    else {
+      this.doctors = this.allDoctors;
+    }
   }
 
   loadMore() {

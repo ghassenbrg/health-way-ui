@@ -86,8 +86,34 @@ export class BookingComponent implements OnInit {
     });
   }
 
+  appointementInput: any;
   proceed() {
-    this.route.navigate(['/checkout']);
+    let findDate: Date;
+    let findSlot: Date;
+    let appointmentStartTime: string;
+    let appointmentEndTime: string;
+
+
+    this.calendar.forEach(day => {
+      for (let i = 0; i < day.slots.length; i++) {
+        if (day.slots[i].isSelected) {
+          findDate = day.date;
+          appointmentStartTime = day.slots[i].time;
+          appointmentEndTime = day.slots[i +1].time;
+        }      
+      }
+    })
+    //this.route.navigate(['/checkout']);
+
+    findDate.setHours(+appointmentStartTime.toString().substr(0,2))
+    findDate.setMinutes(+appointmentStartTime.toString().substr(3,2))
+    findDate.setSeconds(0);
+
+
+
+    console.log('date',findDate)
+    console.log('appointmentStartTime',appointmentStartTime)
+    console.log('appointmentEndTime',appointmentEndTime)
   }
 
 }

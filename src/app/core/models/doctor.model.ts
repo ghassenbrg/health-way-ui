@@ -53,4 +53,5 @@ export class Doctor extends User {
         fileInfo: string;
         pathInfo: string
     }
+    ratingAverage: number;
 }
