@@ -2,6 +2,8 @@ import { environment } from '@env/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { City } from '@models/city.model';
+import { AppointmentInput } from '@models/appointment.model';
+import { Speciality } from '@models/specialty.model';
 
 const basePath = environment.basePath;
 
@@ -14,6 +16,14 @@ export class CommonService {
 
   getCities() {
     return this._http.get<City[]>(`${basePath}/cities`);
+  }
+
+  getSpecialities() {
+    return this._http.get<Speciality[]>(`${basePath}/specialties`);
+  }
+
+  createAppointment(appointment: AppointmentInput) {
+    return this._http.post<AppointmentInput>(`${basePath}/appointments`, appointment);
   }
 
 }

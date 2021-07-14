@@ -1,9 +1,14 @@
+import { PatientService } from './../../core/services-api/patient.service';
+import { AppointmentInput } from './../../core/models/appointment.model';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TIME_SHEET_MOCK } from '@app/common/mocks/timeSheet.mock';
 import { TimeSheet } from '@models/timeSheet.model';
 import * as moment from 'moment';
 import cloneDeep from 'lodash/cloneDeep';
+import { AuthenticationService } from '@auth/_services/authentication.service';
+import { CommonService } from '@services/common.service';
+import { ToastService } from '@services/toast.service';
 
 @Component({
   selector: 'app-booking',
@@ -17,11 +22,33 @@ export class BookingComponent implements OnInit {
   newDate: Date = new Date();
   calendar: Calendar[] = []
   appointmentCalander: any = [];
+  doctorIdentifier: string;
+  patientIdentifier: string;
+  showLoader: boolean;
+  appointementInput: AppointmentInput;
 
-  constructor(private route: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private _patientService: PatientService,
+    private _auth: AuthenticationService,
+    private _commonService: CommonService,
+    private _toastService: ToastService) {}
 
   ngOnInit(): void {
+    this.doctorIdentifier = this.route.snapshot.params.identifier;
+    this.getCurrentPatient();
     this.prepareSlots();
+  }
+
+  getCurrentPatient() {
+    this.showLoader = true;
+    let mail: string = this._auth.getMail();
+    this._patientService.getPatientByMail(mail).subscribe(res => {
+      this.showLoader = false;
+      this.patientIdentifier = res[0].id;
+    }, err => {
+      this.showLoader = false;
+    });
   }
 
   prepareSlots() {
@@ -86,34 +113,40 @@ export class BookingComponent implements OnInit {
     });
   }
 
-  appointementInput: any;
   proceed() {
-    let findDate: Date;
-    let findSlot: Date;
+    this.appointementInput = new AppointmentInput();
+    let appointmentDate: Date;
     let appointmentStartTime: string;
     let appointmentEndTime: string;
-
 
     this.calendar.forEach(day => {
       for (let i = 0; i < day.slots.length; i++) {
         if (day.slots[i].isSelected) {
-          findDate = day.date;
+          appointmentDate = day.date;
           appointmentStartTime = day.slots[i].time;
           appointmentEndTime = day.slots[i +1].time;
         }      
       }
     })
-    //this.route.navigate(['/checkout']);
+    appointmentDate.setHours(+appointmentStartTime.toString().substr(0,2))
+    appointmentDate.setMinutes(+appointmentStartTime.toString().substr(3,2))
+    appointmentDate.setSeconds(0);
 
-    findDate.setHours(+appointmentStartTime.toString().substr(0,2))
-    findDate.setMinutes(+appointmentStartTime.toString().substr(3,2))
-    findDate.setSeconds(0);
+    this.appointementInput.date = appointmentDate.toISOString();
+    this.appointementInput.startTime = appointmentStartTime;
+    this.appointementInput.endTime = appointmentEndTime;
+    this.appointementInput.doctor = this.doctorIdentifier;
+    this.appointementInput.patient = this.patientIdentifier;
+    this.appointementInput.status = 'pending';
 
+    this.showLoader = true;
+    this._commonService.createAppointment(this.appointementInput).subscribe(res => {
+      this.showLoader = false;
+      this._toastService.showSuccess('Success', 'your appointment request has been sent successfully');
+    }, err => {
+      this.showLoader = false;
+    })
 
-
-    console.log('date',findDate)
-    console.log('appointmentStartTime',appointmentStartTime)
-    console.log('appointmentEndTime',appointmentEndTime)
   }
 
 }
@@ -121,4 +154,3 @@ export class Calendar {
     date?: Date;
     slots?: any
 }
-
