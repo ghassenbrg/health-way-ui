@@ -1,3 +1,4 @@
+<app-loader [isLoading]="showLoader" *ngIf="showLoader"></app-loader>
 <!-- Main Wrapper -->
 <div class="main-wrapper">
     
@@ -12,7 +13,7 @@
                             <li class="breadcrumb-item active" aria-current="page">Search</li>
                         </ol>
                     </nav>
-                    <h2 class="breadcrumb-title">{{doctors.length}} matches found</h2>
+                    <h2 class="breadcrumb-title" *ngIf="doctors">{{doctors.length}} matches found</h2>
                 </div>
                 <div class="col-md-4 col-12 d-md-block d-none">
                     <div class="sort-by">
@@ -41,21 +42,16 @@
                         </div>
                         <div class="card-body">
                         <div class="filter-widget">
-                            <div class="cal-icon">
-                                <input type="text" class="form-control datetimepicker" placeholder="Select Date">
-                            </div>			
-                        </div>
-                        <div class="filter-widget">
                             <h4>Gender</h4>
                             <div>
                                 <label class="custom_check">
-                                    <input type="checkbox" name="gender_type" checked>
+                                    <input type="checkbox" [(ngModel)]="maleCriteria" name="male" value="'male'">
                                     <span class="checkmark"></span> Male Doctor
                                 </label>
                             </div>
                             <div>
                                 <label class="custom_check">
-                                    <input type="checkbox" name="gender_type">
+                                    <input type="checkbox" [(ngModel)]="femaleCriteria" name="female" value="'female'">
                                     <span class="checkmark"></span> Female Doctor
                                 </label>
                             </div>
@@ -100,7 +96,7 @@
                             </div>
                         </div>
                             <div class="btn-search">
-                                <button type="button" class="btn btn-block">Search</button>
+                                <button type="button" class="btn btn-block" (click)="filterDoctors()">Search</button>
                             </div>	
                         </div>
                     </div>
@@ -108,7 +104,7 @@
                     
                 </div>
                 
-                <div class="col-md-12 col-lg-8 col-xl-9">
+                <div class="col-md-12 col-lg-8 col-xl-9" *ngIf="doctors && doctors.length > 0">
 
                     <!-- Doctor Widget -->
                     <div *ngFor="let doctor of doctors; let i=index">
@@ -118,7 +114,7 @@
                                     <div class="doc-info-left">
                                         <div class="doctor-img">
                                             <a (click)="viewDoctorProfile(doctor.id)">
-                                                <img src="{{doctor.avatar}}" class="img-fluid" alt="User Image">
+                                                <img src="assets/img/doctors/doctor_{{doctor.gender}}.jpg" class="img-fluid" alt="User Image">
                                             </a>
                                         </div>
                                         <div class="doc-info-cont">
@@ -137,10 +133,14 @@
                                                 <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 3 ? 'filled' : ''"></i>
                                                 <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 4 ? 'filled' : ''"></i>
                                                 <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 5 ? 'filled' : ''"></i>
-                                                <span class="d-inline-block average-rating">({{doctor.feedBacks.length}})</span>
+                                                <span class="d-inline-block average-rating">({{doctor.feedbacks.length}})</span>
                                             </div>
                                             <div class="clinic-details">
-                                                <p class="doc-location"><i class="fas fa-map-marker-alt"></i> {{doctor.city}}, {{doctor.country}}</p>
+                                                <p class="doc-location">
+                                                    <i class="fas fa-map-marker-alt"></i> 
+                                                    <span *ngIf="doctor.city"> {{doctor.city}}, {{doctor.country}}</span>
+                                                    <span *ngIf="!doctor.city"> Address not mentioned</span>
+                                                </p>
                                                 <ul class="clinic-gallery">
                                                     <li>
                                                         <a href="assets/img/features/feature-01.jpg" data-fancybox="gallery">
@@ -172,15 +172,25 @@
                                     <div class="doc-info-right">
                                         <div class="clini-infos">
                                             <ul>
-                                                <li><i class="far fa-comment"></i> {{doctor.feedBacks.length}} Feedback</li>
-                                                <li><i class="fas fa-map-marker-alt"></i> {{doctor.city}}, {{doctor.country}}</li>
-                                                <li><i class="fas fa-hand-holding-usd"></i> 
-                                                    <span *ngFor="let insurance of doctor.insurances; let j = index">
-                                                        {{insurance.name}}<span *ngIf="j < doctor.insurances.length - 1">,</span> 
+                                                <li><i class="far fa-comment"></i> {{doctor.feedbacks.length}} Feedback</li>
+                                                <li><i class="fas fa-map-marker-alt"></i> 
+                                                    <span *ngIf="doctor.city"> {{doctor.city}}, {{doctor.country}}</span>
+                                                    <span *ngIf="!doctor.city"> Address not mentioned</span>
+                                                </li>
+                                                <li><i class="fas fa-hand-holding-usd"></i>
+                                                    <span *ngIf="doctor.insurances && doctor.insurances.length > 0">
+                                                        <span *ngFor="let insurance of doctor.insurances; let j = index">
+                                                            {{insurance.name}}<span *ngIf="j < doctor.insurances.length - 1">,</span> 
+                                                        </span> 
+                                                    </span> 
+                                                    <span *ngIf="!doctor.insurances || (doctor.insurances && doctor.insurances.length == 0)">
+                                                        No insurances defined
                                                     </span> 
                                                     <!-- <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>  -->
                                                 </li>
-                                                <li><i class="fas fa-phone"></i> {{doctor.phoneNumbers[0]}}</li>
+                                                <li *ngIf="doctor.phoneNumbers && doctor.phoneNumbers.length > 0">
+                                                    <i class="fas fa-phone"></i> {{doctor.phoneNumbers[0]}}
+                                                </li>
                                             </ul>
                                         </div>
                                         <div class="clinic-booking">
@@ -194,9 +204,13 @@
                     </div>
                     <!-- /Doctor Widget -->
 
-                    <div class="load-more text-center" *ngIf="doctors.length + 1 != pageSize">
+                    <div class="load-more text-center" *ngIf="doctors.length > pageSize">
                         <a class="btn btn-primary btn-sm" (click)="loadMore()">Load More</a>	
                     </div>	
+                </div>
+                <div class="col-md-12 col-lg-8 col-xl-9 no-data" *ngIf="!doctors || (doctors && doctors.length == 0)">
+                    <span><i class="fas fa-user-slash"></i></span>
+                    <span>No doctors found</span>
                 </div>
             </div>
 

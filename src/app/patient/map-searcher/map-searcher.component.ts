@@ -1,6 +1,7 @@
 import { DOCTORS_MOCK } from '../../common/mocks/doctor.mock';
-import { AgmMap } from '@agm/core';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { DoctorService } from '@services-api/doctor.service';
+import { Doctor } from '@models/doctor.model';
 @Component({
   selector: 'app-map-searcher',
   templateUrl: './map-searcher.component.html',
@@ -8,6 +9,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 })
 export class MapSearcherComponent implements OnInit {
 
+  showLoader: boolean;
   filters: any[] = [
     { name: 'Rating', code: 'NY' },
     { name: 'Popular', code: 'RM' },
@@ -40,14 +42,39 @@ export class MapSearcherComponent implements OnInit {
   ];
   pageSize: number = 2;
 
-  doctors: any = DOCTORS_MOCK;
+  doctors: Doctor[];
 
   geocoder: any;
 
-  constructor() {}
+  constructor(private _doctorService: DoctorService) {}
 
   ngOnInit(): void {
+    this.getAllDoctors();
+  }
 
+  getAllDoctors() {
+    this.showLoader = true;
+    this._doctorService.getAll().subscribe(res => {
+      this.showLoader = false;
+      this.doctors = res;
+      this.initializeRating();
+    }, err => {
+      this.showLoader = false;
+    })
+  }
+
+  initializeRating() {
+    this.doctors.forEach((doctor) => {
+      doctor.ratingAverage = this.calculateRateAverage(doctor.feedbacks);
+    });
+  }
+
+  calculateRateAverage(feedBacks: any) {
+    let raitingSum = 0;
+    feedBacks.forEach((feedBack) => {
+      raitingSum += feedBack.rating;
+    });
+    return raitingSum / feedBacks.length;
   }
 
   clickedMarker(label: string, index: number) {

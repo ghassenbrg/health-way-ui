@@ -1,8 +1,15 @@
 agm-map {
-    height: calc(100vh - 145px);
-    width: 100%;
+  height: calc(100vh - 145px);
+  width: 100%;
 }
 
 .content {
-    padding-top: 115px;
-  }
+  padding-top: 115px;
+}
+
+.no-data {
+  text-align: center;
+  align-self: center;
+  font-size: 25px;
+  font-weight: 400;
+}
