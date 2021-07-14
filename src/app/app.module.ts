@@ -1,3 +1,4 @@
+import { PharmacyModule } from './pharmacy/pharmacy.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { RequestInterceptorInterceptor } from '@core/interceptors/request-interceptor.interceptor';
@@ -9,7 +10,7 @@ import { CoreModule } from './core/core.module';
 import { MainComponent } from './main/main.component';
 import { PatientModule } from './patient/patient.module';
 import { SharedModule } from './shared/shared.module';
-
+import {AutoCompleteModule} from 'primeng/autocomplete';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +21,8 @@ import { SharedModule } from './shared/shared.module';
     CoreModule,
     CommonModule,
     ToastModule,
-    PatientModule
+    PatientModule,
+    PharmacyModule
   ],
   providers: [
     MessageService,

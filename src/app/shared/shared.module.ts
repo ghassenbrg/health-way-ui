@@ -11,6 +11,8 @@ import { IfAuthorizedDirective } from './if-authorized.directive';
 import { LoaderComponent } from './loader/loader.component';
 import {CarouselModule} from 'primeng/carousel';
 import {CalendarModule} from 'primeng/calendar';
+import {AutoCompleteModule} from 'primeng/autocomplete';
+
 @NgModule({
   declarations: [
     IfAuthorizedDirective,
@@ -27,7 +29,8 @@ import {CalendarModule} from 'primeng/calendar';
     BrowserAnimationsModule,
     DropdownModule,
     CarouselModule,
-    CalendarModule
+    CalendarModule,
+    AutoCompleteModule
   ],
   exports: [
     CommonModule,
