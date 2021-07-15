@@ -1,5 +1,3 @@
-<app-loader [isLoading]="showLoader"></app-loader>
-
 <div class="main-wrapper">
 
   <!-- Page Content -->
@@ -62,7 +60,7 @@
                       * Mandatory field.
                     </div> -->
                   </div>
-                  <div class="form-group form-focus" [ngClass]="{'invalid-input': (submitTouched || birthDateForm.touched) && birthDateForm.invalid, 
+                  <div class="form-group form-focus" [ngClass]="{'invalid-input': (submitTouched || birthDateForm.touched) && birthDateForm.invalid,
                     'valid-input': (submitTouched || birthDateForm.touched) && birthDateForm.valid}"
                     *ngIf="!doctorRegisterScreen">
                     <p-calendar [yearRange]="yearRange" [yearNavigator]="true" [monthNavigator]="true"

@@ -8,6 +8,7 @@ import { User } from '@models/user.model';
 import * as moment from 'moment';
 import { PatientService } from '@services-api/patient.service';
 import { roles } from '@core/config/roles';
+import { LoaderService } from '@services/loader.service';
 
 
 @Component({
@@ -26,8 +27,9 @@ export class RegisterComponent implements OnInit {
   yearRange: string;
   confirmPassword: string;
   submitTouched: boolean;
-  
+
   constructor(
+    private _loader: LoaderService,
     private _toastService: ToastService,
     private _doctorService: DoctorService,
     private _patientService: PatientService,
@@ -49,25 +51,25 @@ export class RegisterComponent implements OnInit {
           this._toastService.showInfo('Info', 'Sorry, signUp via social networks is not yet available.');
           break;
         default:
-          this.showLoader = true;
+          this._loader.show();
           if (this.doctorRegisterScreen) {
             this._doctorService.createDoctor(this.userInput).subscribe(res => {
-              this.showLoader = false;
+              this._loader.hide();
               this._toastService.showSuccess('Success', 'Doctor successfully registred with user: ' + res.username);
               this.login(res.username, this.userInput.plainPassword);
             },
               err => {
-                this.showLoader = false;
+                this._loader.hide();
               });
           }
           else {
             this._patientService.createPatient(this.userInput).subscribe(res => {
-              this.showLoader = false;
+              this._loader.hide();
               this._toastService.showSuccess('Success', 'Patient successfully registred with user: ' + res.username);
               this.login(res.username, this.userInput.plainPassword);
             },
               err => {
-                this.showLoader = false;
+                this._loader.hide();
               });
           }
           break;
@@ -111,14 +113,14 @@ export class RegisterComponent implements OnInit {
   }
 
   login(username: string, password: string) {
-    this.showLoader = true;
+    this._loader.show();
     this._auth.login(username, password).subscribe(res => {
-      this.showLoader = false;
+      this._loader.hide();
       this.mainComponent.refreshCurrentUser();
       this.router.navigate(['/']);
     },
       err => {
-        this.showLoader = false;
+        this._loader.hide();
       });
   }
 
