@@ -1,4 +1,4 @@
 <app-loader [isLoading]="$showLoader | async"></app-loader>
- --><app-navbar [ngClass]="navbarCustomStyle" [currentUser]="currentUser"></app-navbar>
+<app-navbar [ngClass]="navbarCustomStyle" [currentUser]="currentUser"></app-navbar>
 <router-outlet (activate)="componentAdded($event)"></router-outlet>
 <app-footer [ngClass]="footerCustomStyle"></app-footer>
