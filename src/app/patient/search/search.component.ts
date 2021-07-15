@@ -36,14 +36,14 @@ export class SearchComponent implements OnInit {
   }
 
   getAllDoctors() {
-    this._loader.show();
+
     this._doctorService.getAll().subscribe(res => {
-      this._loader.hide();
+
       this.doctors = res;
       this.allDoctors = Object.assign([], this.doctors)
       this.initializeRating();
     }, err => {
-      this._loader.hide();
+
     })
   }
 

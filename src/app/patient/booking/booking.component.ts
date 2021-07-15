@@ -42,13 +42,13 @@ export class BookingComponent implements OnInit {
   }
 
   getCurrentPatient() {
-    this._loader.show();
+
     let mail: string = this._auth.getMail();
     this._patientService.getPatientByMail(mail).subscribe(res => {
-      this._loader.hide();
+
       this.patientIdentifier = res[0].id;
     }, err => {
-      this._loader.hide();
+
     });
   }
 
@@ -84,7 +84,7 @@ export class BookingComponent implements OnInit {
       if (slot.time == time) {
         slot.isSelected = true;
       }
-    });  
+    });
   }
 
   getDates(startDate, endDate) {
@@ -104,7 +104,7 @@ export class BookingComponent implements OnInit {
 
   buildCalendar() {
     let daysOfWeeks: string[] = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-    
+
     let calendarDates: Date[] = this.getDates(new Date(), new Date().setDate(new Date().getDate() + 30));
     calendarDates.forEach(date => {
       this.calendar.push({date: date})
@@ -126,7 +126,7 @@ export class BookingComponent implements OnInit {
           appointmentDate = day.date;
           appointmentStartTime = day.slots[i].time;
           appointmentEndTime = day.slots[i +1].time;
-        }      
+        }
       }
     })
     appointmentDate.setHours(+appointmentStartTime.toString().substr(0,2))
@@ -140,12 +140,12 @@ export class BookingComponent implements OnInit {
     this.appointementInput.patient = this.patientIdentifier;
     this.appointementInput.status = 'pending';
 
-    this._loader.show();
+
     this._commonService.createAppointment(this.appointementInput).subscribe(res => {
-      this._loader.hide();
+
       this._toastService.showSuccess('Success', 'your appointment request has been sent successfully');
     }, err => {
-      this._loader.hide();
+
     })
 
   }

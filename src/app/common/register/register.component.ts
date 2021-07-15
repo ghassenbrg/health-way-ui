@@ -1,27 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { DoctorService } from '@services-api/doctor.service';
-import { ToastService } from '@services/toast.service';
 import { Router } from '@angular/router';
-import { MainComponent } from '@app/main/main.component';
 import { AuthenticationService } from '@auth/_services/authentication.service';
-import { User } from '@models/user.model';
-import * as moment from 'moment';
-import { PatientService } from '@services-api/patient.service';
 import { roles } from '@core/config/roles';
-import { LoaderService } from '@services/loader.service';
-
+import { User } from '@models/user.model';
+import { DoctorService } from '@services-api/doctor.service';
+import { PatientService } from '@services-api/patient.service';
+import { ToastService } from '@services/toast.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-
   doctorRegisterScreen: boolean;
   userInput: User = new User();
   showLoader: boolean;
-  genders: any = ["Male", "Female"];
+  genders: any = ['Male', 'Female'];
   birthDate: Date;
   selectedGender: string;
   yearRange: string;
@@ -29,14 +25,12 @@ export class RegisterComponent implements OnInit {
   submitTouched: boolean;
 
   constructor(
-    private _loader: LoaderService,
     private _toastService: ToastService,
     private _doctorService: DoctorService,
     private _patientService: PatientService,
     private router: Router,
-    private mainComponent: MainComponent,
     private _auth: AuthenticationService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.yearRange = this.getYearRange();
@@ -48,29 +42,34 @@ export class RegisterComponent implements OnInit {
       switch (registerType) {
         case 'facebook':
         case 'google':
-          this._toastService.showInfo('Info', 'Sorry, signUp via social networks is not yet available.');
+          this._toastService.showInfo(
+            'Info',
+            'Sorry, signUp via social networks is not yet available.'
+          );
           break;
         default:
-          this._loader.show();
           if (this.doctorRegisterScreen) {
-            this._doctorService.createDoctor(this.userInput).subscribe(res => {
-              this._loader.hide();
-              this._toastService.showSuccess('Success', 'Doctor successfully registred with user: ' + res.username);
-              this.login(res.username, this.userInput.plainPassword);
-            },
-              err => {
-                this._loader.hide();
-              });
-          }
-          else {
-            this._patientService.createPatient(this.userInput).subscribe(res => {
-              this._loader.hide();
-              this._toastService.showSuccess('Success', 'Patient successfully registred with user: ' + res.username);
-              this.login(res.username, this.userInput.plainPassword);
-            },
-              err => {
-                this._loader.hide();
-              });
+            this._doctorService.createDoctor(this.userInput).subscribe(
+              (res) => {
+                this._toastService.showSuccess(
+                  'Success',
+                  'Doctor successfully registred with user: ' + res.username
+                );
+                this.login(res.username, this.userInput.plainPassword);
+              },
+              (err) => {}
+            );
+          } else {
+            this._patientService.createPatient(this.userInput).subscribe(
+              (res) => {
+                this._toastService.showSuccess(
+                  'Success',
+                  'Patient successfully registred with user: ' + res.username
+                );
+                this.login(res.username, this.userInput.plainPassword);
+              },
+              (err) => {}
+            );
           }
           break;
       }
@@ -85,9 +84,15 @@ export class RegisterComponent implements OnInit {
     } else {
       specificCheck = this.userInput && !!this.birthDate;
     }
-    return specificCheck && !!this.userInput.plainPassword && this.userInput.plainPassword == this.confirmPassword
-      && !!this.userInput.firstName && !!this.userInput.lastName && !!this.selectedGender
-      && !!this.userInput.email;
+    return (
+      specificCheck &&
+      !!this.userInput.plainPassword &&
+      this.userInput.plainPassword == this.confirmPassword &&
+      !!this.userInput.firstName &&
+      !!this.userInput.lastName &&
+      !!this.selectedGender &&
+      !!this.userInput.email
+    );
   }
 
   changeUserRole(role: string) {
@@ -96,8 +101,7 @@ export class RegisterComponent implements OnInit {
     if (role == 'doctor') {
       this.doctorRegisterScreen = true;
       this.userInput.roles = [roles.ROLE_DOCTOR];
-    }
-    else {
+    } else {
       this.doctorRegisterScreen = false;
     }
   }
@@ -108,20 +112,17 @@ export class RegisterComponent implements OnInit {
       this.userInput.gender = this.selectedGender.toLowerCase();
     }
     if (this.birthDate) {
-      this.userInput.birthDate = moment(this.birthDate).format("YYYY-MM-DD");
+      this.userInput.birthDate = moment(this.birthDate).format('YYYY-MM-DD');
     }
   }
 
   login(username: string, password: string) {
-    this._loader.show();
-    this._auth.login(username, password).subscribe(res => {
-      this._loader.hide();
-      this.mainComponent.refreshCurrentUser();
-      this.router.navigate(['/']);
-    },
-      err => {
-        this._loader.hide();
-      });
+    this._auth.login(username, password).subscribe(
+      (res) => {
+        this.router.navigate(['/']);
+      },
+      (err) => {}
+    );
   }
 
   getYearRange(): string {
@@ -129,5 +130,4 @@ export class RegisterComponent implements OnInit {
     const end = moment().subtract(13, 'years').year();
     return `${start}:${end}`;
   }
-
 }

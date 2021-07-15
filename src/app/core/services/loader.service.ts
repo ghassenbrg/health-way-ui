@@ -9,14 +9,18 @@ import { Observable, Subject } from 'rxjs';
 export class LoaderService {
   private loaderSubject: Subject<boolean> = new Subject<boolean>();
   loaderState: Observable<boolean> = this.loaderSubject.asObservable();
+  private queue: boolean[] = [];
 
-  constructor() {}
+  constructor() {
+    this.loaderState.subscribe(res => console.log(res))
+  }
 
   /**
    * Displays the loader
    * @returns {void}
    */
   show() {
+    this.queue.push(true);
     this.loaderSubject.next(true);
   }
   /**
@@ -24,6 +28,11 @@ export class LoaderService {
    * @returns {void}
    */
   hide() {
-    this.loaderSubject.next(false);
+    if (this.queue.length > 0) {
+      this.queue.splice(0, 1);
+    }
+    if (this.queue.length == 0) {
+      this.loaderSubject.next(false);
+    }
   }
 }

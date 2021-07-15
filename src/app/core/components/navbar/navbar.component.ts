@@ -1,6 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Event, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
-import { MainComponent } from '@app/main/main.component';
+import {
+  Event,
+  NavigationEnd,
+  NavigationError,
+  NavigationStart,
+  Router
+} from '@angular/router';
 import { AuthenticationService } from '@auth/_services/authentication.service';
 import { NAV_ITEMS } from '@core/config/nav_items';
 import { roles } from '@core/config/roles';
@@ -11,10 +16,9 @@ import { USER_MENU_ITEMS } from './../../config/nav_items';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-
   @Input() currentUser: User;
 
   rolesEnum = roles;
@@ -23,11 +27,7 @@ export class NavbarComponent implements OnInit {
 
   currentPath: string = '';
 
-  constructor(
-    private _auth: AuthenticationService,
-    private router: Router,
-    private mainComponent: MainComponent) {
-
+  constructor(private _auth: AuthenticationService, private router: Router) {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
         // Show loading indicator
@@ -45,11 +45,10 @@ export class NavbarComponent implements OnInit {
         console.log(event.error);
       }
     });
-
   }
 
   ngOnInit(): void {
-    this.navItems.forEach(navItem => {
+    this.navItems.forEach((navItem) => {
       if (navItem.children && navItem.children.length > 0) {
         navItem.path = undefined;
       }
@@ -60,19 +59,25 @@ export class NavbarComponent implements OnInit {
   checkActiveRoute() {
     const currentUrl = this.router.url;
     if (this.navItems) {
-      this.navItems.forEach(navItem => {
+      this.navItems.forEach((navItem) => {
         navItem.isActive = false;
-        let itemPath = navItem.path && navItem.path.startsWith('/') ? navItem.path : '/' + navItem.path;
+        let itemPath =
+          navItem.path && navItem.path.startsWith('/')
+            ? navItem.path
+            : '/' + navItem.path;
         if (navItem.children && navItem.children.length > 0) {
-          navItem.children.forEach(childItem => {
-            let childPath = childItem.path && childItem.path.startsWith('/') ? childItem.path : '/' + childItem.path;
+          navItem.children.forEach((childItem) => {
+            let childPath =
+              childItem.path && childItem.path.startsWith('/')
+                ? childItem.path
+                : '/' + childItem.path;
             if (childPath == currentUrl) {
               childItem.isActive = true;
               navItem.isActive = true;
             } else {
               childItem.isActive = false;
             }
-          })
+          });
         }
         if (!navItem.isActive && itemPath == currentUrl) {
           navItem.isActive = true;
@@ -83,7 +88,5 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this._auth.logout();
-    this.mainComponent.refreshCurrentUser();
   }
-
 }

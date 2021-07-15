@@ -25,13 +25,13 @@ export class DoctorProfileComponent implements OnInit {
   }
 
   getDoctorData(identifier) {
-    this._loader.show();
+
     this._doctorService.getDoctorById(identifier).subscribe(res => {
-      this._loader.hide();
+
       this.doctor = res;
       console.log(this.doctor)
     }, err => {
-      this._loader.hide();
+
     })
   }
 
