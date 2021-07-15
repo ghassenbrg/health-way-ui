@@ -1,52 +1,54 @@
-<div class="row">
-    <div class="col-sm-6 col-md-4 col-xl-6" *ngFor="let doctor of doctors; let i=index">
-        <div class="profile-widget" *ngIf="i < pageSize">
-            <div class="doc-img">
-                <a routerLink="doctor-profile">
-                    <img src="assets/img/doctors/doctor_{{doctor.gender}}.jpg" class="img-fluid" alt="User Image">
-                </a>
-                <a class="fav-btn">
-                    <i class="far fa-bookmark"></i>
-                </a>
-            </div>
-            <div class="pro-content">
-                <h3 class="title">
-                    <a routerLink="doctor-profile">Dr. {{doctor.firstName}} {{doctor.lastName}}</a> 
-                    <i class="fas fa-check-circle verified"></i>
-                </h3>
-                <p class="speciality">{{doctor.jobTitle}}</p>
-                <div class="rating">
-                    <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 1 ? 'filled' : ''"></i>
-                    <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 2 ? 'filled' : ''"></i>
-                    <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 3 ? 'filled' : ''"></i>
-                    <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 4 ? 'filled' : ''"></i>
-                    <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 5 ? 'filled' : ''"></i>
-                    <span class="d-inline-block average-rating">({{doctor.feedBacks.length}})</span>
-                </div>
-                <ul class="available-info">
-                    <li>
-                        <i class="fas fa-map-marker-alt"></i> {{doctor.city}}, {{doctor.country}}
-                    </li>
-                    <li>
-                        <i class="far fa-clock"></i> Available on Fri, 22 Mar
-                    </li>
-                    <li>
-                        <i class="fas fa-hand-holding-usd"></i>
-                        <span *ngFor="let insurance of doctor.insurances; let j = index">
-                            {{insurance.name}}<span *ngIf="j < doctor.insurances.length - 1">,</span> 
-                        </span>
-                    </li>
-                </ul>
-                <div class="row row-sm">
-                    <div class="col-6">
-                        <a class="btn view-btn" (click)="viewDoctorProfile(doctor.id)">View Profile</a>
-                    </div>
-                    <div class="col-6">
-                        <a class="btn book-btn" (click)="bookAppointment(doctor.id)">Book Now</a>
-                    </div>
-                </div>
-            </div>
+<div class="row" *ngIf="doctors">
+  <div class="col-sm-6 col-md-4 col-xl-6" *ngFor="let doctor of doctors; let i=index">
+    <div class="profile-widget" *ngIf="i < pageSize">
+      <div class="doc-img">
+        <a routerLink="doctor-profile">
+          <img src="assets/img/doctors/doctor_{{doctor.gender}}.jpg" class="img-fluid" alt="User Image">
+        </a>
+        <a class="fav-btn">
+          <i class="far fa-bookmark"></i>
+        </a>
+      </div>
+      <div class="pro-content">
+        <h3 class="title">
+          <a routerLink="doctor-profile">Dr. {{doctor.firstName}} {{doctor.lastName}}</a>
+          <i class="fas fa-check-circle verified"></i>
+        </h3>
+        <p class="speciality">{{doctor.jobTitle}}</p>
+        <div class="rating">
+          <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 1 ? 'filled' : ''"></i>
+          <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 2 ? 'filled' : ''"></i>
+          <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 3 ? 'filled' : ''"></i>
+          <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 4 ? 'filled' : ''"></i>
+          <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 5 ? 'filled' : ''"></i>
+          <span class="d-inline-block average-rating">({{doctor.feedBacks ? doctor.feedBacks.length : 0}})</span>
         </div>
-    </div>                        
-    
+        <ul class="available-info">
+          <li>
+            <i class="fas fa-map-marker-alt"></i> {{doctor.city}}, {{doctor.country}}
+          </li>
+          <li>
+            <i class="far fa-clock"></i> Available on Fri, 22 Mar
+          </li>
+          <li>
+            <i class="fas fa-hand-holding-usd"></i>
+            <span *ngIf="doctor.insurances">
+              <span *ngFor="let insurance of doctor.insurances; let j = index">
+                {{insurance.name}}<span *ngIf="j < doctor.insurances.length - 1">,</span>
+              </span>
+            </span>
+          </li>
+        </ul>
+        <div class="row row-sm">
+          <div class="col-6">
+            <a class="btn view-btn" (click)="viewDoctorProfile(doctor.id)">View Profile</a>
+          </div>
+          <div class="col-6">
+            <a class="btn book-btn" (click)="bookAppointment(doctor.id)">Book Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
