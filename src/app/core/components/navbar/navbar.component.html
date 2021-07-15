@@ -168,7 +168,7 @@
         <span class="user-img">
           <img class="rounded-circle"
             src="https://ui-avatars.com/api/?name={{currentUser.firstName + '+' + currentUser.lastName}}&length=2&bold=true&rounded=true&background={{currentUser.gender == 'female' ? 'F3B8DA' : 'b8d8f3'}}"
-            width="31" alt="Ryan Taylor">
+            width="31" alt="{{currentUser.firstName + '+' + currentUser.lastName}}">
         </span>
       </a>
       <div class="dropdown-menu dropdown-menu-right">
@@ -176,7 +176,7 @@
           <div class="avatar avatar-sm">
             <img
               src="https://ui-avatars.com/api/?name={{currentUser.firstName + '+' + currentUser.lastName}}&length=2&bold=true&rounded=true&background={{currentUser.gender == 'female' ? 'F3B8DA' : 'b8d8f3'}}"
-              alt="User Image" class="avatar-img rounded-circle">
+              alt="{{currentUser.firstName + '+' + currentUser.lastName}}" class="avatar-img rounded-circle">
           </div>
           <div class="user-text">
             <h6>{{currentUser.firstName + ' ' + currentUser.lastName}}</h6>

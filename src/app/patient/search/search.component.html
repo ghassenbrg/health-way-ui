@@ -1,7 +1,6 @@
-<app-loader [isLoading]="showLoader" *ngIf="showLoader"></app-loader>
 <!-- Main Wrapper -->
 <div class="main-wrapper">
-    
+
     <!-- Breadcrumb -->
     <div class="breadcrumb-bar">
         <div class="container-fluid">
@@ -27,14 +26,14 @@
         </div>
     </div>
     <!-- /Breadcrumb -->
-    
+
     <!-- Page Content -->
     <div class="content">
         <div class="container-fluid">
 
             <div class="row">
                 <div class="col-md-12 col-lg-4 col-xl-3 theiaStickySidebar">
-                
+
                     <!-- Search Filter -->
                     <div class="card search-filter">
                         <div class="card-header">
@@ -97,13 +96,13 @@
                         </div>
                             <div class="btn-search">
                                 <button type="button" class="btn btn-block" (click)="filterDoctors()">Search</button>
-                            </div>	
+                            </div>
                         </div>
                     </div>
                     <!-- /Search Filter -->
-                    
+
                 </div>
-                
+
                 <div class="col-md-12 col-lg-8 col-xl-9" *ngIf="doctors && doctors.length > 0">
 
                     <!-- Doctor Widget -->
@@ -137,7 +136,7 @@
                                             </div>
                                             <div class="clinic-details">
                                                 <p class="doc-location">
-                                                    <i class="fas fa-map-marker-alt"></i> 
+                                                    <i class="fas fa-map-marker-alt"></i>
                                                     <span *ngIf="doctor.city"> {{doctor.city}}, {{doctor.country}}</span>
                                                     <span *ngIf="!doctor.city"> Address not mentioned</span>
                                                 </p>
@@ -173,19 +172,19 @@
                                         <div class="clini-infos">
                                             <ul>
                                                 <li><i class="far fa-comment"></i> {{doctor.feedbacks.length}} Feedback</li>
-                                                <li><i class="fas fa-map-marker-alt"></i> 
+                                                <li><i class="fas fa-map-marker-alt"></i>
                                                     <span *ngIf="doctor.city"> {{doctor.city}}, {{doctor.country}}</span>
                                                     <span *ngIf="!doctor.city"> Address not mentioned</span>
                                                 </li>
                                                 <li><i class="fas fa-hand-holding-usd"></i>
                                                     <span *ngIf="doctor.insurances && doctor.insurances.length > 0">
                                                         <span *ngFor="let insurance of doctor.insurances; let j = index">
-                                                            {{insurance.name}}<span *ngIf="j < doctor.insurances.length - 1">,</span> 
-                                                        </span> 
-                                                    </span> 
+                                                            {{insurance.name}}<span *ngIf="j < doctor.insurances.length - 1">,</span>
+                                                        </span>
+                                                    </span>
                                                     <span *ngIf="!doctor.insurances || (doctor.insurances && doctor.insurances.length == 0)">
                                                         No insurances defined
-                                                    </span> 
+                                                    </span>
                                                     <!-- <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>  -->
                                                 </li>
                                                 <li *ngIf="doctor.phoneNumbers && doctor.phoneNumbers.length > 0">
@@ -205,8 +204,8 @@
                     <!-- /Doctor Widget -->
 
                     <div class="load-more text-center" *ngIf="doctors.length > pageSize">
-                        <a class="btn btn-primary btn-sm" (click)="loadMore()">Load More</a>	
-                    </div>	
+                        <a class="btn btn-primary btn-sm" (click)="loadMore()">Load More</a>
+                    </div>
                 </div>
                 <div class="col-md-12 col-lg-8 col-xl-9 no-data" *ngIf="!doctors || (doctors && doctors.length == 0)">
                     <span><i class="fas fa-user-slash"></i></span>
@@ -216,7 +215,7 @@
 
         </div>
 
-    </div>		
+    </div>
     <!-- /Page Content -->
 
 </div>

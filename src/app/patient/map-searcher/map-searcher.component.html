@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 <app-loader [isLoading]="showLoader" *ngIf="showLoader"></app-loader>
+=======
+>>>>>>> 0a4797f671d67b4d6d11e25ae8428b467994697c
 <!-- Main Wrapper -->
 <div class="main-wrapper" >
-    
+
     <!-- Page Content -->
     <div class="content">
         <div class="container-fluid">
@@ -33,7 +36,7 @@
                         <app-doctor-searcher-list *ngIf="isListMode" [doctors]="doctors" [pageSize]="pageSize"></app-doctor-searcher-list>
 
                         <div class="load-more text-center">
-                            <a class="btn btn-primary btn-sm" (click)="loadMore()" *ngIf="doctors.length + 1 != pageSize">Load More</a>	
+                            <a class="btn btn-primary btn-sm" (click)="loadMore()" *ngIf="doctors.length + 1 != pageSize">Load More</a>
                         </div>
                     </div>
                     <div *ngIf="!doctors || (doctors && doctors.length == 0)" class="no-data">
@@ -41,7 +44,7 @@
                         <span>No doctors found</span>
                     </div>
                 </div>
-                
+
                 <!-- /content-left-->
 
                 <div class="col-xl-6 col-lg-12 map-right">
@@ -55,11 +58,11 @@
                                 [latitude]="doctor.citylat"
                                 [longitude]="doctor.citylng"
                                 [label]="doctor.city">
-                                
+        
                                 <agm-info-window>
                                     <strong>InfoWindow content</strong>
                                 </agm-info-window>
-                            
+
                             </agm-marker>
                         </agm-map>
                     </div>
@@ -70,9 +73,9 @@
 
         </div>
 
-    </div>		
+    </div>
     <!-- /Page Content -->
-    
+
 </div>
 <!-- </body> -->
 <!-- /Main Wrapper -->

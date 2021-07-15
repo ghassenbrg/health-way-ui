@@ -48,7 +48,34 @@
                     </div>
                 </div>
             </div>
+
         </div>
-    </div>                        
-    
+        <ul class="available-info">
+          <li>
+            <i class="fas fa-map-marker-alt"></i> {{doctor.city}}, {{doctor.country}}
+          </li>
+          <li>
+            <i class="far fa-clock"></i> Available on Fri, 22 Mar
+          </li>
+          <li>
+            <i class="fas fa-hand-holding-usd"></i>
+            <span *ngIf="doctor.insurances">
+              <span *ngFor="let insurance of doctor.insurances; let j = index">
+                {{insurance.name}}<span *ngIf="j < doctor.insurances.length - 1">,</span>
+              </span>
+            </span>
+          </li>
+        </ul>
+        <div class="row row-sm">
+          <div class="col-6">
+            <a class="btn view-btn" (click)="viewDoctorProfile(doctor.id)">View Profile</a>
+          </div>
+          <div class="col-6">
+            <a class="btn book-btn" (click)="bookAppointment(doctor.id)">Book Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>

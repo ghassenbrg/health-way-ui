@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MainComponent } from '@app/main/main.component';
 import { AuthenticationService } from '@auth/_services/authentication.service';
+import { LoaderService } from '@services/loader.service';
 import { ToastService } from './../../core/services/toast.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class LoginComponent implements OnInit {
   showLoader: boolean;
 
   constructor(
+    private _loader: LoaderService,
     private _auth: AuthenticationService,
     private _toastService: ToastService,
     private router: Router,
@@ -35,16 +37,16 @@ export class LoginComponent implements OnInit {
         this._toastService.showInfo('Info', 'Sorry, the authentication via social networks is not yet available.');
         break;
       default:
-        this.showLoader = true;
+        this._loader.show();
         this._auth.login(this.credentials.username, this.credentials.password).subscribe(res => {
-          this.showLoader = false;
+          this._loader.hide();
           let redirectTo: string = this.route.snapshot.queryParams.returnUrl;
           this._toastService.showSuccess('Success', 'Login successfully with user: ' + this.credentials.username);
           this.mainComponent.refreshCurrentUser();
           this.router.navigate([redirectTo ? redirectTo : '/']);
         },
           err => {
-            this.showLoader = false;
+            this._loader.hide();
           });
         break;
     }
