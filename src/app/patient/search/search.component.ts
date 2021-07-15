@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { DOCTORS_MOCK } from '@app/common/mocks/doctor.mock';
 import { DoctorService } from '@services-api/doctor.service';
+import { LoaderService } from '@services/loader.service';
 
 @Component({
   selector: 'app-search',
@@ -11,7 +12,7 @@ import { DoctorService } from '@services-api/doctor.service';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-  
+
   showLoader: boolean;
   doctors: Doctor[];
   allDoctors: Doctor[];
@@ -26,7 +27,8 @@ export class SearchComponent implements OnInit {
   femaleCriteria: boolean;
 
   constructor(
-    private route: Router, 
+    private _loader: LoaderService,
+    private route: Router,
     private _doctorService: DoctorService) {}
 
   ngOnInit(): void {
@@ -34,14 +36,14 @@ export class SearchComponent implements OnInit {
   }
 
   getAllDoctors() {
-    this.showLoader = true;
+    this._loader.show();
     this._doctorService.getAll().subscribe(res => {
-      this.showLoader = false;
+      this._loader.hide();
       this.doctors = res;
       this.allDoctors = Object.assign([], this.doctors)
       this.initializeRating();
     }, err => {
-      this.showLoader = false;
+      this._loader.hide();
     })
   }
 

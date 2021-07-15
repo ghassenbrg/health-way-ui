@@ -2,6 +2,7 @@ import { DOCTORS_MOCK } from '../../common/mocks/doctor.mock';
 import { Component, OnInit } from '@angular/core';
 import { DoctorService } from '@services-api/doctor.service';
 import { Doctor } from '@models/doctor.model';
+import { LoaderService } from '@services/loader.service';
 @Component({
   selector: 'app-map-searcher',
   templateUrl: './map-searcher.component.html',
@@ -46,20 +47,22 @@ export class MapSearcherComponent implements OnInit {
 
   geocoder: any;
 
-  constructor(private _doctorService: DoctorService) {}
+  constructor(
+    private _loader: LoaderService,
+    private _doctorService: DoctorService) {}
 
   ngOnInit(): void {
     this.getAllDoctors();
   }
 
   getAllDoctors() {
-    this.showLoader = true;
+    this._loader.show();
     this._doctorService.getAll().subscribe(res => {
-      this.showLoader = false;
+      this._loader.hide();
       this.doctors = res;
       this.initializeRating();
     }, err => {
-      this.showLoader = false;
+      this._loader.hide();
     })
   }
 

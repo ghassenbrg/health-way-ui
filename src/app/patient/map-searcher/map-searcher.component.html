@@ -1,7 +1,6 @@
-<app-loader [isLoading]="showLoader"></app-loader>
 <!-- Main Wrapper -->
 <div class="main-wrapper" >
-    
+
     <!-- Page Content -->
     <div class="content">
         <div class="container-fluid">
@@ -33,7 +32,7 @@
                         <app-doctor-searcher-list *ngIf="isListMode" [doctors]="doctors" [pageSize]="pageSize"></app-doctor-searcher-list>
 
                         <div class="load-more text-center">
-                            <a class="btn btn-primary btn-sm" (click)="loadMore()" *ngIf="doctors.length + 1 != pageSize">Load More</a>	
+                            <a class="btn btn-primary btn-sm" (click)="loadMore()" *ngIf="doctors.length + 1 != pageSize">Load More</a>
                         </div>
                     </div>
                     <div *ngIf="!doctors || (doctors && doctors.length == 0)" class="no-data">
@@ -41,7 +40,7 @@
                         <span>No doctors found</span>
                     </div>
                 </div>
-                
+
                 <!-- /content-left-->
 
                 <div class="col-xl-6 col-lg-12 map-right">
@@ -49,17 +48,17 @@
 
                     <div id="map" class="map-listing">
                         <agm-map [latitude]="lat" [longitude]="lng">
-                            <agm-marker 
+                            <agm-marker
                                 *ngFor="let m of markers; let i = index"
                                 (markerClick)="clickedMarker(m.label, i)"
                                 [latitude]="m.lat"
                                 [longitude]="m.lng"
                                 [label]="m.label">
-                                
+
                                 <agm-info-window>
                                     <strong>InfoWindow content</strong>
                                 </agm-info-window>
-                            
+
                             </agm-marker>
                         </agm-map>
                     </div>
@@ -70,9 +69,9 @@
 
         </div>
 
-    </div>		
+    </div>
     <!-- /Page Content -->
-    
+
 </div>
 <!-- </body> -->
 <!-- /Main Wrapper -->
