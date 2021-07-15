@@ -2,6 +2,8 @@ import { DOCTORS_MOCK } from '../../common/mocks/doctor.mock';
 import { Component, OnInit } from '@angular/core';
 import { DoctorService } from '@services-api/doctor.service';
 import { Doctor } from '@models/doctor.model';
+import * as cities from '../../_files/cities.json';10.088530
+
 @Component({
   selector: 'app-map-searcher',
   templateUrl: './map-searcher.component.html',
@@ -10,41 +12,18 @@ import { Doctor } from '@models/doctor.model';
 export class MapSearcherComponent implements OnInit {
 
   showLoader: boolean;
+  doctors: Doctor[];
+  lat = 35.720065;
+  lng = 10.649893;
   filters: any[] = [
     { name: 'Rating', code: 'NY' },
     { name: 'Popular', code: 'RM' },
     { name: 'Latest', code: 'LDN' },
     { name: 'Free', code: 'IST' },
   ];
-
   isListMode: boolean = false;
-  lat = 35.720065;
-  lng = 10.649893;
-  markers: any[] = [
-    {
-      lat: 36.673858,
-      lng: 10.815982,
-      label: 'A',
-      draggable: true,
-    },
-    {
-      lat: 51.373858,
-      lng: 7.215982,
-      label: 'B',
-      draggable: false,
-    },
-    {
-      lat: 51.723858,
-      lng: 7.895982,
-      label: 'C',
-      draggable: true,
-    },
-  ];
   pageSize: number = 2;
-
-  doctors: Doctor[];
-
-  geocoder: any;
+  citiesLocation: any = (cities as any).default;
 
   constructor(private _doctorService: DoctorService) {}
 
@@ -57,10 +36,20 @@ export class MapSearcherComponent implements OnInit {
     this._doctorService.getAll().subscribe(res => {
       this.showLoader = false;
       this.doctors = res;
+      this.prepareCityLatLng();
       this.initializeRating();
     }, err => {
       this.showLoader = false;
     })
+  }
+
+  prepareCityLatLng() {
+    this.doctors.forEach(doc => {
+      if (this.citiesLocation.find(city => city.name == doc.city)) {
+        doc.citylat = this.citiesLocation.find(city => city.name == doc.city).lat;
+        doc.citylng = this.citiesLocation.find(city => city.name == doc.city).lng;
+      }
+    });
   }
 
   initializeRating() {
@@ -78,23 +67,7 @@ export class MapSearcherComponent implements OnInit {
   }
 
   clickedMarker(label: string, index: number) {
-    console.log(`clicked the marker: ${label || index}`);
-    this.findLocation('london')
-  }
-
-  findLocation(address) {
-    this.geocoder= new google.maps.Geocoder();
-
-    if (!this.geocoder) this.geocoder = new google.maps.Geocoder()
-    this.geocoder.geocode({
-      'address': address
-    }, (results, status) => {
-      console.log(results);
-      if (status == google.maps.GeocoderStatus.OK) {
-      } else {
-        alert("Sorry, this search produced no results.");
-      }
-    })
+    //to do
   }
 
   loadMore() {

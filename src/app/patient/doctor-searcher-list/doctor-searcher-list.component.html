@@ -21,10 +21,13 @@
                             <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 3 ? 'filled' : ''"></i>
                             <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 4 ? 'filled' : ''"></i>
                             <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 5 ? 'filled' : ''"></i>
-                            <span class="d-inline-block average-rating">({{doctor.feedBacks.length}})</span>
+                            <span class="d-inline-block average-rating">({{doctor.feedbacks.length}})</span>
                         </div>
                         <div class="clinic-details">
-                            <p class="doc-location"><i class="fas fa-map-marker-alt"></i> {{doctor.city}}, {{doctor.country}}</p>
+                            <p class="doc-location"><i class="fas fa-map-marker-alt"></i> 
+                                <span *ngIf="doctor.city"> {{doctor.city}}, {{doctor.country}}</span>
+                                <span *ngIf="!doctor.city"> Address not mentioned</span>
+                            </p>
                             <ul class="clinic-gallery">
                                 <li>
                                     <a routerLink="assets/img/features/feature-01.jpg" data-fancybox="gallery">
@@ -56,15 +59,24 @@
                 <div class="doc-info-right">
                     <div class="clini-infos">
                         <ul>
-                            <li><i class="far fa-comment"></i> {{doctor.feedBacks.length}} Feedback</li>
-                            <li><i class="fas fa-map-marker-alt"></i> {{doctor.city}}, {{doctor.country}}</li>
+                            <li><i class="far fa-comment"></i> {{doctor.feedbacks.length}} Feedback</li>
+                            <li><i class="fas fa-map-marker-alt"></i> 
+                                <span *ngIf="doctor.city"> {{doctor.city}}, {{doctor.country}}</span>
+                                <span *ngIf="!doctor.city"> Address not mentioned</span></li>
                             <li>
                                 <i class="fas fa-hand-holding-usd"></i> 
-                                <span *ngFor="let insurance of doctor.insurances; let j = index">
-                                    {{insurance.name}}<span *ngIf="j < doctor.insurances.length - 1">,</span> 
-                                </span>
+                                <span *ngIf="doctor.insurances && doctor.insurances.length > 0">
+                                    <span *ngFor="let insurance of doctor.insurances; let j = index">
+                                        {{insurance.name}}<span *ngIf="j < doctor.insurances.length - 1">,</span> 
+                                    </span> 
+                                </span> 
+                                <span *ngIf="!doctor.insurances || (doctor.insurances && doctor.insurances.length == 0)">
+                                    No insurances defined
+                                </span> 
                             </li>
-                            <li><i class="fas fa-phone"></i> {{doctor.phoneNumbers[0]}}</li>
+                            <li><i class="fas fa-phone"></i> 
+                                <span *ngIf="doctor.phoneNumbers && doctor.phoneNumbers.length > 0 "> {{doctor.phoneNumbers[0]}}</span>
+                            </li>
                         </ul>
                     </div>
                     <div class="clinic-booking">

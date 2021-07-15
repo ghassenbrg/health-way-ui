@@ -21,11 +21,13 @@
                     <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 3 ? 'filled' : ''"></i>
                     <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 4 ? 'filled' : ''"></i>
                     <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 5 ? 'filled' : ''"></i>
-                    <span class="d-inline-block average-rating">({{doctor.feedBacks.length}})</span>
+                    <span class="d-inline-block average-rating">({{doctor.feedbacks.length}})</span>
                 </div>
                 <ul class="available-info">
                     <li>
-                        <i class="fas fa-map-marker-alt"></i> {{doctor.city}}, {{doctor.country}}
+                        <i class="fas fa-map-marker-alt"></i> 
+                        <span *ngIf="doctor.city"> {{doctor.city}}, {{doctor.country}}</span>
+                        <span *ngIf="!doctor.city"> Address not mentioned</span>
                     </li>
                     <li>
                         <i class="far fa-clock"></i> Available on Fri, 22 Mar

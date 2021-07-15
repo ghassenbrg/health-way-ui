@@ -14,21 +14,6 @@ export class DoctorSearcherGridComponent implements OnInit {
   constructor(private route: Router) { }
 
   ngOnInit(): void {
-    this.initializeRating();
-  }
-
-  initializeRating() {
-    this.doctors.forEach(doctor => {
-      doctor.ratingAverage = this.calculateRateAverage(doctor.feedBacks);
-    })
-  }
-
-  calculateRateAverage(feedBacks: any) {
-    let raitingSum = 0;
-    feedBacks.forEach(feedBack => {
-      raitingSum += feedBack.rating; 
-    });
-    return raitingSum / feedBacks.length;
   }
 
   viewDoctorProfile(id: number) {

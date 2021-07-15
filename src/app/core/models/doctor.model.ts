@@ -9,6 +9,8 @@ export class Doctor extends User {
     description: string;
     phoneNumbers: string[];
     city: string;
+    citylat?: number;
+    citylng?: number;
     address: string;
     jobTitle: string;
     timeSheets: string[];

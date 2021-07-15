@@ -1,4 +1,4 @@
-<app-loader [isLoading]="showLoader"></app-loader>
+<app-loader [isLoading]="showLoader" *ngIf="showLoader"></app-loader>
 <!-- Main Wrapper -->
 <div class="main-wrapper" >
     
@@ -50,11 +50,11 @@
                     <div id="map" class="map-listing">
                         <agm-map [latitude]="lat" [longitude]="lng">
                             <agm-marker 
-                                *ngFor="let m of markers; let i = index"
-                                (markerClick)="clickedMarker(m.label, i)"
-                                [latitude]="m.lat"
-                                [longitude]="m.lng"
-                                [label]="m.label">
+                                *ngFor="let doctor of doctors; let i = index"
+                                (markerClick)="clickedMarker(doctor.city, i)"
+                                [latitude]="doctor.citylat"
+                                [longitude]="doctor.citylng"
+                                [label]="doctor.city">
                                 
                                 <agm-info-window>
                                     <strong>InfoWindow content</strong>
