@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 /**
  * Singleton Loader Service used to change the state of the loader Subject
  */
@@ -8,9 +8,10 @@ import { Subject } from 'rxjs';
 })
 export class LoaderService {
   private loaderSubject: Subject<boolean> = new Subject<boolean>();
-  loaderState = this.loaderSubject.asObservable();
+  loaderState: Observable<boolean> = this.loaderSubject.asObservable();
 
   constructor() {}
+
   /**
    * Displays the loader
    * @returns {void}

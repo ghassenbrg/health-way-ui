@@ -20,7 +20,7 @@ export class MainComponent implements OnInit {
   @ViewChild(NavbarComponent) navbarComponent!: NavbarComponent;
 
   showLoader: Observable<boolean>;
-
+  currentUserLoader: boolean;
   currentUser: User | Doctor | Patient;
   footerCustomStyle: string = '';
   navbarCustomStyle: string = '';
@@ -58,7 +58,7 @@ export class MainComponent implements OnInit {
   }
 
   refreshCurrentUser() {
-    this._loader.show();
+    this.currentUserLoader = true;
     this.currentUser = undefined;
     let currentRoles = this._auth.getRoles();
     let isDoctor: boolean = currentRoles.indexOf(roles.ROLE_DOCTOR) > -1;
@@ -67,7 +67,7 @@ export class MainComponent implements OnInit {
     if (mail) {
       if (isDoctor) {
         this._doctorService.getDoctorByMail(mail).subscribe((res) => {
-          this._loader.hide();
+          this.currentUserLoader = false;
           this.currentUser = res[0];
         });
       } else if (isPatient) {
@@ -77,12 +77,12 @@ export class MainComponent implements OnInit {
         });
       } else {
         this._userService.getUserByMail(mail).subscribe((res) => {
-          this._loader.hide();
+          this.currentUserLoader = false;
           this.currentUser = res[0];
         });
       }
     } else {
-      this._loader.hide();
+      this.currentUserLoader = false;
     }
   }
 }
