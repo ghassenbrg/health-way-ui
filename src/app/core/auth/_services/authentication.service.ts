@@ -23,7 +23,7 @@ const REFRESH_TOKEN = `${PREFIX}_refresh_token`;
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-  private currentTokenSubject: BehaviorSubject<any>;
+  public currentTokenSubject: BehaviorSubject<any>;
   public currentUserSubject: BehaviorSubject<User | Doctor | Patient>;
   public decodedTokenSubject: BehaviorSubject<any>;
 
@@ -65,6 +65,8 @@ export class AuthenticationService {
             REFRESH_TOKEN,
             JSON.stringify(res.refresh_token)
           );
+          this.currentTokenSubject.next(res.token);
+          this.decodedTokenSubject.next(jwt_decode(res.token));
           /* ----------------- get current user ------------------ */
           let decodedToken: any = res.token ? jwt_decode(res.token) : null;
           let currentRoles =
@@ -93,8 +95,6 @@ export class AuthenticationService {
             }
           }
           /* ----------------------------------------------------- */
-          this.currentTokenSubject.next(res.token);
-          this.decodedTokenSubject.next(jwt_decode(res.token));
           return res.token;
         })
       );
