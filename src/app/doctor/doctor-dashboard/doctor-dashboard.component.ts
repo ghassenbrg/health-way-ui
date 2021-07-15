@@ -9,7 +9,6 @@ import { Doctor } from '@models/doctor.model';
 })
 export class DoctorDashboardComponent implements OnInit {
   currentUser: Doctor = new Doctor();
-  showLoader: boolean = true;
 
   constructor(private _auth: AuthenticationService) {}
 

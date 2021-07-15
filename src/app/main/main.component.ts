@@ -15,7 +15,7 @@ import { Observable } from 'rxjs';
 export class MainComponent implements OnInit {
   @ViewChild(NavbarComponent) navbarComponent!: NavbarComponent;
 
-  showLoader: Observable<boolean>;
+  $showLoader: Observable<boolean>;
   currentUserLoader: boolean;
   currentUser: User | Doctor | Patient;
   footerCustomStyle: string = '';
@@ -30,7 +30,7 @@ export class MainComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.showLoader = this._loader.loaderState;
+    this.$showLoader = this._loader.loaderState;
     this._auth.currentUserSubject
       .asObservable()
       .subscribe((user) => (this.currentUser = user));

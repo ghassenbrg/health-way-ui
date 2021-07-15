@@ -14,7 +14,6 @@ export class LoginComponent implements OnInit {
     username: '',
     password: '',
   };
-  showLoader: boolean;
 
   constructor(
     private _loader: LoaderService,

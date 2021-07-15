@@ -11,7 +11,6 @@ import { LoaderService } from '@services/loader.service';
 })
 export class MapSearcherComponent implements OnInit {
 
-  showLoader: boolean;
   doctors: Doctor[];
   lat = 35.720065;
   lng = 10.649893;

@@ -13,7 +13,6 @@ import { LoaderService } from '@services/loader.service';
 })
 export class SearchComponent implements OnInit {
 
-  showLoader: boolean;
   doctors: Doctor[];
   allDoctors: Doctor[];
   pageSize: number = 2;
