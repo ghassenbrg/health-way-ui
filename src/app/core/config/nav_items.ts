@@ -7,20 +7,6 @@ export const NAV_ITEMS: NavItem[] = [
         path: ''
     },
     {
-        label: 'Doctors',
-        authorizedRoles: [roles.ROLE_ADMIN],
-        children: [
-            {
-                label: 'Simple Search',
-                path: 'search'
-            },
-            {
-                label: 'Map Search',
-                path: 'map-grid'
-            }
-        ]
-    },
-    {
         label: 'Patients',
         authorizedRoles: [roles.ROLE_ADMIN],
         children: [
@@ -39,16 +25,16 @@ export const NAV_ITEMS: NavItem[] = [
                 path: 'doctor-dashboard'
             },
             {
-                label: 'My Available timings',
-                path: 'schedule-timings'
-            },
-            {
                 label: 'Appointments',
                 path: 'appointments'
             },
             {
                 label: 'My patients',
                 path: 'my-patients'
+            },
+            {
+                label: 'My Available timings',
+                path: 'schedule-timings'
             }
         ]
     },
@@ -67,27 +53,12 @@ export const NAV_ITEMS: NavItem[] = [
         ]
     },
     {
-        label: 'Schedule Timings',
-        authorizedRoles: [roles.ROLE_DOCTOR],
-        children: [
-            {
-                label: 'My Available timings',
-                path: 'schedule-timings'
-            },
-            {
-                label: 'Appointments',
-                path: 'appointments'
-            }
-        ]
-    },
-    {
-        label: 'My patients',
-        authorizedRoles: [roles.ROLE_DOCTOR],
-        path: 'my-patients'
+        label: 'My Appointments',
+        authorizedRoles: [roles.ROLE_PATIENT],
+        path: 'patient-dashboard'
     },
     {
         label: 'Search Doctor',
-        authorizedRoles: [roles.ROLE_PATIENT],
         children: [
             {
                 label: 'Simple Search',
@@ -98,11 +69,6 @@ export const NAV_ITEMS: NavItem[] = [
                 path: 'map-grid'
             }
         ]
-    },
-    {
-        label: 'My Appointments',
-        authorizedRoles: [roles.ROLE_PATIENT],
-        path: 'patient-dashboard'
     },
     {
         label: 'Pharmacy',
@@ -228,7 +194,7 @@ export const FOOTER_ITEMS: NavItem[] = [
     },
     {
         label: 'Workspace',
-        authorizedRoles: [roles.ROLE_DOCTOR,roles.ROLE_PATIENT],
+        authorizedRoles: [roles.ROLE_DOCTOR, roles.ROLE_PATIENT],
         children: [
             {
                 label: 'My Dashboard',
