@@ -26,23 +26,31 @@
             <div class="row">
                 <div class="col-12">
                 
-                    <div class="card">
+                    <div class="card" *ngIf="doctorData">
                         <div class="card-body">
                             <div class="booking-doc-info">
-                                <a routerLink="doctor-profile" class="booking-doc-img">
-                                    <img src="assets/img/doctors/doctor-thumb-02.jpg" alt="User Image">
+                                <a (click)="viewDoctorProfile(doctorData.id)" class="booking-doc-img" width="100%">
+                                    <img src="assets/img/doctors/doctor_{{doctorData.gender}}.jpg" alt="User Image">
                                 </a>
                                 <div class="booking-info">
-                                    <h4><a routerLink="doctor-profile">Dr. Darren Elder</a></h4>
+                                    <h4>
+                                        <a (click)="viewDoctorProfile(doctorData.id)">
+                                            Dr. {{doctorData.firstName}} {{doctorData.lastName}}
+                                        </a>
+                                    </h4>
                                     <div class="rating">
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star filled"></i>
-                                        <i class="fas fa-star"></i>
-                                        <span class="d-inline-block average-rating">35</span>
+                                        <i class="fas fa-star" [ngClass]="doctorData.ratingAverage >= 1 ? 'filled' : ''"></i>
+                                        <i class="fas fa-star" [ngClass]="doctorData.ratingAverage >= 2 ? 'filled' : ''"></i>
+                                        <i class="fas fa-star" [ngClass]="doctorData.ratingAverage >= 3 ? 'filled' : ''"></i>
+                                        <i class="fas fa-star" [ngClass]="doctorData.ratingAverage >= 4 ? 'filled' : ''"></i>
+                                        <i class="fas fa-star" [ngClass]="doctorData.ratingAverage >= 5 ? 'filled' : ''"></i>
+                                        <span class="d-inline-block average-rating">({{doctorData.feedbacks.length}})</span>
                                     </div>
-                                    <p class="text-muted mb-0"><i class="fas fa-map-marker-alt"></i> Newyork, USA</p>
+                                    <p class="text-muted mb-0">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        <span *ngIf="doctorData.city"> {{doctorData.city}}</span>
+                                        <span *ngIf="!doctorData.city"> Address not mentioned</span>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -65,7 +73,7 @@
                         <div class="schedule-header">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <ul>
+                                    <ul *ngIf="calendar && calendar.length > 0">
                                         <p-carousel [value]="calendar" [numVisible]="7" [numScroll]="1" [showIndicators]="false">
                                             <ng-template let-day pTemplate="item">
                                                 <div class="day-slot">
@@ -97,7 +105,7 @@
                     
                     <!-- Submit Section -->
                     <div class="submit-section proceed-btn text-right">
-                        <a class="btn btn-primary submit-btn" (click)="proceed()">Proceed to Pay</a>
+                        <a class="btn btn-primary submit-btn" (click)="proceed()">Book Appointment</a>
                     </div>
                     <!-- /Submit Section -->
                     

@@ -1,3 +1,4 @@
+import { TimeSheet } from './../models/timeSheet.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
@@ -27,6 +28,10 @@ export class DoctorService {
 
   getDoctorByMail(mail: string) {
     return this.http.get<Doctor>(`${basePath}/doctors?email=${mail}`);
+  }
+
+  getDoctorTimeSheet(doctorId: string) {
+    return this.http.get<TimeSheet[]>(`${basePath}/time_sheets?doctor.id=${doctorId}`);
   }
 
 }
