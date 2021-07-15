@@ -25,7 +25,7 @@
                         </div>
                         <div class="clinic-details">
                             <p class="doc-location"><i class="fas fa-map-marker-alt"></i> 
-                                <span *ngIf="doctor.city"> {{doctor.city}}, {{doctor.country}}</span>
+                                <span *ngIf="doctor.city"> {{doctor.city}}</span>
                                 <span *ngIf="!doctor.city"> Address not mentioned</span>
                             </p>
                             <ul class="clinic-gallery">
@@ -52,7 +52,7 @@
                             </ul>
                         </div>
                         <div class="clinic-services">
-                            <span *ngFor="let speciality of doctor.specialities">{{speciality.name}}</span>
+                            <span *ngFor="let speciality of doctor.specialties">{{speciality.name}}</span>
                         </div>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                         <ul>
                             <li><i class="far fa-comment"></i> {{doctor.feedbacks.length}} Feedback</li>
                             <li><i class="fas fa-map-marker-alt"></i> 
-                                <span *ngIf="doctor.city"> {{doctor.city}}, {{doctor.country}}</span>
+                                <span *ngIf="doctor.city"> {{doctor.city}}</span>
                                 <span *ngIf="!doctor.city"> Address not mentioned</span></li>
                             <li>
                                 <i class="fas fa-hand-holding-usd"></i> 
@@ -74,8 +74,9 @@
                                     No insurances defined
                                 </span> 
                             </li>
-                            <li><i class="fas fa-phone"></i> 
-                                <span *ngIf="doctor.phoneNumbers && doctor.phoneNumbers.length > 0 "> {{doctor.phoneNumbers[0]}}</span>
+                            <li *ngIf="doctor.phoneNumbers && doctor.phoneNumbers.length > 0 ">
+                                <i class="fas fa-phone"></i> 
+                                <span> {{doctor.phoneNumbers[0]}}</span>
                             </li>
                         </ul>
                     </div>

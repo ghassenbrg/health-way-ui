@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Doctor } from '@models/doctor.model';
 
 @Component({
   selector: 'app-doctor-searcher-list',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class DoctorSearcherListComponent implements OnInit {
   
-  @Input() doctors: any;
+  @Input() doctors: Doctor[];
   @Input() pageSize: number;
 
   constructor(private route: Router) { }

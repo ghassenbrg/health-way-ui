@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
+import { Doctor } from '@models/doctor.model';
 
 @Component({
   selector: 'app-doctor-searcher-grid',
@@ -7,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./doctor-searcher-grid.component.scss'],
 })
 export class DoctorSearcherGridComponent implements OnInit {
-  @Input() doctors: any;
+  @Input() doctors: Doctor[];
   @Input() pageSize: number;
 
   constructor(private route: Router) {}

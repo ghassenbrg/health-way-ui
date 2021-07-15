@@ -9,6 +9,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import { AuthenticationService } from '@auth/_services/authentication.service';
 import { CommonService } from '@services/common.service';
 import { ToastService } from '@services/toast.service';
+import { LoaderService } from '@services/loader.service';
 
 @Component({
   selector: 'app-booking',
@@ -24,7 +25,6 @@ export class BookingComponent implements OnInit {
   appointmentCalander: any = [];
   doctorIdentifier: string;
   patientIdentifier: string;
-  showLoader: boolean;
   appointementInput: AppointmentInput;
 
   constructor(
@@ -32,7 +32,8 @@ export class BookingComponent implements OnInit {
     private _patientService: PatientService,
     private _auth: AuthenticationService,
     private _commonService: CommonService,
-    private _toastService: ToastService) {}
+    private _toastService: ToastService,
+    private _loader: LoaderService) {}
 
   ngOnInit(): void {
     this.doctorIdentifier = this.route.snapshot.params.identifier;
@@ -41,13 +42,13 @@ export class BookingComponent implements OnInit {
   }
 
   getCurrentPatient() {
-    this.showLoader = true;
+    this._loader.show();
     let mail: string = this._auth.getMail();
     this._patientService.getPatientByMail(mail).subscribe(res => {
-      this.showLoader = false;
+      this._loader.hide();
       this.patientIdentifier = res[0].id;
     }, err => {
-      this.showLoader = false;
+      this._loader.hide();
     });
   }
 
@@ -139,12 +140,12 @@ export class BookingComponent implements OnInit {
     this.appointementInput.patient = this.patientIdentifier;
     this.appointementInput.status = 'pending';
 
-    this.showLoader = true;
+    this._loader.show();
     this._commonService.createAppointment(this.appointementInput).subscribe(res => {
-      this.showLoader = false;
+      this._loader.hide();
       this._toastService.showSuccess('Success', 'your appointment request has been sent successfully');
     }, err => {
-      this.showLoader = false;
+      this._loader.hide();
     })
 
   }
