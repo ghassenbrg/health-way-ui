@@ -12,7 +12,6 @@ export class LoaderService {
   private queue: boolean[] = [];
 
   constructor() {
-    this.loaderState.subscribe(res => console.log(res))
   }
 
   /**

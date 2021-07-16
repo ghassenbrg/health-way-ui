@@ -4,8 +4,8 @@ export class Appointment {
     endTime: Date;
     date: Date;
     status: string;
-    patient: string;
-    doctor: string;
+    patient: any;
+    doctor: any;
 }
 export class AppointmentInput {
     startTime: string;

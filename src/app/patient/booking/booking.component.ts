@@ -46,9 +46,9 @@ export class BookingComponent implements OnInit {
 
   getCurrentPatient() {
     let mail: string = this._auth.getMail();
-    this._patientService.getPatientByMail(mail).subscribe(res => {
+    this._patientService.getPatientsByMail(mail).subscribe(res => {
 
-      this.patientIdentifier = res[0].id;
+      this.patientIdentifier = res[0].id.toString();
     }, err => {
 
     });

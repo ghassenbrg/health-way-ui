@@ -3,17 +3,15 @@
   <!-- Page Content -->
   <div class="content">
     <div class="container-fluid">
-
       <div class="row">
         <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
-
           <!-- Profile Sidebar -->
           <div class="profile-sidebar">
             <div class="widget-profile pro-widget-content">
               <div class="profile-info-widget">
                 <a class="booking-doc-img">
                   <img class="rounded-circle"
-                    src="https://ui-avatars.com/api/?name={{currentUser.firstName + '+' + currentUser.lastName}}&length=2&bold=true&rounded=true&background={{currentUser.gender == 'female' ? 'F3B8DA' : 'b8d8f3'}}"
+                    src="https://ui-avatars.com/api/?name={{currentUser.firstName + '+' + currentUser.lastName}}&length=2&bold=true&rounded=true&background={{currentUser.gender.toLowerCase() == 'female' ? 'F3B8DA' : 'b8d8f3'}}"
                     width="31" alt="{{currentUser.firstName + '+' + currentUser.lastName}}">
                 </a>
                 <div class="profile-det-info">
@@ -100,9 +98,7 @@
             </div>
           </div>
           <!-- /Profile Sidebar -->
-
         </div>
-
         <div class="col-md-7 col-lg-8 col-xl-9">
 
           <div class="row">
@@ -114,12 +110,13 @@
                       <div class="dash-widget dct-border-rht">
                         <div class="circle-bar circle-bar1">
                           <div class="circle-graph1" data-percent="75">
-                            <img src="assets/img/icon-01.png" class="img-fluid" alt="patient">
+                            <img src="/assets/img/doctors/doctor-dashboard/001-hospitalisation.png" class="img-fluid"
+                              height="50" width="70" alt="patient">
                           </div>
                         </div>
                         <div class="dash-widget-info">
-                          <h6>Total Patient</h6>
-                          <h3>1500</h3>
+                          <h6>Total Patients</h6>
+                          <h3>{{statics.totalPatients}}</h3>
                           <p class="text-muted">Till Today</p>
                         </div>
                       </div>
@@ -129,13 +126,14 @@
                       <div class="dash-widget dct-border-rht">
                         <div class="circle-bar circle-bar2">
                           <div class="circle-graph2" data-percent="65">
-                            <img src="assets/img/icon-02.png" class="img-fluid" alt="Patient">
+                            <img src="/assets/img/doctors/doctor-dashboard/004-people.png" class="img-fluid" height="50"
+                              width="70" alt="patient">
                           </div>
                         </div>
                         <div class="dash-widget-info">
-                          <h6>Today Patient</h6>
-                          <h3>160</h3>
-                          <p class="text-muted">06, Nov 2019</p>
+                          <h6>Today Patients</h6>
+                          <h3>{{statics.todayPatients}}</h3>
+                          <p class="text-muted">{{ currentDate | date: 'MMM d, y' }}</p>
                         </div>
                       </div>
                     </div>
@@ -144,13 +142,14 @@
                       <div class="dash-widget">
                         <div class="circle-bar circle-bar3">
                           <div class="circle-graph3" data-percent="50">
-                            <img src="assets/img/icon-03.png" class="img-fluid" alt="Patient">
+                            <img src="/assets/img/doctors/doctor-dashboard/003-appointment.png" class="img-fluid"
+                              height="50" width="70" alt="patient">
                           </div>
                         </div>
                         <div class="dash-widget-info">
                           <h6>Appoinments</h6>
-                          <h3>85</h3>
-                          <p class="text-muted">06, Apr 2019</p>
+                          <h3>{{statics.appoinments}}</h3>
+                          <p class="text-muted">{{ currentDate | date: 'MMM d, y' }}</p>
                         </div>
                       </div>
                     </div>
@@ -162,24 +161,28 @@
 
           <div class="row">
             <div class="col-md-12">
-              <h4 class="mb-4">Patient Appoinment</h4>
+              <h4>Patient Appoinment</h4>
+              <span
+                style="font-size: 0.9em;">{{isTodaySelected ? todayAppointmentsList.length : upcomingAppointmentsList.length}}
+                element(s)</span>
               <div class="appointment-tab">
 
                 <!-- Appointment Tab -->
                 <ul class="nav nav-tabs nav-tabs-solid nav-tabs-rounded">
                   <li class="nav-item">
-                    <a class="nav-link active" routerLink="#upcoming-appointments" data-toggle="tab">Upcoming</a>
+                    <a class="nav-link" [ngClass]="{'active': !isTodaySelected}"
+                      (click)="isTodaySelected = false;">Upcoming</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" routerLink="#today-appointments" data-toggle="tab">Today</a>
+                    <a class="nav-link" [ngClass]="{'active': isTodaySelected}"
+                      (click)="isTodaySelected = true;">Today</a>
                   </li>
                 </ul>
                 <!-- /Appointment Tab -->
 
                 <div class="tab-content">
-
                   <!-- Upcoming Appointment Tab -->
-                  <div class="tab-pane show active" id="upcoming-appointments">
+                  <div *ngIf="!isTodaySelected" class="tab-pane show active" id="upcoming-appointments">
                     <div class="card card-table mb-0">
                       <div class="card-body">
                         <div class="table-responsive">
@@ -195,159 +198,23 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
+                              <tr *ngFor="let appointment of upcomingAppointmentsList">
                                 <td>
                                   <h2 class="table-avatar">
                                     <a routerLink="patient-profile" class="avatar avatar-sm mr-2"><img
-                                        class="avatar-img rounded-circle" src="assets/img/patients/patient.jpg"
+                                        class="avatar-img rounded-circle" src="/assets/img/patients/patient_male.png"
                                         alt="User Image"></a>
-                                    <a routerLink="patient-profile">Richard Wilson <span>#PT0016</span></a>
+                                    <a routerLink="patient-profile">
+                                      <span>{{appointment.patient.firstName + ' ' + appointment.patient.lastName}}</span>
+                                      <span>#ID{{appointment.patient.id}}</span>
+                                    </a>
                                   </h2>
                                 </td>
-                                <td>11 Nov 2019 <span class="d-block text-info">10.00 AM</span></td>
+                                <td>{{ appointment.date | date: 'MMM d, y' }} <span
+                                    class="d-block text-info">{{appointment.startTime}}</span></td>
                                 <td>General</td>
                                 <td>New Patient</td>
                                 <td class="text-center">$150</td>
-                                <td class="text-right">
-                                  <div class="table-action">
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-info-light">
-                                      <i class="far fa-eye"></i> View
-                                    </a>
-
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
-                                      <i class="fas fa-check"></i> Accept
-                                    </a>
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
-                                      <i class="fas fa-times"></i> Cancel
-                                    </a>
-                                  </div>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <h2 class="table-avatar">
-                                    <a routerLink="patient-profile" class="avatar avatar-sm mr-2"><img
-                                        class="avatar-img rounded-circle" src="assets/img/patients/patient1.jpg"
-                                        alt="User Image"></a>
-                                    <a routerLink="patient-profile">Charlene Reed <span>#PT0001</span></a>
-                                  </h2>
-                                </td>
-                                <td>3 Nov 2019 <span class="d-block text-info">11.00 AM</span></td>
-                                <td>General</td>
-                                <td>Old Patient</td>
-                                <td class="text-center">$200</td>
-                                <td class="text-right">
-                                  <div class="table-action">
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-info-light">
-                                      <i class="far fa-eye"></i> View
-                                    </a>
-
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
-                                      <i class="fas fa-check"></i> Accept
-                                    </a>
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
-                                      <i class="fas fa-times"></i> Cancel
-                                    </a>
-                                  </div>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <h2 class="table-avatar">
-                                    <a routerLink="patient-profile" class="avatar avatar-sm mr-2"><img
-                                        class="avatar-img rounded-circle" src="assets/img/patients/patient2.jpg"
-                                        alt="User Image"></a>
-                                    <a routerLink="patient-profile">Travis Trimble <span>#PT0002</span></a>
-                                  </h2>
-                                </td>
-                                <td>1 Nov 2019 <span class="d-block text-info">1.00 PM</span></td>
-                                <td>General</td>
-                                <td>New Patient</td>
-                                <td class="text-center">$75</td>
-                                <td class="text-right">
-                                  <div class="table-action">
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-info-light">
-                                      <i class="far fa-eye"></i> View
-                                    </a>
-
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
-                                      <i class="fas fa-check"></i> Accept
-                                    </a>
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
-                                      <i class="fas fa-times"></i> Cancel
-                                    </a>
-                                  </div>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <h2 class="table-avatar">
-                                    <a routerLink="patient-profile" class="avatar avatar-sm mr-2"><img
-                                        class="avatar-img rounded-circle" src="assets/img/patients/patient3.jpg"
-                                        alt="User Image"></a>
-                                    <a routerLink="patient-profile">Carl Kelly <span>#PT0003</span></a>
-                                  </h2>
-                                </td>
-                                <td>30 Oct 2019 <span class="d-block text-info">9.00 AM</span></td>
-                                <td>General</td>
-                                <td>Old Patient</td>
-                                <td class="text-center">$100</td>
-                                <td class="text-right">
-                                  <div class="table-action">
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-info-light">
-                                      <i class="far fa-eye"></i> View
-                                    </a>
-
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
-                                      <i class="fas fa-check"></i> Accept
-                                    </a>
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
-                                      <i class="fas fa-times"></i> Cancel
-                                    </a>
-                                  </div>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <h2 class="table-avatar">
-                                    <a routerLink="patient-profile" class="avatar avatar-sm mr-2"><img
-                                        class="avatar-img rounded-circle" src="assets/img/patients/patient4.jpg"
-                                        alt="User Image"></a>
-                                    <a routerLink="patient-profile">Michelle Fairfax <span>#PT0004</span></a>
-                                  </h2>
-                                </td>
-                                <td>28 Oct 2019 <span class="d-block text-info">6.00 PM</span></td>
-                                <td>General</td>
-                                <td>New Patient</td>
-                                <td class="text-center">$350</td>
-                                <td class="text-right">
-                                  <div class="table-action">
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-info-light">
-                                      <i class="far fa-eye"></i> View
-                                    </a>
-
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
-                                      <i class="fas fa-check"></i> Accept
-                                    </a>
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
-                                      <i class="fas fa-times"></i> Cancel
-                                    </a>
-                                  </div>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <h2 class="table-avatar">
-                                    <a routerLink="patient-profile" class="avatar avatar-sm mr-2"><img
-                                        class="avatar-img rounded-circle" src="assets/img/patients/patient5.jpg"
-                                        alt="User Image"></a>
-                                    <a routerLink="patient-profile">Gina Moore <span>#PT0005</span></a>
-                                  </h2>
-                                </td>
-                                <td>27 Oct 2019 <span class="d-block text-info">8.00 AM</span></td>
-                                <td>General</td>
-                                <td>Old Patient</td>
-                                <td class="text-center">$250</td>
                                 <td class="text-right">
                                   <div class="table-action">
                                     <a routerLink="javascript:void(0);" class="btn btn-sm bg-info-light">
@@ -370,9 +237,8 @@
                     </div>
                   </div>
                   <!-- /Upcoming Appointment Tab -->
-
                   <!-- Today Appointment Tab -->
-                  <div class="tab-pane" id="today-appointments">
+                  <div *ngIf="isTodaySelected" class="tab-pane show active" id="upcoming-appointments">
                     <div class="card card-table mb-0">
                       <div class="card-body">
                         <div class="table-responsive">
@@ -388,159 +254,23 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
+                              <tr *ngFor="let appointment of todayAppointmentsList">
                                 <td>
                                   <h2 class="table-avatar">
                                     <a routerLink="patient-profile" class="avatar avatar-sm mr-2"><img
-                                        class="avatar-img rounded-circle" src="assets/img/patients/patient6.jpg"
+                                        class="avatar-img rounded-circle" src="/assets/img/patients/patient_male.png"
                                         alt="User Image"></a>
-                                    <a routerLink="patient-profile">Elsie Gilley <span>#PT0006</span></a>
+                                    <a routerLink="patient-profile">
+                                      <span>{{appointment.patient.firstName + ' ' + appointment.patient.lastName}}</span>
+                                      <span>#ID{{appointment.patient.id}}</span>
+                                    </a>
                                   </h2>
                                 </td>
-                                <td>14 Nov 2019 <span class="d-block text-info">6.00 PM</span></td>
-                                <td>Fever</td>
-                                <td>Old Patient</td>
-                                <td class="text-center">$300</td>
-                                <td class="text-right">
-                                  <div class="table-action">
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-info-light">
-                                      <i class="far fa-eye"></i> View
-                                    </a>
-
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
-                                      <i class="fas fa-check"></i> Accept
-                                    </a>
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
-                                      <i class="fas fa-times"></i> Cancel
-                                    </a>
-                                  </div>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <h2 class="table-avatar">
-                                    <a routerLink="patient-profile" class="avatar avatar-sm mr-2"><img
-                                        class="avatar-img rounded-circle" src="assets/img/patients/patient7.jpg"
-                                        alt="User Image"></a>
-                                    <a routerLink="patient-profile">Joan Gardner <span>#PT0006</span></a>
-                                  </h2>
-                                </td>
-                                <td>14 Nov 2019 <span class="d-block text-info">5.00 PM</span></td>
-                                <td>General</td>
-                                <td>Old Patient</td>
-                                <td class="text-center">$100</td>
-                                <td class="text-right">
-                                  <div class="table-action">
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-info-light">
-                                      <i class="far fa-eye"></i> View
-                                    </a>
-
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
-                                      <i class="fas fa-check"></i> Accept
-                                    </a>
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
-                                      <i class="fas fa-times"></i> Cancel
-                                    </a>
-                                  </div>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <h2 class="table-avatar">
-                                    <a routerLink="patient-profile" class="avatar avatar-sm mr-2"><img
-                                        class="avatar-img rounded-circle" src="assets/img/patients/patient8.jpg"
-                                        alt="User Image"></a>
-                                    <a routerLink="patient-profile">Daniel Griffing <span>#PT0007</span></a>
-                                  </h2>
-                                </td>
-                                <td>14 Nov 2019 <span class="d-block text-info">3.00 PM</span></td>
+                                <td>{{ appointment.date | date: 'MMM d, y' }} <span
+                                    class="d-block text-info">{{appointment.startTime}}</span></td>
                                 <td>General</td>
                                 <td>New Patient</td>
-                                <td class="text-center">$75</td>
-                                <td class="text-right">
-                                  <div class="table-action">
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-info-light">
-                                      <i class="far fa-eye"></i> View
-                                    </a>
-
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
-                                      <i class="fas fa-check"></i> Accept
-                                    </a>
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
-                                      <i class="fas fa-times"></i> Cancel
-                                    </a>
-                                  </div>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <h2 class="table-avatar">
-                                    <a routerLink="patient-profile" class="avatar avatar-sm mr-2"><img
-                                        class="avatar-img rounded-circle" src="assets/img/patients/patient9.jpg"
-                                        alt="User Image"></a>
-                                    <a routerLink="patient-profile">Walter Roberson <span>#PT0008</span></a>
-                                  </h2>
-                                </td>
-                                <td>14 Nov 2019 <span class="d-block text-info">1.00 PM</span></td>
-                                <td>General</td>
-                                <td>Old Patient</td>
-                                <td class="text-center">$350</td>
-                                <td class="text-right">
-                                  <div class="table-action">
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-info-light">
-                                      <i class="far fa-eye"></i> View
-                                    </a>
-
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
-                                      <i class="fas fa-check"></i> Accept
-                                    </a>
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
-                                      <i class="fas fa-times"></i> Cancel
-                                    </a>
-                                  </div>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <h2 class="table-avatar">
-                                    <a routerLink="patient-profile" class="avatar avatar-sm mr-2"><img
-                                        class="avatar-img rounded-circle" src="assets/img/patients/patient10.jpg"
-                                        alt="User Image"></a>
-                                    <a routerLink="patient-profile">Robert Rhodes <span>#PT0010</span></a>
-                                  </h2>
-                                </td>
-                                <td>14 Nov 2019 <span class="d-block text-info">10.00 AM</span></td>
-                                <td>General</td>
-                                <td>New Patient</td>
-                                <td class="text-center">$175</td>
-                                <td class="text-right">
-                                  <div class="table-action">
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-info-light">
-                                      <i class="far fa-eye"></i> View
-                                    </a>
-
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
-                                      <i class="fas fa-check"></i> Accept
-                                    </a>
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
-                                      <i class="fas fa-times"></i> Cancel
-                                    </a>
-                                  </div>
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>
-                                  <h2 class="table-avatar">
-                                    <a routerLink="patient-profile" class="avatar avatar-sm mr-2"><img
-                                        class="avatar-img rounded-circle" src="assets/img/patients/patient11.jpg"
-                                        alt="User Image"></a>
-                                    <a routerLink="patient-profile">Harry Williams <span>#PT0011</span></a>
-                                  </h2>
-                                </td>
-                                <td>14 Nov 2019 <span class="d-block text-info">11.00 AM</span></td>
-                                <td>General</td>
-                                <td>New Patient</td>
-                                <td class="text-center">$450</td>
+                                <td class="text-center">$150</td>
                                 <td class="text-right">
                                   <div class="table-action">
                                     <a routerLink="javascript:void(0);" class="btn btn-sm bg-info-light">
@@ -563,7 +293,6 @@
                     </div>
                   </div>
                   <!-- /Today Appointment Tab -->
-
                 </div>
               </div>
             </div>
