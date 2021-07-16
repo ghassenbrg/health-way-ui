@@ -101,7 +101,7 @@
                                 </ul>
                             </div>
                             <div class="clinic-booking">
-                                <a class="apt-btn" routerLink="booking">Book Appointment</a>
+                                <a class="apt-btn" (click)="bookAppointment(doctor.id)">Book Appointment</a>
                             </div>
                         </div>
                     </div>
@@ -477,38 +477,40 @@
                                 <ul class="comments-list">
                                 
                                     <!-- Comment List -->
-                                    <li *ngFor="let feedback of feedbacks">
-                                        <div class="comment">
-                                            <img class="avatar avatar-sm rounded-circle"
-                                                src="https://ui-avatars.com/api/?name={{feedback.patient.firstName + '+' + feedback.patient.lastName}}&length=2&bold=true&rounded=true&background-color='b8d8f3'}}"
-                                                width="31" alt="{{feedback.patient.firstName + '+' + feedback.patient.lastName}}">
-                                            <div class="comment-body">
-                                                <div class="meta-data">
-                                                    <span class="comment-author">{{feedback.patient.firstName}} {{feedback.patient.lastName}}</span>
-                                                    <!-- <span class="comment-date">Reviewed 2 Days ago</span> -->
-                                                    <div class="review-count rating">
-                                                        <i class="fas fa-star" [ngClass]="{'filled': feedback.rating >= 1}"></i>
-                                                        <i class="fas fa-star" [ngClass]="{'filled': feedback.rating >= 2}"></i>
-                                                        <i class="fas fa-star" [ngClass]="{'filled': feedback.rating >= 3}"></i>
-                                                        <i class="fas fa-star" [ngClass]="{'filled': feedback.rating >= 4}"></i>
-                                                        <i class="fas fa-star" [ngClass]="{'filled': feedback.rating >= 5}"></i>
+                                    <ng-container  *ngFor="let feedback of feedbacks; let i=index">
+                                        <li *ngIf="i < pageSize">
+                                            <div class="comment">
+                                                <img class="avatar avatar-sm rounded-circle"
+                                                    src="https://ui-avatars.com/api/?name={{feedback.patient.firstName + '+' + feedback.patient.lastName}}&length=2&bold=true&rounded=true&background-color='b8d8f3'}}"
+                                                    width="31" alt="{{feedback.patient.firstName + '+' + feedback.patient.lastName}}">
+                                                <div class="comment-body" style="width: 100%;">
+                                                    <div class="meta-data">
+                                                        <span class="comment-author">{{feedback.patient.firstName}} {{feedback.patient.lastName}}</span>
+                                                        <!-- <span class="comment-date">Reviewed 2 Days ago</span> -->
+                                                        <div class="review-count rating">
+                                                            <i class="fas fa-star" [ngClass]="{'filled': feedback.rating >= 1}"></i>
+                                                            <i class="fas fa-star" [ngClass]="{'filled': feedback.rating >= 2}"></i>
+                                                            <i class="fas fa-star" [ngClass]="{'filled': feedback.rating >= 3}"></i>
+                                                            <i class="fas fa-star" [ngClass]="{'filled': feedback.rating >= 4}"></i>
+                                                            <i class="fas fa-star" [ngClass]="{'filled': feedback.rating >= 5}"></i>
+                                                        </div>
                                                     </div>
+                                                    <p class="recommended"><i class="far fa-thumbs-up"></i> I recommend the doctor</p>
+                                                    <p class="comment-content">
+                                                        {{feedback.comment}}
+                                                    </p>
                                                 </div>
-                                                <p class="recommended"><i class="far fa-thumbs-up"></i> I recommend the doctor</p>
-                                                <p class="comment-content">
-                                                    {{feedback.comment}}
-                                                </p>
                                             </div>
-                                        </div>
-                                                                                
-                                    </li>
+                                                                                    
+                                        </li>
+                                    </ng-container>
                                     <!-- /Comment List -->
                                     
                                 </ul>
                                 
                                 <!-- Show All -->
                                 <div class="all-feedback text-center" *ngIf="feedbacks && feedbacks.length > pageSize">
-                                    <a  class="btn btn-primary btn-sm">
+                                    <a  class="btn btn-primary btn-sm" (click)="loadMore()">
                                         Show all feedback <strong>({{feedbacks.length}})</strong>
                                     </a>
                                 </div>
@@ -550,7 +552,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label>Your review</label>
-                                        <textarea name="comment" maxlength="100" class="form-control" [(ngModel)]="feedback.comment"></textarea>
+                                        <textarea name="comment" maxlength="200" class="form-control" [(ngModel)]="feedback.comment"></textarea>
                                         
                                         <div class="d-flex justify-content-between mt-3"><small class="text-muted"><span id="chars">100</span> characters remaining</small></div>
                                     </div>

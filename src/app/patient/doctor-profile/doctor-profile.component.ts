@@ -3,7 +3,7 @@ import { Speciality } from '@models/specialty.model';
 import { Feedback } from './../../core/models/feedback.model';
 import { DoctorService } from '@services-api/doctor.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Doctor } from '@models/doctor.model';
 import { CommonService } from '@services/common.service';
 import { City } from '@models/city.model';
@@ -33,7 +33,8 @@ export class DoctorProfileComponent implements OnInit {
     private route: ActivatedRoute,
     private _doctorService: DoctorService,
     private _commonService: CommonService,
-    private _auth: AuthenticationService) { }
+    private _auth: AuthenticationService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.doctorIdentifier = this.route.snapshot.params.identifier;
@@ -122,6 +123,13 @@ export class DoctorProfileComponent implements OnInit {
     })
   }
 
+  bookAppointment(id: number) {
+    this.router.navigate(['/booking', { identifier: id }]);
+  }
+
+  loadMore() {
+    this.pageSize = this.feedbacks.length;
+  }
   getCityId(cityId) {
     if (cityId.includes('/api/cities/')) {
       return cityId.replace('/api/cities/', '');
