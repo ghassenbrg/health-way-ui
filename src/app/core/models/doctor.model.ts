@@ -17,7 +17,7 @@ export class Doctor extends User {
     address: string;
     jobTitle: string;
     timeSheets: string[];
-    feedbacks: string[];
+    feedbacks: any[];
     appointments: string[];
     officeImages: string[];
     email: string;

@@ -31,6 +31,7 @@ export class SearchComponent implements OnInit {
   cities: City[];
   insurances: Insurance[];
   specialities: Speciality[];
+  selectedSpecialities: Speciality[];
 
   constructor(
     private _commonService: CommonService,
@@ -42,9 +43,7 @@ export class SearchComponent implements OnInit {
   }
 
   getAllDoctors() {
-
     this._doctorService.getAll().subscribe(res => {
-
       this.doctors = res;
       this.allDoctors = Object.assign([], this.doctors)
       this.initializeRating();
@@ -72,6 +71,17 @@ export class SearchComponent implements OnInit {
 
 
   filterDoctors() {
+    // let selectedSpecialities: string[] = [];
+    // this.specialities.forEach(speciality => {
+    //   if (speciality.isSelected) {
+    //     selectedSpecialities.push(speciality.name);
+    //   }
+    // })
+    // this._doctorService.getDoctorsBySpeciality(selectedSpecialities).subscribe(res => {
+    //   this.doctors = res;
+    // }, err => {
+
+    // })
     this.doctors = [];
     if (this.maleCriteria && !this.femaleCriteria) {
       this.allDoctors.forEach(doctor => {

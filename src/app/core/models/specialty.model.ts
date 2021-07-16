@@ -4,4 +4,5 @@ export class Speciality {
     description: string;
     doctors: string[];
     logo?: any;
+    isSelected?: boolean
 }

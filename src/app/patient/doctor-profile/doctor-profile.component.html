@@ -25,7 +25,7 @@
 
             <!-- Doctor Widget -->
             <div class="card">
-                <div class="card-body">
+                <div class="card-body" *ngIf="doctor">
                     <div class="doctor-widget">
                         <div class="doc-info-left">
                             <div class="doctor-img">
@@ -35,17 +35,17 @@
                                 <h4 class="doc-name">Dr. {{doctor.firstName}} {{doctor.lastName}}</h4>
                                 <p class="doc-department">{{doctor.jobTitle}}</p>
                                 <div class="rating">
-                                    <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 1 ? 'filled' : ''"></i>
-                                    <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 2 ? 'filled' : ''"></i>
-                                    <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 3 ? 'filled' : ''"></i>
-                                    <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 4 ? 'filled' : ''"></i>
-                                    <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 5 ? 'filled' : ''"></i>
+                                    <i class="fas fa-star" [ngClass]="ratingAverage >= 1 ? 'filled' : ''"></i>
+                                    <i class="fas fa-star" [ngClass]="ratingAverage >= 2 ? 'filled' : ''"></i>
+                                    <i class="fas fa-star" [ngClass]="ratingAverage >= 3 ? 'filled' : ''"></i>
+                                    <i class="fas fa-star" [ngClass]="ratingAverage >= 4 ? 'filled' : ''"></i>
+                                    <i class="fas fa-star" [ngClass]="ratingAverage >= 5 ? 'filled' : ''"></i>
                                     <span class="d-inline-block average-rating">({{doctor.feedbacks.length}})</span>
                                 </div>
                                 <div class="clinic-details">
                                     <p class="doc-location"><i class="fas fa-map-marker-alt"></i> 
-                                        <span *ngIf="doctor.city"> {{doctor.city}}</span>
-                                        <span *ngIf="!doctor.city"> Address not mentioned</span>
+                                        <span *ngIf="doctor.cityName"> {{doctor.cityName}}</span>
+                                        <span *ngIf="!doctor.cityName"> Address not mentioned</span>
                                     </p>
                                     <ul class="clinic-gallery">
                                         <li>
@@ -71,7 +71,7 @@
                                     </ul>
                                 </div>
                                 <div class="clinic-services">
-                                    <span *ngFor="let speciality of doctor.specialties">{{speciality.name}}</span>
+                                    <span *ngFor="let speciality of doctor.specialtyNames">{{speciality}}</span>
                                 </div>
                             </div>
                         </div>
@@ -80,17 +80,17 @@
                                 <ul>
                                     <li><i class="far fa-comment"></i> {{doctor.feedbacks.length}} Feedback</li>
                                     <li><i class="fas fa-map-marker-alt"></i> 
-                                        <span *ngIf="doctor.city"> {{doctor.city}}</span>
-                                        <span *ngIf="!doctor.city"> Address not mentioned</span>
+                                        <span *ngIf="doctor.cityName"> {{doctor.cityName}}</span>
+                                        <span *ngIf="!doctor.cityName"> Address not mentioned</span>
                                     </li>
                                     <li>
                                         <i class="fas fa-hand-holding-usd"></i> 
-                                        <span *ngIf="doctor.insurances && doctor.insurances.length > 0">
-                                            <span *ngFor="let insurance of doctor.insurances; let j = index">
-                                                {{insurance.name}}<span *ngIf="j < doctor.insurances.length - 1">,</span> 
+                                        <span *ngIf="doctor.insuranceNames && doctor.insuranceNames.length > 0">
+                                            <span *ngFor="let insurance of doctor.insuranceNames; let j = index">
+                                                {{insurance}}<span *ngIf="j < doctor.insuranceNames.length - 1">,</span> 
                                             </span> 
                                         </span> 
-                                        <span *ngIf="!doctor.insurances || (doctor.insurances && doctor.insurances.length == 0)">
+                                        <span *ngIf="!doctor.insuranceNames || (doctor.insuranceNames && doctor.insuranceNames.length == 0)">
                                             No insurances defined
                                         </span> 
                                     </li>
@@ -99,20 +99,6 @@
                                         <span> {{doctor.phoneNumbers[0]}}</span>
                                     </li>
                                 </ul>
-                            </div>
-                            <div class="doctor-action">
-                                <a routerLink="javascript:void(0)" class="btn btn-white fav-btn">
-                                    <i class="far fa-bookmark"></i>
-                                </a>
-                                <a routerLink="chat" class="btn btn-white msg-btn">
-                                    <i class="far fa-comment-alt"></i>
-                                </a>
-                                <a routerLink="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#voice_call">
-                                    <i class="fas fa-phone"></i>
-                                </a>
-                                <a routerLink="javascript:void(0)" class="btn btn-white call-btn" data-toggle="modal" data-target="#video_call">
-                                    <i class="fas fa-video"></i>
-                                </a>
                             </div>
                             <div class="clinic-booking">
                                 <a class="apt-btn" routerLink="booking">Book Appointment</a>
@@ -491,138 +477,39 @@
                                 <ul class="comments-list">
                                 
                                     <!-- Comment List -->
-                                    <li>
+                                    <li *ngFor="let feedback of feedbacks">
                                         <div class="comment">
-                                            <img class="avatar avatar-sm rounded-circle" alt="User Image" src="assets/img/patients/patient.jpg">
+                                            <img class="avatar avatar-sm rounded-circle"
+                                                src="https://ui-avatars.com/api/?name={{feedback.patient.firstName + '+' + feedback.patient.lastName}}&length=2&bold=true&rounded=true&background-color='b8d8f3'}}"
+                                                width="31" alt="{{feedback.patient.firstName + '+' + feedback.patient.lastName}}">
                                             <div class="comment-body">
                                                 <div class="meta-data">
-                                                    <span class="comment-author">Richard Wilson</span>
-                                                    <span class="comment-date">Reviewed 2 Days ago</span>
+                                                    <span class="comment-author">{{feedback.patient.firstName}} {{feedback.patient.lastName}}</span>
+                                                    <!-- <span class="comment-date">Reviewed 2 Days ago</span> -->
                                                     <div class="review-count rating">
-                                                        <i class="fas fa-star filled"></i>
-                                                        <i class="fas fa-star filled"></i>
-                                                        <i class="fas fa-star filled"></i>
-                                                        <i class="fas fa-star filled"></i>
-                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star" [ngClass]="{'filled': feedback.rating >= 1}"></i>
+                                                        <i class="fas fa-star" [ngClass]="{'filled': feedback.rating >= 2}"></i>
+                                                        <i class="fas fa-star" [ngClass]="{'filled': feedback.rating >= 3}"></i>
+                                                        <i class="fas fa-star" [ngClass]="{'filled': feedback.rating >= 4}"></i>
+                                                        <i class="fas fa-star" [ngClass]="{'filled': feedback.rating >= 5}"></i>
                                                     </div>
                                                 </div>
                                                 <p class="recommended"><i class="far fa-thumbs-up"></i> I recommend the doctor</p>
                                                 <p class="comment-content">
-                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                                    Ut enim ad minim veniam, quis nostrud exercitation.
-                                                    Curabitur non nulla sit amet nisl tempus
+                                                    {{feedback.comment}}
                                                 </p>
-                                                <div class="comment-reply">
-                                                    <a class="comment-btn" >
-                                                        <i class="fas fa-reply"></i> Reply
-                                                    </a>
-                                                    <p class="recommend-btn">
-                                                    <span>Recommend?</span>
-                                                    <a  class="like-btn">
-                                                        <i class="far fa-thumbs-up"></i> Yes
-                                                    </a>
-                                                    <a  class="dislike-btn">
-                                                        <i class="far fa-thumbs-down"></i> No
-                                                    </a>
-                                                </p>
-                                                </div>
                                             </div>
                                         </div>
-                                        
-                                        <!-- Comment Reply -->
-                                        <ul class="comments-reply">
-                                            <li>
-                                                <div class="comment">
-                                                    <img class="avatar avatar-sm rounded-circle" alt="User Image" src="assets/img/patients/patient1.jpg">
-                                                    <div class="comment-body">
-                                                        <div class="meta-data">
-                                                            <span class="comment-author">Charlene Reed</span>
-                                                            <span class="comment-date">Reviewed 3 Days ago</span>
-                                                            <div class="review-count rating">
-                                                                <i class="fas fa-star filled"></i>
-                                                                <i class="fas fa-star filled"></i>
-                                                                <i class="fas fa-star filled"></i>
-                                                                <i class="fas fa-star filled"></i>
-                                                                <i class="fas fa-star"></i>
-                                                            </div>
-                                                        </div>
-                                                        <p class="comment-content">
-                                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                                            sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                                            Ut enim ad minim veniam.
-                                                            Curabitur non nulla sit amet nisl tempus
-                                                        </p>
-                                                        <div class="comment-reply">
-                                                            <a class="comment-btn" >
-                                                                <i class="fas fa-reply"></i> Reply
-                                                            </a>
-                                                            <p class="recommend-btn">
-                                                                <span>Recommend?</span>
-                                                                <a  class="like-btn">
-                                                                    <i class="far fa-thumbs-up"></i> Yes
-                                                                </a>
-                                                                <a  class="dislike-btn">
-                                                                    <i class="far fa-thumbs-down"></i> No
-                                                                </a>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        <!-- /Comment Reply -->
-                                        
-                                    </li>
-                                    <!-- /Comment List -->
-                                    
-                                    <!-- Comment List -->
-                                    <li>
-                                        <div class="comment">
-                                            <img class="avatar avatar-sm rounded-circle" alt="User Image" src="assets/img/patients/patient2.jpg">
-                                            <div class="comment-body">
-                                                <div class="meta-data">
-                                                    <span class="comment-author">Travis Trimble</span>
-                                                    <span class="comment-date">Reviewed 4 Days ago</span>
-                                                    <div class="review-count rating">
-                                                        <i class="fas fa-star filled"></i>
-                                                        <i class="fas fa-star filled"></i>
-                                                        <i class="fas fa-star filled"></i>
-                                                        <i class="fas fa-star filled"></i>
-                                                        <i class="fas fa-star"></i>
-                                                    </div>
-                                                </div>
-                                                <p class="comment-content">
-                                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                                    Ut enim ad minim veniam, quis nostrud exercitation.
-                                                    Curabitur non nulla sit amet nisl tempus
-                                                </p>
-                                                <div class="comment-reply">
-                                                    <a class="comment-btn" >
-                                                        <i class="fas fa-reply"></i> Reply
-                                                    </a>
-                                                    <p class="recommend-btn">
-                                                        <span>Recommend?</span>
-                                                        <a  class="like-btn">
-                                                            <i class="far fa-thumbs-up"></i> Yes
-                                                        </a>
-                                                        <a  class="dislike-btn">
-                                                            <i class="far fa-thumbs-down"></i> No
-                                                        </a>
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
+                                                                                
                                     </li>
                                     <!-- /Comment List -->
                                     
                                 </ul>
                                 
                                 <!-- Show All -->
-                                <div class="all-feedback text-center">
+                                <div class="all-feedback text-center" *ngIf="feedbacks && feedbacks.length > pageSize">
                                     <a  class="btn btn-primary btn-sm">
-                                        Show all feedback <strong>(167)</strong>
+                                        Show all feedback <strong>({{feedbacks.length}})</strong>
                                     </a>
                                 </div>
                                 <!-- /Show All -->
@@ -632,56 +519,44 @@
                         
                             <!-- Write Review -->
                             <div class="write-review">
-                                <h4>Write a review for <strong>Dr. Darren Elder</strong></h4>
+                                <h4>Write a review for <strong *ngIf="doctor">Dr. {{doctor.firstName}} {{doctor.lastName}}</strong></h4>
                                 
                                 <!-- Write Review Form -->
                                 <form>
                                     <div class="form-group">
                                         <label>Review</label>
                                         <div class="star-rating">
-                                            <input id="star-5" type="radio" name="rating" value="star-5">
-                                            <label for="star-5" title="5 stars">
+                                            <input id="star-5" type="radio" name="rating" value="5">
+                                            <label for="star-5" title="5 stars" (click)="feedback.rating=5">
                                                 <i class="active fa fa-star"></i>
                                             </label>
-                                            <input id="star-4" type="radio" name="rating" value="star-4">
-                                            <label for="star-4" title="4 stars">
+                                            <input id="star-4" type="radio" name="rating" value="4">
+                                            <label for="star-4" title="4 stars" (click)="feedback.rating=4">
                                                 <i class="active fa fa-star"></i>
                                             </label>
-                                            <input id="star-3" type="radio" name="rating" value="star-3">
-                                            <label for="star-3" title="3 stars">
+                                            <input id="star-3" type="radio" name="rating" value="3">
+                                            <label for="star-3" title="3 stars" (click)="feedback.rating=3">
                                                 <i class="active fa fa-star"></i>
                                             </label>
-                                            <input id="star-2" type="radio" name="rating" value="star-2">
-                                            <label for="star-2" title="2 stars">
+                                            <input id="star-2" type="radio" name="rating" value="2">
+                                            <label for="star-2" title="2 stars" (click)="feedback.rating=2">
                                                 <i class="active fa fa-star"></i>
                                             </label>
-                                            <input id="star-1" type="radio" name="rating" value="star-1">
-                                            <label for="star-1" title="1 star">
+                                            <input id="star-1" type="radio" name="rating" value="1">
+                                            <label for="star-1" title="1 star" (click)="feedback.rating=1">
                                                 <i class="active fa fa-star"></i>
                                             </label>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label>Title of your review</label>
-                                        <input class="form-control" type="text" placeholder="If you could say it in one sentence, what would you say?">
-                                    </div>
-                                    <div class="form-group">
                                         <label>Your review</label>
-                                        <textarea id="review_desc" maxlength="100" class="form-control"></textarea>
+                                        <textarea name="comment" maxlength="100" class="form-control" [(ngModel)]="feedback.comment"></textarea>
                                         
                                         <div class="d-flex justify-content-between mt-3"><small class="text-muted"><span id="chars">100</span> characters remaining</small></div>
                                     </div>
                                     <hr>
-                                    <div class="form-group">
-                                        <div class="terms-accept">
-                                            <div class="custom-checkbox">
-                                                <input type="checkbox" id="terms_accept">
-                                                <label for="terms_accept">I have read and accept <a >Terms &amp; Conditions</a></label>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div class="submit-section">
-                                        <button type="submit" class="btn btn-primary submit-btn">Add Review</button>
+                                        <button type="submit" class="btn btn-primary submit-btn" (click)="addReview()">Add Review</button>
                                     </div>
                                 </form>
                                 <!-- /Write Review Form -->

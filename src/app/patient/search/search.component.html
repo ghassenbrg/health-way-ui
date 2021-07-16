@@ -55,42 +55,12 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="filter-widget">
+                        <div class="filter-widget" *ngIf="specialities && specialities.length > 0">
                             <h4>Select Specialist</h4>
-                            <div>
+                            <div *ngFor="let speciality of specialities">
                                 <label class="custom_check">
-                                    <input type="checkbox" name="select_specialist" checked>
-                                    <span class="checkmark"></span> Urology
-                                </label>
-                            </div>
-                            <div>
-                                <label class="custom_check">
-                                    <input type="checkbox" name="select_specialist" checked>
-                                    <span class="checkmark"></span> Neurology
-                                </label>
-                            </div>
-                            <div>
-                                <label class="custom_check">
-                                    <input type="checkbox" name="select_specialist">
-                                    <span class="checkmark"></span> Dentist
-                                </label>
-                            </div>
-                            <div>
-                                <label class="custom_check">
-                                    <input type="checkbox" name="select_specialist">
-                                    <span class="checkmark"></span> Orthopedic
-                                </label>
-                            </div>
-                            <div>
-                                <label class="custom_check">
-                                    <input type="checkbox" name="select_specialist">
-                                    <span class="checkmark"></span> Cardiologist
-                                </label>
-                            </div>
-                            <div>
-                                <label class="custom_check">
-                                    <input type="checkbox" name="select_specialist">
-                                    <span class="checkmark"></span> Cardiologist
+                                    <input type="checkbox" name="{{speciality.id}}" [(ngModel)]="speciality.isSelected">
+                                    <span class="checkmark"></span> {{speciality.name}}
                                 </label>
                             </div>
                         </div>

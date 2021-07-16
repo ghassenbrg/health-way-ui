@@ -36,7 +36,15 @@ export class DoctorService {
   }
 
   getDoctorfeedbacks(doctorId: string) {
-    return this.http.get<Feedback[]>(`${basePath}/feedBack?doctor.id=${doctorId}`);
+    return this.http.get<Feedback[]>(`${basePath}/feedback?doctor.id=${doctorId}`);
+  }
+
+  addFeedback(feedback: Feedback) {
+    return this.http.post<Feedback>(`${basePath}/feedback`, feedback);
+  }
+
+  getDoctorsBySpeciality(specialityName: string[]) {
+    return this.http.get<Doctor[]>(`${basePath}/doctors?specialities.name=${specialityName}`);
   }
 
 }
