@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import { Doctor } from '@models/doctor.model';
@@ -45,7 +45,22 @@ export class DoctorService {
     return this.http.post<Feedback>(`${basePath}/feedback`, feedback);
   }
 
-  getDoctorsBySpeciality(specialityName: string[]) {
-    return this.http.get<Doctor[]>(`${basePath}/doctors?specialities.name=${specialityName}`);
+  getDoctorsByFilters(specialityNames?: string[], gender?: string, firstName?: string, lastName?: string) {
+    let params: HttpParams = new HttpParams();
+    if (specialityNames && specialityNames.length > 0) {
+      specialityNames.forEach(speciality => {
+        params = params.set('specialties.name[]',speciality)
+      })
+    }
+    if (gender) {
+      params = params.set('gender',gender)
+    }
+    if (firstName) {
+      params = params.set('firstName',firstName)
+    }
+    if (lastName) {
+      params = params.set('lastName',lastName)
+    }
+    return this.http.get<Doctor[]>(`${basePath}/doctors`, {params});
   }
 }

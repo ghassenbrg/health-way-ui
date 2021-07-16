@@ -41,18 +41,20 @@
                         </div>
                         <div class="card-body">
                         <div class="filter-widget">
+                            <h4>First Name</h4>
+                            <input type="text" [(ngModel)]="searchByFirstName" name="searchByFirstName" class="form-control floating">
+                            <h4 style="margin-top: 20px;">Last Name</h4>
+                            <input type="text" [(ngModel)]="searchByLastName" name="searchByLastName" class="form-control floating">
+                        </div>
+                        <div class="filter-widget">
                             <h4>Gender</h4>
-                            <div>
-                                <label class="custom_check">
-                                    <input type="checkbox" [(ngModel)]="maleCriteria" name="male" value="'male'">
-                                    <span class="checkmark"></span> Male Doctor
-                                </label>
+                            <div class="p-field-radiobutton">
+                                <p-radioButton name="aaa" value="Male" [(ngModel)]="selectedGender"></p-radioButton>
+                                <span class="checkmark"></span> Male
                             </div>
-                            <div>
-                                <label class="custom_check">
-                                    <input type="checkbox" [(ngModel)]="femaleCriteria" name="female" value="'female'">
-                                    <span class="checkmark"></span> Female Doctor
-                                </label>
+                            <div class="p-field-radiobutton">
+                                <p-radioButton name="aaa" value="Female" [(ngModel)]="selectedGender"></p-radioButton>
+                                <span class="checkmark"></span> Female
                             </div>
                         </div>
                         <div class="filter-widget" *ngIf="specialities && specialities.length > 0">

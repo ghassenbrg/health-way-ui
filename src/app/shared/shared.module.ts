@@ -12,7 +12,7 @@ import { LoaderComponent } from './loader/loader.component';
 import {CarouselModule} from 'primeng/carousel';
 import {CalendarModule} from 'primeng/calendar';
 import {AutoCompleteModule} from 'primeng/autocomplete';
-
+import {RadioButtonModule} from 'primeng/radiobutton';
 @NgModule({
   declarations: [
     IfAuthorizedDirective,
@@ -30,7 +30,8 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
     DropdownModule,
     CarouselModule,
     CalendarModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    RadioButtonModule
   ],
   exports: [
     CommonModule,
@@ -45,7 +46,8 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
     DropdownModule,
     LoaderComponent,
     CarouselModule,
-    CalendarModule
+    CalendarModule,
+    RadioButtonModule
   ]
 })
 export class SharedModule { }

@@ -26,12 +26,15 @@ export class SearchComponent implements OnInit {
     { name: 'Latest', code: 'LDN' },
     { name: 'Free', code: 'IST' },
   ];
+  genders: any = [{name: 'Male', isSelected: false},{name: 'Female', isSelected: false}]
   maleCriteria: boolean;
   femaleCriteria: boolean;
   cities: City[];
   insurances: Insurance[];
   specialities: Speciality[];
   selectedSpecialities: Speciality[];
+  searchByFirstName: string;
+  searchByLastName: string;
 
   constructor(
     private _commonService: CommonService,
@@ -68,38 +71,22 @@ export class SearchComponent implements OnInit {
     });
     return raitingSum / feedBacks.length;
   }
-
-
+  selectedGender: any
   filterDoctors() {
-    // let selectedSpecialities: string[] = [];
-    // this.specialities.forEach(speciality => {
-    //   if (speciality.isSelected) {
-    //     selectedSpecialities.push(speciality.name);
-    //   }
-    // })
-    // this._doctorService.getDoctorsBySpeciality(selectedSpecialities).subscribe(res => {
-    //   this.doctors = res;
-    // }, err => {
-
-    // })
-    this.doctors = [];
-    if (this.maleCriteria && !this.femaleCriteria) {
-      this.allDoctors.forEach(doctor => {
-        if (doctor.gender.toLowerCase() == 'male') {
-          this.doctors.push(doctor)
-        }
-      });
-    }
-    else if (this.femaleCriteria && !this.maleCriteria) {
-      this.allDoctors.forEach(doctor => {
-        if (doctor.gender.toLowerCase() == 'female') {
-          this.doctors.push(doctor)
-        }
-      });
-    }
-    else {
-      this.doctors = this.allDoctors;
-    }
+    let selectedSpecialities: string[] = [];
+    this.specialities.forEach(speciality => {
+      if (speciality.isSelected) {
+        selectedSpecialities.push(speciality.name);
+      }
+    })
+    this._doctorService.getDoctorsByFilters(selectedSpecialities,this.selectedGender,this.searchByFirstName,this.searchByLastName).subscribe(res => {
+      this.doctors = res;
+      this.initializeRating();
+      this.prepareCities();
+      this.prepareInsurances();
+      this.prepareSpecialities();
+    }, err => {
+    })
   }
 
   loadMore() {
@@ -115,50 +102,76 @@ export class SearchComponent implements OnInit {
   }
 
   prepareCities() {
-    this._commonService.getCities().subscribe(res => {
-      this.cities = res;
-      this.doctors.forEach(doctor => {
-        if (doctor.city) {
-          doctor.city = this.getCityId(doctor.city);
-          doctor.cityName = this.cities.find(city => city.id == +doctor.city).name;
-        }
+    if (!this.cities) {
+      this._commonService.getCities().subscribe(res => {
+        this.cities = res;
+        this.initializeCityName();
+      }, err => {
       })
-    }, err => {
+    }
+    else {
+      this.initializeCityName();
+    }
+  }
+
+  initializeCityName() {
+    this.doctors.forEach(doctor => {
+      if (doctor.city) {
+        doctor.city = this.getCityId(doctor.city);
+        doctor.cityName = this.cities.find(city => city.id == +doctor.city).name;
+      }
     })
   }
 
   prepareSpecialities() {
-    this._commonService.getSpecialities().subscribe(res => {
-      this.specialities = res;
-      for (let i = 0; i < this.doctors.length; i++) {
-        if (this.doctors[i].specialties && this.doctors[i].specialties.length > 0) {
-          this.doctors[i].specialtyNames = [];
-          this.doctors[i].specialties.forEach(speciality => {
-            speciality = this.getSpecialityId(speciality);
-            this.doctors[i].specialtyNames.push(this.specialities.find(specialityDef => specialityDef.id == +speciality).name);
-          })
-        }
-      }
-    }, err => {
+    if (!this.specialities) {
+      this._commonService.getSpecialities().subscribe(res => {
+        this.specialities = res;
+        this.initializeSpeciality();
+      }, err => {
 
-    })
+      })
+    }
+    else {
+      this.initializeSpeciality();
+    }
+  }
+
+  initializeSpeciality() {
+    for (let i = 0; i < this.doctors.length; i++) {
+      if (this.doctors[i].specialties && this.doctors[i].specialties.length > 0) {
+        this.doctors[i].specialtyNames = [];
+        this.doctors[i].specialties.forEach(speciality => {
+          speciality = this.getSpecialityId(speciality);
+          this.doctors[i].specialtyNames.push(this.specialities.find(specialityDef => specialityDef.id == +speciality).name);
+        })
+      }
+    }
   }
 
   prepareInsurances() {
-    this._commonService.getInsurances().subscribe(res => {
-      this.insurances = res;
-      for (let i = 0; i < this.doctors.length; i++) {
-        if (this.doctors[i].insurances && this.doctors[i].insurances.length > 0) {
-          this.doctors[i].insuranceNames = [];
-          this.doctors[i].insurances.forEach(insurance => {
-            insurance = this.getInsuranceId(insurance);
-            this.doctors[i].insuranceNames.push(this.insurances.find(insuranceDef => insuranceDef.id == +insurance).name);
-          })
-        }
-      }
-    }, err => {
+    if (!this.insurances) {
+      this._commonService.getInsurances().subscribe(res => {
+        this.insurances = res;
+        this.initializeInsurance();
+      }, err => {
+      })
+    }
+    else {
+      this.initializeInsurance();
+    }
+  }
 
-    })
+  initializeInsurance() {
+    for (let i = 0; i < this.doctors.length; i++) {
+      if (this.doctors[i].insurances && this.doctors[i].insurances.length > 0) {
+        this.doctors[i].insuranceNames = [];
+        this.doctors[i].insurances.forEach(insurance => {
+          insurance = this.getInsuranceId(insurance);
+          this.doctors[i].insuranceNames.push(this.insurances.find(insuranceDef => insuranceDef.id == +insurance).name);
+        })
+      }
+    }
   }
 
   getCityId(cityId) {
