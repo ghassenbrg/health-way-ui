@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Patient } from '@models/patient.model';
 
 @Component({
   selector: 'app-profile-settings',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileSettingsComponent implements OnInit {
 
+  @Input() currentUser: Patient;
+  birthDate: Date;
+
   constructor() { }
 
   ngOnInit(): void {
+    this.birthDate = new Date(this.currentUser.birthDate)
   }
 
 }
