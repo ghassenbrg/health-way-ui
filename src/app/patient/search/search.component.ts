@@ -85,14 +85,14 @@ export class SearchComponent implements OnInit {
     this.doctors = [];
     if (this.maleCriteria && !this.femaleCriteria) {
       this.allDoctors.forEach(doctor => {
-        if (doctor.gender == 'male') {
+        if (doctor.gender.toLowerCase() == 'male') {
           this.doctors.push(doctor)
         }
       });
     }
     else if (this.femaleCriteria && !this.maleCriteria) {
       this.allDoctors.forEach(doctor => {
-        if (doctor.gender == 'female') {
+        if (doctor.gender.toLowerCase() == 'female') {
           this.doctors.push(doctor)
         }
       });

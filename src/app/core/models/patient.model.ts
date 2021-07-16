@@ -1,7 +1,7 @@
 import { User } from "./user.model";
 
 export class Patient extends User {
-    id: number;
+    id: number ;
     feedbacks: [
         string
     ];

@@ -67,34 +67,7 @@ export class AuthenticationService {
           );
           this.currentTokenSubject.next(res.token);
           this.decodedTokenSubject.next(jwt_decode(res.token));
-          /* ----------------- get current user ------------------ */
-          let decodedToken: any = res.token ? jwt_decode(res.token) : null;
-          let currentRoles =
-            decodedToken && decodedToken.roles ? decodedToken.roles : [];
-          let isDoctor: boolean = currentRoles.indexOf(roles.ROLE_DOCTOR) > -1;
-          let isPatient: boolean =
-            currentRoles.indexOf(roles.ROLE_PATIENT) > -1;
-          let mail: string =
-            decodedToken && decodedToken.username ? decodedToken.username : '';
-          if (mail) {
-            if (isDoctor) {
-              this._doctorService.getDoctorByMail(mail).subscribe((users) => {
-                localStorage.setItem(CURRENT_USER, JSON.stringify(users[0]));
-                this.currentUserSubject.next(users[0]);
-              });
-            } else if (isPatient) {
-              this._patientService.getPatientByMail(mail).subscribe((users) => {
-                localStorage.setItem(CURRENT_USER, JSON.stringify(users[0]));
-                this.currentUserSubject.next(users[0]);
-              });
-            } else {
-              this._userService.getUserByMail(mail).subscribe((users) => {
-                localStorage.setItem(CURRENT_USER, JSON.stringify(users[0]));
-                this.currentUserSubject.next(users[0]);
-              });
-            }
-          }
-          /* ----------------------------------------------------- */
+          this.refreshCurrentUser(res.token);
           return res.token;
         })
       );
@@ -111,39 +84,46 @@ export class AuthenticationService {
     this.router.navigate(['/login']);
   }
 
-  getDecodedAccessToken(token: string): any {
-    try {
-      return jwt_decode(token);
-    } catch (Error) {
-      return null;
+  refreshCurrentUser(token?: any) {
+    let mail: string;
+    let isDoctor: boolean;
+    let isPatient: boolean;
+    let currentRoles: string[];
+    if (token) {
+      let decodedToken: any = token ? jwt_decode(token) : null;
+      currentRoles =
+        decodedToken && decodedToken.roles ? decodedToken.roles : [];
+      mail = decodedToken && decodedToken.username ? decodedToken.username : '';
+    } else if (this.currentUser) {
+      currentRoles = this.currentUser.roles ? this.currentUser.roles : [];
+      mail = this.currentUser.email;
+    }
+    if (mail) {
+      isDoctor = currentRoles.indexOf(roles.ROLE_DOCTOR) > -1;
+      isPatient = currentRoles.indexOf(roles.ROLE_PATIENT) > -1;
+      if (isDoctor) {
+        this._doctorService.getDoctorsByMail(mail).subscribe((users) => {
+          localStorage.setItem(CURRENT_USER, JSON.stringify(users[0]));
+          this.currentUserSubject.next(users[0]);
+        });
+      } else if (isPatient) {
+        this._patientService.getPatientsByMail(mail).subscribe((users) => {
+          localStorage.setItem(CURRENT_USER, JSON.stringify(users[0]));
+          this.currentUserSubject.next(users[0]);
+        });
+      } else {
+        this._userService.getUsersByMail(mail).subscribe((users) => {
+          localStorage.setItem(CURRENT_USER, JSON.stringify(users[0]));
+          this.currentUserSubject.next(users[0]);
+        });
+      }
     }
   }
 
-  getRoles(): string[] {
-    let token = localStorage.getItem(ACCESS_TOKEN);
-    let decodedToken = this.getDecodedAccessToken(token);
-    return decodedToken && decodedToken.roles ? decodedToken.roles : [];
-  }
-
-  isDocotor(): boolean {
-    let token = localStorage.getItem(ACCESS_TOKEN);
-    let decodedToken = this.getDecodedAccessToken(token);
-    let rolesList: string[] =
-      decodedToken && decodedToken.roles ? decodedToken.roles : [];
-    return rolesList.indexOf(roles.ROLE_DOCTOR) > -1;
-  }
-
-  isPatient(): boolean {
-    let token = localStorage.getItem(ACCESS_TOKEN);
-    let decodedToken = this.getDecodedAccessToken(token);
-    let rolesList: string[] =
-      decodedToken && decodedToken.roles ? decodedToken.roles : [];
-    return rolesList.indexOf(roles.ROLE_PATIENT) > -1;
-  }
-
-  getMail(): string {
-    let token = localStorage.getItem(ACCESS_TOKEN);
-    let decodedToken = this.getDecodedAccessToken(token);
-    return decodedToken && decodedToken.username ? decodedToken.username : '';
+  getMail() {
+    if (this.currentUser) {
+      return this.currentUser.email;
+    }
+    return '';
   }
 }

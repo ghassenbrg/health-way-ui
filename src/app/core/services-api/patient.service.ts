@@ -3,30 +3,29 @@ import { Injectable } from '@angular/core';
 import { environment } from '@env/environment';
 import { Patient } from '@models/patient.model';
 import { User } from '@models/user.model';
+import { Observable } from 'rxjs';
 
 const basePath = environment.basePath;
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PatientService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   createPatient(patient: Patient | User) {
     return this.http.post<Patient>(`${basePath}/patients`, patient);
   }
 
-  getAll() {
+  getAll(): Observable<Patient[]> {
     return this.http.get<Patient[]>(`${basePath}/patients`);
   }
 
-  getPatientById(id: string) {
+  getPatientById(id: string): Observable<Patient> {
     return this.http.get<Patient>(`${basePath}/patients/${id}`);
   }
 
-  getPatientByMail(mail: string) {
-    return this.http.get<Patient>(`${basePath}/patients?email=${mail}`);
+  getPatientsByMail(mail: string): Observable<Patient[]> {
+    return this.http.get<Patient[]>(`${basePath}/patients?email=${mail}`);
   }
-
 }
