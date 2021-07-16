@@ -11,8 +11,7 @@ export class LoaderService {
   loaderState: Observable<boolean> = this.loaderSubject.asObservable();
   private queue: boolean[] = [];
 
-  constructor() {
-  }
+  constructor() {}
 
   /**
    * Displays the loader

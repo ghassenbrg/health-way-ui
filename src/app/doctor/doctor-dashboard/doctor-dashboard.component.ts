@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '@auth/_services/authentication.service';
 import { Appointment } from '@models/appointment.model';
-import { Doctor } from '@models/doctor.model';
 import { AppointmentService } from '@services-api/appointment.service';
+import { LoaderService } from '@services/loader.service';
+import { DoctorDashboardContainerComponent } from '../doctor-dashboard-container/doctor-dashboard-container.component';
 
 @Component({
   selector: 'app-doctor-dashboard',
@@ -10,29 +10,23 @@ import { AppointmentService } from '@services-api/appointment.service';
   styleUrls: ['./doctor-dashboard.component.scss'],
 })
 export class DoctorDashboardComponent implements OnInit {
-  currentUser: any = new Doctor();
+  currentUser: any;
   appointmentsList: Appointment[] = [];
   upcomingAppointmentsList: Appointment[] = [];
   todayAppointmentsList: Appointment[] = [];
   isTodaySelected: boolean;
   currentDate: Date = new Date();
   statics = { totalPatients: 0, todayPatients: 0, appoinments: 0 };
+
   constructor(
+    private _doctorDashboard: DoctorDashboardContainerComponent,
     private _appointmentService: AppointmentService,
-    private _auth: AuthenticationService
+    private _loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {
-    this.getCurrentUser();
+    this.currentUser = this._doctorDashboard.currentUser;
     this.getAppointments();
-  }
-
-  getCurrentUser() {
-    this.currentUser = this._auth.currentUser;
-    this._auth.currentUserSubject.subscribe(
-      (user) => (this.currentUser = user)
-    );
-    this._auth.refreshCurrentUser();
   }
 
   getAppointments() {
@@ -42,7 +36,6 @@ export class DoctorDashboardComponent implements OnInit {
         this.appointmentsList = appointments.filter(
           (element) => element.status != 'Canceled'
         );
-        console.log(this.appointmentsList);
         if (this.appointmentsList) {
           //upcomingAppointmentsList
           this.upcomingAppointmentsList = this.appointmentsList
@@ -86,11 +79,11 @@ export class DoctorDashboardComponent implements OnInit {
               (element, index, self) => index === self.indexOf(element)
             ).length;
           //todayPatients
-          this.statics.todayPatients = this.todayAppointmentsList.map(
-            (element) => element.patient.id
-          ).filter(
-            (element, index, self) => index === self.indexOf(element)
-          ).length;
+          this.statics.todayPatients = this.todayAppointmentsList
+            .map((element) => element.patient.id)
+            .filter(
+              (element, index, self) => index === self.indexOf(element)
+            ).length;
         }
       });
   }

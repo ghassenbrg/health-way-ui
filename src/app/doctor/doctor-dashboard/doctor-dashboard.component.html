@@ -1,313 +1,194 @@
-<!-- Main Wrapper -->
-<div class="main-wrapper">
-  <!-- Page Content -->
-  <div class="content">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
-          <!-- Profile Sidebar -->
-          <div class="profile-sidebar">
-            <div class="widget-profile pro-widget-content">
-              <div class="profile-info-widget">
-                <a class="booking-doc-img">
-                  <img class="rounded-circle"
-                    src="https://ui-avatars.com/api/?name={{currentUser.firstName + '+' + currentUser.lastName}}&length=2&bold=true&rounded=true&background={{currentUser.gender.toLowerCase() == 'female' ? 'F3B8DA' : 'b8d8f3'}}"
-                    width="31" alt="{{currentUser.firstName + '+' + currentUser.lastName}}">
-                </a>
-                <div class="profile-det-info">
-                  <h3>Dr. {{currentUser ? currentUser.firstName + ' ' + currentUser.lastName : '--'}}</h3>
-
-                  <div class="patient-details">
-                    <h5 class="mb-0">{{currentUser.jobTitle}}</h5>
-                  </div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card dash-card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12 col-lg-4">
+            <div class="dash-widget dct-border-rht">
+              <div class="circle-bar circle-bar1">
+                <div class="circle-graph1" data-percent="75">
+                  <img src="/assets/img/doctors/doctor-dashboard/001-hospitalisation.png" class="img-fluid" height="50"
+                    width="70" alt="patient">
                 </div>
               </div>
-            </div>
-            <div class="dashboard-widget">
-              <nav class="dashboard-menu">
-                <ul>
-                  <li class="active">
-                    <a routerLink="doctor-dashboard">
-                      <i class="fas fa-columns"></i>
-                      <span>Dashboard</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a routerLink="appointments">
-                      <i class="fas fa-calendar-check"></i>
-                      <span>Appointments</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a routerLink="my-patients">
-                      <i class="fas fa-user-injured"></i>
-                      <span>My Patients</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a routerLink="schedule-timings">
-                      <i class="fas fa-hourglass-start"></i>
-                      <span>Schedule Timings</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a routerLink="invoices">
-                      <i class="fas fa-file-invoice"></i>
-                      <span>Invoices</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a routerLink="reviews">
-                      <i class="fas fa-star"></i>
-                      <span>Reviews</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a routerLink="chat-doctor">
-                      <i class="fas fa-comments"></i>
-                      <span>Message</span>
-                      <small class="unread-msg">23</small>
-                    </a>
-                  </li>
-                  <li>
-                    <a routerLink="doctor-profile-settings">
-                      <i class="fas fa-user-cog"></i>
-                      <span>Profile Settings</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a routerLink="social-media">
-                      <i class="fas fa-share-alt"></i>
-                      <span>Social Media</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a routerLink="doctor-change-password">
-                      <i class="fas fa-lock"></i>
-                      <span>Change Password</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a routerLink="doctor-register">
-                      <i class="fas fa-sign-out-alt"></i>
-                      <span>Logout</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </div>
-          <!-- /Profile Sidebar -->
-        </div>
-        <div class="col-md-7 col-lg-8 col-xl-9">
-
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card dash-card">
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-md-12 col-lg-4">
-                      <div class="dash-widget dct-border-rht">
-                        <div class="circle-bar circle-bar1">
-                          <div class="circle-graph1" data-percent="75">
-                            <img src="/assets/img/doctors/doctor-dashboard/001-hospitalisation.png" class="img-fluid"
-                              height="50" width="70" alt="patient">
-                          </div>
-                        </div>
-                        <div class="dash-widget-info">
-                          <h6>Total Patients</h6>
-                          <h3>{{statics.totalPatients}}</h3>
-                          <p class="text-muted">Till Today</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-12 col-lg-4">
-                      <div class="dash-widget dct-border-rht">
-                        <div class="circle-bar circle-bar2">
-                          <div class="circle-graph2" data-percent="65">
-                            <img src="/assets/img/doctors/doctor-dashboard/004-people.png" class="img-fluid" height="50"
-                              width="70" alt="patient">
-                          </div>
-                        </div>
-                        <div class="dash-widget-info">
-                          <h6>Today Patients</h6>
-                          <h3>{{statics.todayPatients}}</h3>
-                          <p class="text-muted">{{ currentDate | date: 'MMM d, y' }}</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="col-md-12 col-lg-4">
-                      <div class="dash-widget">
-                        <div class="circle-bar circle-bar3">
-                          <div class="circle-graph3" data-percent="50">
-                            <img src="/assets/img/doctors/doctor-dashboard/003-appointment.png" class="img-fluid"
-                              height="50" width="70" alt="patient">
-                          </div>
-                        </div>
-                        <div class="dash-widget-info">
-                          <h6>Appoinments</h6>
-                          <h3>{{statics.appoinments}}</h3>
-                          <p class="text-muted">{{ currentDate | date: 'MMM d, y' }}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <div class="dash-widget-info">
+                <h6>Total Patients</h6>
+                <h3>{{statics.totalPatients}}</h3>
+                <p class="text-muted">Till Today</p>
               </div>
             </div>
           </div>
 
-          <div class="row">
-            <div class="col-md-12">
-              <h4>Patient Appoinment</h4>
-              <span
-                style="font-size: 0.9em;">{{isTodaySelected ? todayAppointmentsList.length : upcomingAppointmentsList.length}}
-                element(s)</span>
-              <div class="appointment-tab">
-
-                <!-- Appointment Tab -->
-                <ul class="nav nav-tabs nav-tabs-solid nav-tabs-rounded">
-                  <li class="nav-item">
-                    <a class="nav-link" [ngClass]="{'active': !isTodaySelected}"
-                      (click)="isTodaySelected = false;">Upcoming</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" [ngClass]="{'active': isTodaySelected}"
-                      (click)="isTodaySelected = true;">Today</a>
-                  </li>
-                </ul>
-                <!-- /Appointment Tab -->
-
-                <div class="tab-content">
-                  <!-- Upcoming Appointment Tab -->
-                  <div *ngIf="!isTodaySelected" class="tab-pane show active" id="upcoming-appointments">
-                    <div class="card card-table mb-0">
-                      <div class="card-body">
-                        <div class="table-responsive">
-                          <table class="table table-hover table-center mb-0">
-                            <thead>
-                              <tr>
-                                <th>Patient Name</th>
-                                <th>Appt Date</th>
-                                <th>Purpose</th>
-                                <th>Type</th>
-                                <th class="text-center">Paid Amount</th>
-                                <th></th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr *ngFor="let appointment of upcomingAppointmentsList">
-                                <td>
-                                  <h2 class="table-avatar">
-                                    <a routerLink="patient-profile" class="avatar avatar-sm mr-2"><img
-                                        class="avatar-img rounded-circle" src="/assets/img/patients/patient_male.png"
-                                        alt="User Image"></a>
-                                    <a routerLink="patient-profile">
-                                      <span>{{appointment.patient.firstName + ' ' + appointment.patient.lastName}}</span>
-                                      <span>#ID{{appointment.patient.id}}</span>
-                                    </a>
-                                  </h2>
-                                </td>
-                                <td>{{ appointment.date | date: 'MMM d, y' }} <span
-                                    class="d-block text-info">{{appointment.startTime}}</span></td>
-                                <td>General</td>
-                                <td>New Patient</td>
-                                <td class="text-center">$150</td>
-                                <td class="text-right">
-                                  <div class="table-action">
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-info-light">
-                                      <i class="far fa-eye"></i> View
-                                    </a>
-
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
-                                      <i class="fas fa-check"></i> Accept
-                                    </a>
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
-                                      <i class="fas fa-times"></i> Cancel
-                                    </a>
-                                  </div>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- /Upcoming Appointment Tab -->
-                  <!-- Today Appointment Tab -->
-                  <div *ngIf="isTodaySelected" class="tab-pane show active" id="upcoming-appointments">
-                    <div class="card card-table mb-0">
-                      <div class="card-body">
-                        <div class="table-responsive">
-                          <table class="table table-hover table-center mb-0">
-                            <thead>
-                              <tr>
-                                <th>Patient Name</th>
-                                <th>Appt Date</th>
-                                <th>Purpose</th>
-                                <th>Type</th>
-                                <th class="text-center">Paid Amount</th>
-                                <th></th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr *ngFor="let appointment of todayAppointmentsList">
-                                <td>
-                                  <h2 class="table-avatar">
-                                    <a routerLink="patient-profile" class="avatar avatar-sm mr-2"><img
-                                        class="avatar-img rounded-circle" src="/assets/img/patients/patient_male.png"
-                                        alt="User Image"></a>
-                                    <a routerLink="patient-profile">
-                                      <span>{{appointment.patient.firstName + ' ' + appointment.patient.lastName}}</span>
-                                      <span>#ID{{appointment.patient.id}}</span>
-                                    </a>
-                                  </h2>
-                                </td>
-                                <td>{{ appointment.date | date: 'MMM d, y' }} <span
-                                    class="d-block text-info">{{appointment.startTime}}</span></td>
-                                <td>General</td>
-                                <td>New Patient</td>
-                                <td class="text-center">$150</td>
-                                <td class="text-right">
-                                  <div class="table-action">
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-info-light">
-                                      <i class="far fa-eye"></i> View
-                                    </a>
-
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
-                                      <i class="fas fa-check"></i> Accept
-                                    </a>
-                                    <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
-                                      <i class="fas fa-times"></i> Cancel
-                                    </a>
-                                  </div>
-                                </td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <!-- /Today Appointment Tab -->
+          <div class="col-md-12 col-lg-4">
+            <div class="dash-widget dct-border-rht">
+              <div class="circle-bar circle-bar2">
+                <div class="circle-graph2" data-percent="65">
+                  <img src="/assets/img/doctors/doctor-dashboard/004-people.png" class="img-fluid" height="50"
+                    width="70" alt="patient">
                 </div>
+              </div>
+              <div class="dash-widget-info">
+                <h6>Today Patients</h6>
+                <h3>{{statics.todayPatients}}</h3>
+                <p class="text-muted">{{ currentDate | date: 'MMM d, y' }}</p>
               </div>
             </div>
           </div>
 
+          <div class="col-md-12 col-lg-4">
+            <div class="dash-widget">
+              <div class="circle-bar circle-bar3">
+                <div class="circle-graph3" data-percent="50">
+                  <img src="/assets/img/doctors/doctor-dashboard/003-appointment.png" class="img-fluid" height="50"
+                    width="70" alt="patient">
+                </div>
+              </div>
+              <div class="dash-widget-info">
+                <h6>Appoinments</h6>
+                <h3>{{statics.appoinments}}</h3>
+                <p class="text-muted">{{ currentDate | date: 'MMM d, y' }}</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
     </div>
-
   </div>
-  <!-- /Page Content -->
-
-
-
 </div>
 
-<!-- <router-outlet></router-outlet> -->
+<div class="row">
+  <div class="col-md-12">
+    <h4>Patient Appoinment</h4>
+    <span style="font-size: 0.9em;">{{isTodaySelected ? todayAppointmentsList.length : upcomingAppointmentsList.length}}
+      element(s)</span>
+    <div class="appointment-tab">
+
+      <!-- Appointment Tab -->
+      <ul class="nav nav-tabs nav-tabs-solid nav-tabs-rounded">
+        <li class="nav-item">
+          <a class="nav-link" [ngClass]="{'active': !isTodaySelected}" (click)="isTodaySelected = false;">Upcoming</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [ngClass]="{'active': isTodaySelected}" (click)="isTodaySelected = true;">Today</a>
+        </li>
+      </ul>
+      <!-- /Appointment Tab -->
+
+      <div class="tab-content">
+        <!-- Upcoming Appointment Tab -->
+        <div *ngIf="!isTodaySelected" class="tab-pane show active" id="upcoming-appointments">
+          <div class="card card-table mb-0">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-hover table-center mb-0">
+                  <thead>
+                    <tr>
+                      <th>Patient Name</th>
+                      <th>Appt Date</th>
+                      <th>Purpose</th>
+                      <th>Type</th>
+                      <th class="text-center">Paid Amount</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let appointment of upcomingAppointmentsList">
+                      <td>
+                        <h2 class="table-avatar">
+                          <a routerLink="patient-profile" class="avatar avatar-sm mr-2"><img
+                              class="avatar-img rounded-circle"
+                              src="/assets/img/patients/patient_{{appointment.patient.gender.toLowerCase()}}.png"
+                              alt="User Image"></a>
+                          <a routerLink="patient-profile">
+                            <span>{{appointment.patient.firstName + ' ' + appointment.patient.lastName}}</span>
+                            <span>#ID{{appointment.patient.id}}</span>
+                          </a>
+                        </h2>
+                      </td>
+                      <td>{{ appointment.date | date: 'MMM d, y' }} <span
+                          class="d-block text-info">{{appointment.startTime}}</span></td>
+                      <td>General</td>
+                      <td>New Patient</td>
+                      <td class="text-center">80 TND</td>
+                      <td class="text-right">
+                        <div class="table-action">
+                          <a routerLink="javascript:void(0);" class="btn btn-sm bg-info-light">
+                            <i class="far fa-eye"></i> View
+                          </a>
+
+                          <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
+                            <i class="fas fa-check"></i> Accept
+                          </a>
+                          <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
+                            <i class="fas fa-times"></i> Cancel
+                          </a>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /Upcoming Appointment Tab -->
+        <!-- Today Appointment Tab -->
+        <div *ngIf="isTodaySelected" class="tab-pane show active" id="upcoming-appointments">
+          <div class="card card-table mb-0">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-hover table-center mb-0">
+                  <thead>
+                    <tr>
+                      <th>Patient Name</th>
+                      <th>Appt Date</th>
+                      <th>Purpose</th>
+                      <th>Type</th>
+                      <th class="text-center">Paid Amount</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let appointment of todayAppointmentsList">
+                      <td>
+                        <h2 class="table-avatar">
+                          <a routerLink="patient-profile" class="avatar avatar-sm mr-2"><img
+                              class="avatar-img rounded-circle" src="/assets/img/patients/patient_male.png"
+                              alt="User Image"></a>
+                          <a routerLink="patient-profile">
+                            <span>{{appointment.patient.firstName + ' ' + appointment.patient.lastName}}</span>
+                            <span>#ID{{appointment.patient.id}}</span>
+                          </a>
+                        </h2>
+                      </td>
+                      <td>{{ appointment.date | date: 'MMM d, y' }} <span
+                          class="d-block text-info">{{appointment.startTime}}</span></td>
+                      <td>General</td>
+                      <td>New Patient</td>
+                      <td class="text-center">$150</td>
+                      <td class="text-right">
+                        <div class="table-action">
+                          <a routerLink="javascript:void(0);" class="btn btn-sm bg-info-light">
+                            <i class="far fa-eye"></i> View
+                          </a>
+
+                          <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
+                            <i class="fas fa-check"></i> Accept
+                          </a>
+                          <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
+                            <i class="fas fa-times"></i> Cancel
+                          </a>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /Today Appointment Tab -->
+      </div>
+    </div>
+  </div>
+</div>

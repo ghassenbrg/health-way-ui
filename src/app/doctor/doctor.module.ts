@@ -16,6 +16,7 @@ import { PatientProfileComponent } from './patient-profile/patient-profile.compo
 import { ReviewsComponent } from './reviews/reviews.component';
 import { ScheduleTimingsComponent } from './schedule-timings/schedule-timings.component';
 import { SocialMediaComponent } from './social-media/social-media.component';
+import { DoctorDashboardContainerComponent } from './doctor-dashboard-container/doctor-dashboard-container.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { SocialMediaComponent } from './social-media/social-media.component';
     DoctorBlogComponent,
     DoctorAddBlogComponent,
     SocialMediaComponent,
-    DoctorChangePasswordComponent
+    DoctorChangePasswordComponent,
+    DoctorDashboardContainerComponent
   ],
   imports: [
     BrowserModule,

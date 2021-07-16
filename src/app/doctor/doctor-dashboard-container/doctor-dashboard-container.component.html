@@ -1,0 +1,68 @@
+<!-- Main Wrapper -->
+<div class="main-wrapper">
+  <!-- Breadcrumb -->
+  <div class="breadcrumb-bar">
+    <div class="container-fluid">
+      <div class="row align-items-center">
+        <div class="col-md-12 col-12">
+          <nav aria-label="breadcrumb" class="page-breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a routerLink="">Home</a></li>
+              <li class="breadcrumb-item"><a routerLink="./">Doctor Workspace</a></li>
+              <li class="breadcrumb-item active" aria-current="page">{{currentItem.label}}</li>
+            </ol>
+          </nav>
+          <h2 class="breadcrumb-title">{{currentItem.label}}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Breadcrumb -->
+  <!-- Page Content -->
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-5 col-lg-4 col-xl-3 theiaStickySidebar">
+          <!-- Profile Sidebar -->
+          <div class="profile-sidebar">
+            <div class="widget-profile pro-widget-content">
+              <div class="profile-info-widget">
+                <a class="booking-doc-img">
+                  <img class="rounded-circle"
+                    src="https://ui-avatars.com/api/?name={{currentUser.firstName + '+' + currentUser.lastName}}&length=2&bold=true&rounded=true&background={{currentUser.gender.toLowerCase() == 'female' ? 'F3B8DA' : 'b8d8f3'}}"
+                    width="31" alt="{{currentUser.firstName + '+' + currentUser.lastName}}">
+                </a>
+                <div class="profile-det-info">
+                  <h3>Dr. {{currentUser ? currentUser.firstName + ' ' + currentUser.lastName : '--'}}</h3>
+
+                  <div class="patient-details">
+                    <h5 class="mb-0">{{currentUser.jobTitle}}</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="dashboard-widget">
+              <nav class="dashboard-menu">
+                <ul>
+                  <li *ngFor="let item of doctorDashboardItems" [ngClass]="{'active': item.isActive}">
+                    <a routerLink="{{item.subPath}}">
+                      <i class="{{item.icon}}"></i>
+                      <span>{{item.label}}</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+          <!-- /Profile Sidebar -->
+        </div>
+        <div class="col-md-7 col-lg-8 col-xl-9">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <!-- /Page Content -->
+</div>

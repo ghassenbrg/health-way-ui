@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { AuthenticationService } from '@auth/_services/authentication.service';
 import { NavbarComponent } from '@core/components/navbar/navbar.component';
 import { Doctor } from '@core/models/doctor.model';
@@ -26,7 +26,8 @@ export class MainComponent implements OnInit {
 
   constructor(
     private _loader: LoaderService,
-    private _auth: AuthenticationService
+    private _auth: AuthenticationService,
+    private cdRef: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -34,6 +35,10 @@ export class MainComponent implements OnInit {
     this._auth.currentUserSubject
       .asObservable()
       .subscribe((user) => (this.currentUser = user));
+  }
+
+  ngAfterViewChecked() {
+    this.cdRef.detectChanges();
   }
 
   componentAdded(event) {
