@@ -3,12 +3,15 @@ import { User } from "./user.model";
 export class Doctor extends User {
     id: number;
     specialties: string[];
+    specialtyNames?: string[];
     insurances: string[];
+    insuranceNames?: string[];
     languages: string[];
     paymentMethods: string[];
     description: string;
     phoneNumbers: string[];
     city: string;
+    cityName?: string;
     citylat?: number;
     citylng?: number;
     address: string;

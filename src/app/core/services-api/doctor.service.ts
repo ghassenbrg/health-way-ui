@@ -1,3 +1,4 @@
+import { Feedback } from './../models/feedback.model';
 import { TimeSheet } from './../models/timeSheet.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -32,6 +33,10 @@ export class DoctorService {
 
   getDoctorTimeSheet(doctorId: string) {
     return this.http.get<TimeSheet[]>(`${basePath}/time_sheets?doctor.id=${doctorId}`);
+  }
+
+  getDoctorfeedbacks(doctorId: string) {
+    return this.http.get<Feedback[]>(`${basePath}/feedBack?doctor.id=${doctorId}`);
   }
 
 }

@@ -26,7 +26,7 @@
           <ul class="available-info">
               <li>
                   <i class="fas fa-map-marker-alt"></i> 
-                  <span *ngIf="doctor.city"> {{doctor.city}}</span>
+                  <span *ngIf="doctor.city"> {{doctor.cityName}}</span>
                   <span *ngIf="!doctor.city"> Address not mentioned</span>
               </li>
               <li>
@@ -34,12 +34,12 @@
               </li>
               <li>
                 <i class="fas fa-hand-holding-usd"></i>
-                <span *ngIf="doctor.insurances && doctor.insurances.length > 0">
-                  <span *ngFor="let insurance of doctor.insurances; let j = index">
-                      {{insurance.name}}<span *ngIf="j < doctor.insurances.length - 1">,</span> 
+                <span *ngIf="doctor.insuranceNames && doctor.insuranceNames.length > 0">
+                  <span *ngFor="let insurance of doctor.insuranceNames; let j = index">
+                      {{insurance.name}}<span *ngIf="j < doctor.insuranceNames.length - 1">,</span> 
                   </span> 
                 </span> 
-                <span *ngIf="!doctor.insurances || (doctor.insurances && doctor.insurances.length == 0)">
+                <span *ngIf="!doctor.insuranceNames || (doctor.insuranceNames && doctor.insuranceNames.length == 0)">
                     No insurances defined
                 </span> 
               </li>

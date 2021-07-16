@@ -1,3 +1,4 @@
+import { Insurance } from './../models/insurance.model';
 import { environment } from '@env/environment';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -20,6 +21,10 @@ export class CommonService {
 
   getSpecialities() {
     return this._http.get<Speciality[]>(`${basePath}/specialties`);
+  }
+
+  getInsurances() {
+    return this._http.get<Insurance[]>(`${basePath}/insurances`);
   }
 
   createAppointment(appointment: AppointmentInput) {
