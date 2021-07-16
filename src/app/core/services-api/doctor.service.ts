@@ -31,14 +31,16 @@ export class DoctorService {
     return this.http.get<Doctor[]>(`${basePath}/doctors?email=${mail}`);
   }
 
-  getDoctorTimeSheet(doctorId: string) {
+  getDoctorTimeSheet(doctorId: string): Observable<TimeSheet[]> {
     return this.http.get<TimeSheet[]>(
       `${basePath}/time_sheets?doctor.id=${doctorId}`
     );
   }
 
-  getDoctorfeedbacks(doctorId: string) {
-    return this.http.get<Feedback[]>(`${basePath}/feedback?doctor.id=${doctorId}`);
+  getDoctorfeedbacks(doctorId: string): Observable<Feedback[]> {
+    return this.http.get<Feedback[]>(
+      `${basePath}/feedback?doctor.id=${doctorId}`
+    );
   }
 
   addFeedback(feedback: Feedback) {

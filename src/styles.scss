@@ -17,7 +17,6 @@ a {
 //toast-error
 
 .toast-error {
-
   .p-toast-message-icon,
   .p-toast-summary {
     color: #ff0040 !important;
@@ -31,7 +30,6 @@ a {
 //toast-success
 
 .toast-success {
-
   .p-toast-message-icon,
   .p-toast-summary {
     color: #2bd480 !important;
@@ -45,7 +43,6 @@ a {
 //toast-info
 
 .toast-info {
-
   .p-toast-message-icon,
   .p-toast-summary {
     color: #48b6ff !important;
@@ -59,21 +56,19 @@ a {
 //toast-warn
 
 .toast-warn {
-
   .p-toast-message-icon,
   .p-toast-summary {
-    color: #FF9404 !important;
+    color: #ff9404 !important;
   }
 }
 
 .p-toast-message-warn {
-  border-color: #FF9404 !important;
+  border-color: #ff9404 !important;
 }
 
 //********************************
 .p-dropdown {
   height: 44px !important;
-
 }
 
 .form-group {
@@ -81,8 +76,6 @@ a {
     height: 50px !important;
     width: 100%;
     align-items: center;
-
-
   }
 
   .p-dropdown .p-dropdown-label.p-placeholder {
@@ -96,13 +89,11 @@ a {
     height: 46px;
     width: 100%;
   }
-
 }
 
 .btn-social {
   color: rgb(170, 166, 166) !important;
 }
-
 
 .p-carousel .p-carousel-content .p-carousel-prev:enabled:hover,
 .p-carousel .p-carousel-content .p-carousel-next:enabled:hover {
@@ -117,13 +108,39 @@ a {
 }
 
 .invalid-input {
-  input, p-dropdown > div {
+  input,
+  p-dropdown > div {
     border: 1px solid #ff0040;
   }
 }
 
 .valid-input {
-  input, p-dropdown > div {
+  input,
+  p-dropdown > div {
     border: 1px solid #2bd480;
   }
 }
+
+.no-data {
+  text-align: center;
+  align-self: center;
+  font-size: 25px;
+  font-weight: 400;
+}
+
+
+/* buttons */
+.green-btn .p-button	{
+  background-color: #09e5ab !important;
+  border: 1px solid #09e5ab !important;
+  color: #15558d !important;
+}
+
+.semi-bold-btn .p-button	{
+  font-weight: 600 !important;
+}
+
+.bold-btn .p-button	{
+  font-weight: bold !important;
+}
+

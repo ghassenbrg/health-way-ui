@@ -95,10 +95,11 @@
                     <tr *ngFor="let appointment of upcomingAppointmentsList">
                       <td>
                         <h2 class="table-avatar">
-                          <a routerLink="patient-profile" class="avatar avatar-sm mr-2"><img
-                              class="avatar-img rounded-circle"
+                          <a routerLink="patient-profile" class="avatar avatar-sm mr-2">
+                            <img class="avatar-img rounded-circle"
                               src="/assets/img/patients/patient_{{appointment.patient.gender.toLowerCase()}}.png"
-                              alt="User Image"></a>
+                              alt="User Image">
+                          </a>
                           <a routerLink="patient-profile">
                             <span>{{appointment.patient.firstName + ' ' + appointment.patient.lastName}}</span>
                             <span>#ID{{appointment.patient.id}}</span>
@@ -127,6 +128,14 @@
                     </tr>
                   </tbody>
                 </table>
+                <div class="no-data" *ngIf="!upcomingAppointmentsList || upcomingAppointmentsList.length == 0">
+                  <br>
+                  <div><img class="avatar-img" width="60" height="60"
+                    src="/assets/img/doctors/doctor-dashboard/checklist.png"
+                    alt="User Image"></div>
+                  <div>No remaining appointments</div>
+                  <br>
+                </div>
               </div>
             </div>
           </div>
@@ -183,6 +192,14 @@
                     </tr>
                   </tbody>
                 </table>
+                <div class="no-data" *ngIf="!todayAppointmentsList || todayAppointmentsList.length == 0">
+                  <br>
+                  <div><img class="avatar-img" width="60" height="60"
+                    src="/assets/img/doctors/doctor-dashboard/checklist.png"
+                    alt="User Image"></div>
+                  <div>No appointments remaining for today</div>
+                  <br>
+                </div>
               </div>
             </div>
           </div>
