@@ -67,7 +67,7 @@ export class DoctorService {
     let params: HttpParams = new HttpParams();
     if (specialityNames && specialityNames.length > 0) {
       specialityNames.forEach(speciality => {
-        params = params.set('specialties.name[]',speciality)
+        params = params.append('specialties.name[]',speciality)
       })
     }
     if (gender) {

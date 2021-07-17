@@ -29,6 +29,7 @@ export class SearchComponent implements OnInit {
   selectedSpecialities: Speciality[];
   searchByFirstName: string;
   searchByLastName: string;
+  selectedGender: any;
 
   constructor(
     private _commonService: CommonService,
@@ -43,7 +44,6 @@ export class SearchComponent implements OnInit {
     this._doctorService.getAll().subscribe(res => {
       this.doctors = res;
       this.allDoctors = Object.assign([], this.doctors)
-      this.initializeRating();
       this.prepareCities();
       this.prepareInsurances();
       this.prepareSpecialities();
@@ -52,20 +52,6 @@ export class SearchComponent implements OnInit {
     })
   }
 
-  initializeRating() {
-    this.doctors.forEach((doctor) => {
-      doctor.ratingAverage = this.calculateRateAverage(doctor.feedbacks);
-    });
-  }
-
-  calculateRateAverage(feedBacks: any) {
-    let raitingSum = 0;
-    feedBacks.forEach((feedBack) => {
-      raitingSum += feedBack.rating;
-    });
-    return raitingSum / feedBacks.length;
-  }
-  selectedGender: any
   filterDoctors() {
     let selectedSpecialities: string[] = [];
     this.specialities.forEach(speciality => {
@@ -75,7 +61,6 @@ export class SearchComponent implements OnInit {
     })
     this._doctorService.getDoctorsByFilters(selectedSpecialities,this.selectedGender,this.searchByFirstName,this.searchByLastName).subscribe(res => {
       this.doctors = res;
-      this.initializeRating();
       this.prepareCities();
       this.prepareInsurances();
       this.prepareSpecialities();

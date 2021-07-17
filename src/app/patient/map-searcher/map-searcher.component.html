@@ -47,13 +47,12 @@
                         <agm-map [latitude]="lat" [longitude]="lng">
                             <agm-marker 
                                 *ngFor="let doctor of doctors; let i = index"
-                                (markerClick)="clickedMarker(doctor.city, i)"
                                 [latitude]="doctor.citylat"
                                 [longitude]="doctor.citylng"
                                 [label]="doctor.cityName">
         
                                 <agm-info-window>
-                                    <div class="doc-info-cont">
+                                    <div class="doc-info-cont" (click)="viewDoctorProfile(doctor.id)">
                                         <a>Dr. {{doctor.firstName}} {{doctor.lastName}}</a>
                                         <i class="fas fa-check-circle verified"  style="color: green; margin-left: 5px;"></i>
                                         <p class="speciality">{{doctor.jobTitle}}</p>

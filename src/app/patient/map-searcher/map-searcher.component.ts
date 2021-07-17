@@ -8,6 +8,7 @@ import { Doctor } from '@models/doctor.model';
 import * as cities from '../../_files/cities.json';10.088530
 import { LoaderService } from '@services/loader.service';
 import { City } from '@models/city.model';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-map-searcher',
   templateUrl: './map-searcher.component.html',
@@ -27,7 +28,8 @@ export class MapSearcherComponent implements OnInit {
 
   constructor(
     private _commonService: CommonService,
-    private _doctorService: DoctorService) {}
+    private _doctorService: DoctorService,
+    private router: Router) {}
 
   ngOnInit(): void {
     this.getAllDoctors();
@@ -39,7 +41,6 @@ export class MapSearcherComponent implements OnInit {
       this.prepareCities();
       this.prepareInsurances();
       this.prepareSpecialities();
-      this.initializeRating();
     }, err => {
 
     })
@@ -114,26 +115,12 @@ export class MapSearcherComponent implements OnInit {
     });
   }
 
-  initializeRating() {
-    this.doctors.forEach((doctor) => {
-      doctor.ratingAverage = this.calculateRateAverage(doctor.feedbacks);
-    });
-  }
-
-  calculateRateAverage(feedBacks: any) {
-    let raitingSum = 0;
-    feedBacks.forEach((feedBack) => {
-      raitingSum += feedBack.rating;
-    });
-    return raitingSum / feedBacks.length;
-  }
-
-  clickedMarker(label: string, index: number) {
-    //to do
-  }
-
   loadMore() {
     this.pageSize = this.pageSize + 2;
+  }
+
+  viewDoctorProfile(id: number) {
+    this.router.navigate(['/doctor-profile', { identifier: id }]);
   }
 
   getCityId(cityId) {

@@ -10,6 +10,7 @@ import { AuthenticationService } from '@auth/_services/authentication.service';
 import { CommonService } from '@services/common.service';
 import { ToastService } from '@services/toast.service';
 import { DoctorService } from '@services-api/doctor.service';
+import { City } from '@models/city.model';
 
 @Component({
   selector: 'app-booking',
@@ -27,7 +28,9 @@ export class BookingComponent implements OnInit {
   doctorData: Doctor;
   patientIdentifier: string;
   appointementInput: AppointmentInput;
-
+  cities: City[];
+  ratingAverage: number;
+  
   constructor(
     private route: ActivatedRoute,
     private _patientService: PatientService,
@@ -51,6 +54,7 @@ export class BookingComponent implements OnInit {
   getDoctorData() {
     this._doctorService.getDoctorById(this.doctorIdentifier).subscribe(res => {
       this.doctorData = res;
+      this.prepareCities();
     }, err => {
       
     });
@@ -161,6 +165,35 @@ export class BookingComponent implements OnInit {
 
   viewDoctorProfile(id: number) {
     this.router.navigate(['/doctor-profile', { identifier: id }]);
+  }
+
+  prepareCities() {
+    this._commonService.getCities().subscribe(res => {
+      this.cities = res;
+      if (this.doctorData.city) {
+        this.doctorData.city = this.getCityId(this.doctorData.city);
+        this.doctorData.cityName = this.cities.find(city => city.id == +this.doctorData.city).name;
+      }
+    }, err => {
+    })
+  }
+
+  calculateRateAverage(feedbacks) {
+    let raitingSum = 0;
+    feedbacks.forEach((feedBack) => {
+      raitingSum += feedBack.rating;
+    });
+    this.ratingAverage = raitingSum / feedbacks.length;
+    return this.ratingAverage;
+  }
+
+  getCityId(cityId) {
+    if (cityId.includes('/api/cities/')) {
+      return cityId.replace('/api/cities/', '');
+    }
+    else {
+      return cityId;
+    }
   }
 
 }
