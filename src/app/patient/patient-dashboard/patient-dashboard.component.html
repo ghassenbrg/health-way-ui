@@ -59,19 +59,6 @@
                                             <span>Favourites</span>
                                         </a>
                                     </li> 
-                                    <li>
-                                        <a>
-                                            <i class="fas fa-users"></i>
-                                            <span>Dependent</span>
-                                        </a>
-                                    </li> 
-                                    <li>
-                                        <a >
-                                            <i class="fas fa-comments"></i>
-                                            <span>Message</span>
-                                            <small class="unread-msg">23</small>
-                                        </a>
-                                    </li>
                                     <li [ngClass]="{'active': profileSettingsDisplayed}">
                                         <a (click)="displayProfileSettings()">
                                             <i class="fas fa-user-cog"></i>
@@ -82,12 +69,6 @@
                                         <a (click)="displayChangePassword()">
                                             <i class="fas fa-lock"></i>
                                             <span>Change Password</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a>
-                                            <i class="fas fa-sign-out-alt"></i>
-                                            <span>Logout</span>
                                         </a>
                                     </li>
                                 </ul>

@@ -1,6 +1,8 @@
-import { Speciality } from './../../models/specialty.model';
+import { DoctorService } from '@services-api/doctor.service';
+import { Speciality } from '@models/specialty.model';
 import { Component, OnInit } from '@angular/core';
-import { SPECIALITIES_MOCK } from '@app/common/mocks/speciality.mock';
+import { CommonService } from '@services/common.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +11,7 @@ import { SPECIALITIES_MOCK } from '@app/common/mocks/speciality.mock';
 })
 export class HomeComponent implements OnInit {
   doctors: any = [1, 2, 3, 4];
-  specialities: Speciality[] = SPECIALITIES_MOCK;
+  specialities: Speciality[];
   responsiveOptions: any = [
     {
       breakpoint: '1024px',
@@ -28,7 +30,39 @@ export class HomeComponent implements OnInit {
     },
   ];
 
-  constructor() {}
+  constructor(
+    private _commonService: CommonService,
+    private _doctorService: DoctorService,
+    private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getSpecialities();
+    this.getDoctors();
+  }
+
+  getSpecialities() {
+    if (!this.specialities) {
+      this._commonService.getSpecialities().subscribe(res => {
+        this.specialities = res;
+        console.log(this.specialities)
+      }, err => {
+
+      })
+    }
+    else {
+    }
+  }
+
+  getDoctors() {
+    this._doctorService.getAll().subscribe(res => {
+      this.doctors = res;
+    }, err => {
+
+    })
+  }
+
+  viewDoctorProfile(id: number) {
+    this.router.navigate(['/doctor-profile', { identifier: id }]);
+  }
+
 }

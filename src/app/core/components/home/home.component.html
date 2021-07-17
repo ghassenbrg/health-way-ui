@@ -36,35 +36,24 @@
                     <h2>What are you looking for?</h2>
                 </div>
                 <div class="row">
-                    <div class="col-lg-4 mb-3">
+                    <div class="col-lg-6 mb-3">
                         <div class="card text-center doctor-book-card">
                             <img src="assets/img/doctors/doctor-07.jpg" alt="" class="img-fluid">
                             <div class="doctor-book-card-content tile-card-content-1">
                                 <div>
-                                    <h3 class="card-title mb-0">Visit a Doctor</h3>
+                                    <h3 class="card-title mb-0" [routerLink]="'/search'">Visit a Doctor</h3>
                                     <a routerLink="search" class="btn book-btn1 px-3 py-2 mt-3" tabindex="0">Book Now</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 mb-3">
+                    <div class="col-lg-6 mb-3">
                         <div class="card text-center doctor-book-card">
                             <img src="assets/img/img-pharmacy1.jpg" alt="" class="img-fluid">
                             <div class="doctor-book-card-content tile-card-content-1">
                                 <div>
-                                    <h3 class="card-title mb-0">Find a Pharmacy</h3>
+                                    <h3 class="card-title mb-0" [routerLink]="'/pharmacy-search'">Find a Pharmacy</h3>
                                     <a routerLink="pharmacy-search" class="btn book-btn1 px-3 py-2 mt-3" tabindex="0">Find Now</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 mb-3">
-                        <div class="card text-center doctor-book-card">
-                            <img src="assets/img/lab-image.jpg" alt="" class="img-fluid">
-                            <div class="doctor-book-card-content tile-card-content-1">
-                                <div>
-                                <h3 class="card-title mb-0">Find a Lab</h3>
-                                    <a routerLink="javascript:void(0);" class="btn book-btn1 px-3 py-2 mt-3" tabindex="0">Coming Soon</a>
                                 </div>
                             </div>
                         </div>
@@ -88,7 +77,7 @@
                     <ng-template let-speciality pTemplate="item">
                         <div class="speicality-item text-center" style="display: inline-block;">
                             <div class="speicality-img">
-                                <img src="{{speciality.logo}}" class="img-fluid" alt="Speciality">
+                                <img src="assets/img/specialities/specialities-{{speciality.id}}.png" class="img-fluid" alt="Speciality">
                                 <span><i class="fa fa-circle" aria-hidden="true"></i></span>
                             </div>
                             <p>{{speciality.name}}</p>
@@ -116,13 +105,13 @@
                     <a routerLink="javascript:;">Read More..</a>
                 </div>
             </div>
-            <div class="col-lg-8">
+            <div class="col-lg-8" *ngIf="doctors && doctors.length > 0">
                 <p-carousel [value]="doctors" [numVisible]="3" [numScroll]="3" [circular]="false" [responsiveOptions]="responsiveOptions">
                     <ng-template let-doctor pTemplate="item">
                         <div class="profile-widget">
                             <div class="doc-img">
-                                <a routerLink="doctor-profile">
-                                    <img class="img-fluid" alt="User Image" src="assets/img/doctors/doctor-01.jpg">
+                                <a (click)="viewDoctorProfile(doctor.id)">
+                                    <img src="assets/img/doctors/doctor_{{doctor.gender.toLowerCase()}}.jpg" class="img-fluid" alt="User Image">
                                 </a>
                                 <a routerLink="javascript:void(0)" class="fav-btn">
                                     <i class="far fa-bookmark"></i>
@@ -130,28 +119,34 @@
                             </div>
                             <div class="pro-content">
                                 <h3 class="title">
-                                    <a routerLink="doctor-profile">Ruby Perrin</a> 
+                                    <a (click)="viewDoctorProfile(doctor.id)">Dr. {{doctor.firstName}} {{doctor.lastName}}</a> 
                                     <i class="fas fa-check-circle verified"></i>
                                 </h3>
-                                <p class="speciality">MDS - Periodontology and Oral Implantology, BDS</p>
+                                <p class="speciality">{{doctor.jobTitle}}</p>
                                 <div class="rating">
                                     <i class="fas fa-star filled"></i>
                                     <i class="fas fa-star filled"></i>
                                     <i class="fas fa-star filled"></i>
                                     <i class="fas fa-star filled"></i>
                                     <i class="fas fa-star filled"></i>
-                                    <span class="d-inline-block average-rating">(17)</span>
+                                    <span class="d-inline-block average-rating">({{doctor.feedbacks.length}})</span>
                                 </div>
                                 <ul class="available-info">
                                     <li>
-                                        <i class="fas fa-map-marker-alt"></i> Florida, USA
+                                        <i class="fas fa-map-marker-alt"></i> 
+                                        <span *ngIf="doctor.cityName"> {{doctor.cityName}}</span>
+                                        <span *ngIf="!doctor.cityName"> Address not mentioned</span>
                                     </li>
                                     <li>
-                                        <i class="far fa-clock"></i> Available on Fri, 22 Mar
-                                    </li>
-                                    <li>
-                                        <i class="far fa-money-bill-alt"></i> $300 - $1000 
-                                        <i class="fas fa-info-circle" data-toggle="tooltip" title="Lorem Ipsum"></i>
+                                        <i class="fas fa-hand-holding-usd"></i>
+                                        <span *ngIf="doctor.insuranceNames && doctor.insuranceNames.length > 0">
+                                            <span *ngFor="let insurance of doctor.insuranceNames; let j = index">
+                                                {{insurance.name}}<span *ngIf="j < doctor.insuranceNames.length - 1">,</span>
+                                            </span>
+                                        </span>
+                                        <span *ngIf="!doctor.insuranceNames || (doctor.insuranceNames && doctor.insuranceNames.length == 0)">
+                                            No insurances defined
+                                        </span>
                                     </li>
                                 </ul>
                                 <div class="row row-sm">

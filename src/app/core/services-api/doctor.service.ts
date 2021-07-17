@@ -31,8 +31,8 @@ export class DoctorService {
     return this.http.put<TimeSheet>(`${basePath}/time_sheets/${id}`, timesheet);
   }
 
-  getAll(): Observable<Doctor[]> {
-    return this.http.get<Doctor[]>(`${basePath}/doctors`);
+  getAll(page?: string): Observable<Doctor[]> {
+    return this.http.get<Doctor[]>(`${basePath}/doctors?page=${page}`);
   }
 
   getDoctorById(id: string): Observable<Doctor> {
