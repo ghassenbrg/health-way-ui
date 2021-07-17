@@ -29,4 +29,13 @@
       </div>
     </div>
   </div>
+  <div class="col-md-6 col-lg-4 col-xl-3" *ngIf="!patientsList || patientsList.length == 0">
+    <div class="no-data">
+      <br>
+      <div><img class="avatar-img" width="60" height="60" src="/assets/img/doctors/doctor-dashboard/cloud.png"
+          alt="User Image"></div>
+      <div>No patients yet</div>
+      <br>
+    </div>
+  </div>
 </div>

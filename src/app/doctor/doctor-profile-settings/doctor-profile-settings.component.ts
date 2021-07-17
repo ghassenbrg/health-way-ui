@@ -31,6 +31,26 @@ export class DoctorProfileSettingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this._doctorDashboard.currentUser;
+    this.initUser();
+    this.yearRange = this.getYearRange();
+    this._commonService.getCities().subscribe((cities) => {
+      this.cities = cities.sort((city1, city2) =>
+        city1.name < city2.name ? -1 : 1
+      );
+    });
+    this._commonService.getSpecialities().subscribe((specialities) => {
+      this.specialities = specialities.sort((speciality1, speciality2) =>
+        speciality1.name < speciality2.name ? -1 : 1
+      );
+    });
+    this._commonService.getInsurances().subscribe((insurances) => {
+      this.insurances = insurances.sort((insurance1, insurance2) =>
+        insurance1.name < insurance2.name ? -1 : 1
+      );
+    });
+  }
+
+  initUser() {
     let cityPath: string = this.currentUser.city;
     if (cityPath) {
       let splittedPath: string[] = cityPath.split('/');
@@ -67,25 +87,6 @@ export class DoctorProfileSettingsComponent implements OnInit {
         }
       }
     }
-    console.log(this.currentUser.city);
-    console.log(this.currentUser.specialties);
-    console.log(this.currentUser.insurances);
-    this.yearRange = this.getYearRange();
-    this._commonService.getCities().subscribe((cities) => {
-      this.cities = cities.sort((city1, city2) =>
-        city1.name < city2.name ? -1 : 1
-      );
-    });
-    this._commonService.getSpecialities().subscribe((specialities) => {
-      this.specialities = specialities.sort((speciality1, speciality2) =>
-        speciality1.name < speciality2.name ? -1 : 1
-      );
-    });
-    this._commonService.getInsurances().subscribe((insurances) => {
-      this.insurances = insurances.sort((insurance1, insurance2) =>
-        insurance1.name < insurance2.name ? -1 : 1
-      );
-    });
   }
 
   getYearRange(): string {
@@ -104,6 +105,7 @@ export class DoctorProfileSettingsComponent implements OnInit {
         );
         this.currentUser = user;
         this._doctorDashboard.currentUser = user;
+        this.initUser();
       });
   }
 }
