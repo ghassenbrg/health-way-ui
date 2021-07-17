@@ -16,7 +16,7 @@ import * as moment from 'moment';
 export class RegisterComponent implements OnInit {
   doctorRegisterScreen: boolean;
   userInput: User = new User();
-  genders: any = ['Male', 'Female'];
+  genders: any = ['male', 'female'];
   birthDate: Date;
   selectedGender: string;
   yearRange: string;

@@ -18,7 +18,8 @@ import { PatientProfileComponent } from './patient-profile/patient-profile.compo
 import { ReviewsComponent } from './reviews/reviews.component';
 import { ScheduleTimingsComponent } from './schedule-timings/schedule-timings.component';
 import { SocialMediaComponent } from './social-media/social-media.component';
-import {DialogModule} from 'primeng/dialog';
+import { DialogModule } from 'primeng/dialog';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,13 @@ import {DialogModule} from 'primeng/dialog';
     DoctorChangePasswordComponent,
     DoctorDashboardContainerComponent,
   ],
-  imports: [BrowserModule, SharedModule, CoreModule, TooltipModule, DialogModule],
+  imports: [
+    BrowserModule,
+    SharedModule,
+    CoreModule,
+    TooltipModule,
+    DialogModule,
+    MultiSelectModule,
+  ],
 })
 export class DoctorModule {}
