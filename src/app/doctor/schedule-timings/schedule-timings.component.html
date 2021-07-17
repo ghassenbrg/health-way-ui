@@ -59,7 +59,7 @@
                         </p-calendar>
                       </div>
                       <div class="col">
-                        <i class="fas fa-save save-btn" pTooltip="Save {{selectedDay}} TimeSheet" tooltipPosition="bottom"></i>
+                        <i class="fas fa-save save-btn" (click)="saveSelected()" pTooltip="Save {{selectedDay}} TimeSheet" tooltipPosition="bottom"></i>
                       </div>
                     </div>
                   </div>
@@ -71,7 +71,7 @@
               <!-- /Schedule Content -->
               <br>
               <div class="d-flex flex-row-reverse">
-                <p-button class="green-btn semi-bold-btn" label="Save All" icon="pi pi-check" iconPos="right">
+                <p-button (click)="saveAll()"  class="green-btn semi-bold-btn" label="Save All" icon="pi pi-check" iconPos="right">
                 </p-button>
               </div>
             </div>
