@@ -12,8 +12,12 @@ import { MainComponent } from './main/main.component';
 import { PatientModule } from './patient/patient.module';
 import { PharmacyModule } from './pharmacy/pharmacy.module';
 import { SharedModule } from './shared/shared.module';
+import {DialogModule} from 'primeng/dialog';
+import { BloodBankComponent } from './blood-bank/blood-bank.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+
 @NgModule({
-  declarations: [AppComponent, MainComponent],
+  declarations: [AppComponent, MainComponent, BloodBankComponent],
   imports: [
     SharedModule,
     CoreModule,
@@ -21,7 +25,7 @@ import { SharedModule } from './shared/shared.module';
     ToastModule,
     PatientModule,
     PharmacyModule,
-    DoctorModule,
+    DoctorModule,DialogModule,NgxChartsModule
   ],
   providers: [
     MessageService,
