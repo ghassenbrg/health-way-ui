@@ -1,27 +1,66 @@
-<form>
+<!-- <form>
   <div class="row">
-  <div class="col 12">
-  <span class="p-float-label">
-    <input id="float-input" type="text" pInputText>
-    <label for="float-input">CIN</label>
-</span>
+    <div class="col 12">
+      <span class="p-float-label">
+        <input id="float-input" type="text" pInputText />
+        <label for="float-input" [(ngModel)]="cin">CIN</label>
+      </span>
 
-<span class="p-float-label">
-  <input id="float-input" type="text" pInputText>
-  <label for="float-input">First Name</label>
-</span>
-<span class="p-float-label">
-  <input id="float-input" type="text" pInputText>
-  <label for="float-input">Last Name</label>
-</span>
-<span class="p-float-label">
-  <input id="float-input" type="text" pInputText>
-  <label for="float-input">Day</label>
-</span>
-<span class="p-float-label">
-  <input id="float-input" type="text" pInputText>
-  <label for="float-input">Time</label>
-</span>
-</div>
-</div>
+      <span class="p-float-label">
+        <input id="float-input" type="text" pInputText />
+        <label for="float-input" [(ngModel)]="fname">First Name</label>
+      </span>
+      <span class="p-float-label">
+        <input id="float-input" type="text" pInputText />
+        <label for="float-input" [(ngModel)]="lname">Last Name</label>
+      </span>
+      <span class="p-float-label">
+        <p-inputMask mask="(999) 999-9999? x99999" [(ngModel)]="date"></p-inputMask>
+        <label for="float-input">Day</label>
+      </span>
+      <span class="p-float-label">
+        <input id="float-input" type="text" pInputText />
+        <label for="float-input"  [(ngModel)]="time">Time</label>
+      </span>
+    </div>
+  </div>
 </form>
+ -->
+ <div class="card" >
+  <div class="card-body">
+      <div class="doctor-widget">
+          <div class="doc-info-left">
+
+              <div class="doc-info-cont">
+                <span class="p-float-label">
+                  <input id="float-input" [(ngModel)]="cin" type="text" pInputText />
+                  <label for="float-input" >CIN</label>
+                </span><br>
+
+                  <div class="clinic-details">
+                      <div class="clini-infos pt-3">
+
+                        <span class="p-float-label">
+                          <input id="float-input" [(ngModel)]="fname" type="text" pInputText />
+                          <label for="float-input" >First Name</label>
+                        </span><br>
+                        <span class="p-float-label">
+                          <input id="float-input" [(ngModel)]="lname" type="text" pInputText />
+                          <label for="float-input" >Last Name</label>
+                        </span><br>
+                        <span class="p-float-label">
+                          <input id="float-input" [(ngModel)]="date" type="date" pInputDate />
+
+
+                          <input id="float-input" [(ngModel)]="time" type="time" pInputText />
+
+                        </span><br><br><br>
+
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          </div>
+      </div>
+  </div>
