@@ -42,6 +42,7 @@ export class PatientDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this._auth.currentUser;
+    console.log(this.currentUser)
     let timeDiff = Math.abs(Date.now() - new Date(this.currentUser.birthDate).getTime());
     this.currentUserAge = Math.floor((timeDiff / (1000 * 3600 * 24))/365.25);
   }

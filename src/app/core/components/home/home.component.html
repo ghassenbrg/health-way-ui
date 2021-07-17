@@ -131,10 +131,9 @@
                                             No insurances defined
                                         </span>
                                     </li>
-                                    <li>
+                                    <li  *ngIf="doctor.phoneNumber">
                                         <i class="fas fa-phone"></i> 
-                                        <span *ngIf="doctor.phoneNumbers && doctor.phoneNumbers.length > 0">{{doctor.phoneNumbers[0]}}</span>
-                                        <span *ngIf="!doctor.phoneNumbers || doctor.phoneNumbers.length == 0">No Phone Numbers available</span>
+                                        <span>{{doctor.phoneNumber}}</span>
                                     </li>
                                 </ul>
                                 <div class="row row-sm">

@@ -94,9 +94,10 @@
                                             No insurances defined
                                         </span>
                                     </li>
-                                    <li *ngIf="doctor.phoneNumbers && doctor.phoneNumbers.length > 0 ">
+                                    <li *ngIf="doctor.phoneNumber">
                                         <i class="fas fa-phone"></i>
-                                        <span> {{doctor.phoneNumbers[0]}}</span>
+                                        <span> {{doctor.phoneNumber}}</span>
+                                        <span> </span>
                                     </li>
                                 </ul>
                             </div>
