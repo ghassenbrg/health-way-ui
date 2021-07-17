@@ -1,12 +1,13 @@
 import { User } from './user.model';
 
 export class Patient extends User {
+  feedbacks: string[];
+  appointments: string[];
+  bloodGroup: string;
   id: number;
-  feedbacks: [string];
-  appointments: [string];
   email: string;
   username: string;
-  roles: [string];
+  roles: string[];
   password: string;
   salt: string;
   firstName: string;
