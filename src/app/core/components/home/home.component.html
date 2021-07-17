@@ -69,7 +69,6 @@
     <div class="container-fluid">
         <div class="section-header text-center">
             <h2>Clinic and Specialities</h2>
-            <p class="sub-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </div>
         <div class="row justify-content-center">
             <div class="col-md-9">
@@ -93,27 +92,19 @@
 <!-- Popular Section -->
 <section class="section section-doctor">
     <div class="container-fluid">
+        <div class="section-header text-center">
+            <h2>Available Doctors</h2>
+        </div>
        <div class="row">
-            <div class="col-lg-4">
-                <div class="section-header ">
-                    <h2>Book Our Doctor</h2>
-                    <p>Lorem Ipsum is simply dummy text </p>
-                </div>
-                <div class="about-content">
-                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum.</p>
-                    <p>web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes</p>					
-                    <a routerLink="javascript:;">Read More..</a>
-                </div>
-            </div>
-            <div class="col-lg-8" *ngIf="doctors && doctors.length > 0">
-                <p-carousel [value]="doctors" [numVisible]="3" [numScroll]="3" [circular]="false" [responsiveOptions]="responsiveOptions">
+            <div class="col-lg-12" *ngIf="doctors && doctors.length > 0">
+                <p-carousel [value]="doctors" [numVisible]="5" [numScroll]="5" [circular]="false" [responsiveOptions]="responsiveOptions">
                     <ng-template let-doctor pTemplate="item">
                         <div class="profile-widget">
                             <div class="doc-img">
                                 <a (click)="viewDoctorProfile(doctor.id)">
                                     <img src="assets/img/doctors/doctor_{{doctor.gender.toLowerCase()}}.jpg" class="img-fluid" alt="User Image">
                                 </a>
-                                <a routerLink="javascript:void(0)" class="fav-btn">
+                                <a class="fav-btn">
                                     <i class="far fa-bookmark"></i>
                                 </a>
                             </div>
@@ -123,14 +114,6 @@
                                     <i class="fas fa-check-circle verified"></i>
                                 </h3>
                                 <p class="speciality">{{doctor.jobTitle}}</p>
-                                <div class="rating">
-                                    <i class="fas fa-star filled"></i>
-                                    <i class="fas fa-star filled"></i>
-                                    <i class="fas fa-star filled"></i>
-                                    <i class="fas fa-star filled"></i>
-                                    <i class="fas fa-star filled"></i>
-                                    <span class="d-inline-block average-rating">({{doctor.feedbacks.length}})</span>
-                                </div>
                                 <ul class="available-info">
                                     <li>
                                         <i class="fas fa-map-marker-alt"></i> 
@@ -148,13 +131,18 @@
                                             No insurances defined
                                         </span>
                                     </li>
+                                    <li>
+                                        <i class="fas fa-phone"></i> 
+                                        <span *ngIf="doctor.phoneNumbers && doctor.phoneNumbers.length > 0">{{doctor.phoneNumbers[0]}}</span>
+                                        <span *ngIf="!doctor.phoneNumbers || doctor.phoneNumbers.length == 0">No Phone Numbers available</span>
+                                    </li>
                                 </ul>
                                 <div class="row row-sm">
                                     <div class="col-6">
-                                        <a routerLink="doctor-profile" class="btn view-btn">View Profile</a>
+                                        <a (click)="viewDoctorProfile(doctor.id)" class="btn view-btn">View Profile</a>
                                     </div>
                                     <div class="col-6">
-                                        <a routerLink="booking" class="btn book-btn">Book Now</a>
+                                        <a (click)="bookAppointment(doctor.id)" class="btn book-btn">Book Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -167,81 +155,14 @@
 </section>
 <!-- /Popular Section -->
 
-<!-- Availabe Features -->
-<section class="section section-features">
-    <div class="container-fluid">
-       <div class="row">
-            <div class="col-md-5 features-img">
-                <img src="assets/img/features/feature.png" class="img-fluid" alt="Feature">
-            </div>
-            <div class="col-md-7">
-                <div class="section-header">
-                <h2 class="mt-2">Availabe Features in Our Clinic</h2>
-                <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. </p>
-                </div>
-                <div class="features-slider slider slick-initialized slick-slider slick-dotted"><div class="slick-list draggable" style="padding: 0px 50px;"><div class="slick-track" style="opacity: 1; width: 30000px; transform: translate3d(-396px, 0px, 0px);"><div class="slick-slide slick-cloned" data-slick-index="-4" aria-hidden="true" tabindex="-1"><div><div class="feature-item text-center" style="width: 100%; display: inline-block;">
-                <img src="assets/img/features/feature-03.jpg" class="img-fluid" alt="Feature">
-                <p>ICU</p>
-                </div></div></div><div class="slick-slide slick-cloned" data-slick-index="-3" aria-hidden="true" tabindex="-1"><div><div class="feature-item text-center" style="width: 100%; display: inline-block;">
-                <img src="assets/img/features/feature-04.jpg" class="img-fluid" alt="Feature">
-                <p>Laboratory</p>
-                </div></div></div><div class="slick-slide slick-cloned" data-slick-index="-2" aria-hidden="true" tabindex="-1"><div><div class="feature-item text-center" style="width: 100%; display: inline-block;">
-                <img src="assets/img/features/feature-05.jpg" class="img-fluid" alt="Feature">
-                <p>Operation</p>
-                </div></div></div><div class="slick-slide slick-cloned slick-active" data-slick-index="-1" aria-hidden="false" tabindex="-1"><div><div class="feature-item text-center" style="width: 100%; display: inline-block;">
-                <img src="assets/img/features/feature-06.jpg" class="img-fluid" alt="Feature">
-                <p>Medical</p>
-                </div></div></div><div class="slick-slide slick-current slick-active slick-center" data-slick-index="0" aria-hidden="false" role="tabpanel" id="slick-slide20"><div><div class="feature-item text-center" style="width: 100%; display: inline-block;">
-                <img src="assets/img/features/feature-01.jpg" class="img-fluid" alt="Feature">
-                <p>Patient Ward</p>
-                </div></div></div><div class="slick-slide slick-active" data-slick-index="1" aria-hidden="false" role="tabpanel" id="slick-slide21"><div><div class="feature-item text-center" style="width: 100%; display: inline-block;">
-                <img src="assets/img/features/feature-02.jpg" class="img-fluid" alt="Feature">
-                <p>Test Room</p>
-                </div></div></div><div class="slick-slide" data-slick-index="2" aria-hidden="true" role="tabpanel" id="slick-slide22"><div><div class="feature-item text-center" style="width: 100%; display: inline-block;">
-                <img src="assets/img/features/feature-03.jpg" class="img-fluid" alt="Feature">
-                <p>ICU</p>
-                </div></div></div><div class="slick-slide" data-slick-index="3" aria-hidden="true" tabindex="-1" role="tabpanel" id="slick-slide23"><div><div class="feature-item text-center" style="width: 100%; display: inline-block;">
-                <img src="assets/img/features/feature-04.jpg" class="img-fluid" alt="Feature">
-                <p>Laboratory</p>
-                </div></div></div><div class="slick-slide" data-slick-index="4" aria-hidden="true" tabindex="-1" role="tabpanel" id="slick-slide24"><div><div class="feature-item text-center" style="width: 100%; display: inline-block;">
-                <img src="assets/img/features/feature-05.jpg" class="img-fluid" alt="Feature">
-                <p>Operation</p>
-                </div></div></div><div class="slick-slide" data-slick-index="5" aria-hidden="true" tabindex="-1" role="tabpanel" id="slick-slide25"><div><div class="feature-item text-center" style="width: 100%; display: inline-block;">
-                <img src="assets/img/features/feature-06.jpg" class="img-fluid" alt="Feature">
-                <p>Medical</p>
-                </div></div></div><div class="slick-slide slick-cloned" data-slick-index="6" aria-hidden="true" tabindex="-1"><div><div class="feature-item text-center" style="width: 100%; display: inline-block;">
-                <img src="assets/img/features/feature-01.jpg" class="img-fluid" alt="Feature">
-                <p>Patient Ward</p>
-                </div></div></div><div class="slick-slide slick-cloned" data-slick-index="7" aria-hidden="true" tabindex="-1"><div><div class="feature-item text-center" style="width: 100%; display: inline-block;">
-                <img src="assets/img/features/feature-02.jpg" class="img-fluid" alt="Feature">
-                <p>Test Room</p>
-                </div></div></div><div class="slick-slide slick-cloned slick-center" data-slick-index="8" aria-hidden="true" tabindex="-1"><div><div class="feature-item text-center" style="width: 100%; display: inline-block;">
-                <img src="assets/img/features/feature-03.jpg" class="img-fluid" alt="Feature">
-                <p>ICU</p>
-                </div></div></div><div class="slick-slide slick-cloned" data-slick-index="9" aria-hidden="true" tabindex="-1"><div><div class="feature-item text-center" style="width: 100%; display: inline-block;">
-                <img src="assets/img/features/feature-04.jpg" class="img-fluid" alt="Feature">
-                <p>Laboratory</p>
-                </div></div></div><div class="slick-slide slick-cloned" data-slick-index="10" aria-hidden="true" tabindex="-1"><div><div class="feature-item text-center" style="width: 100%; display: inline-block;">
-                <img src="assets/img/features/feature-05.jpg" class="img-fluid" alt="Feature">
-                <p>Operation</p>
-                </div></div></div><div class="slick-slide slick-cloned" data-slick-index="11" aria-hidden="true" tabindex="-1"><div><div class="feature-item text-center" style="width: 100%; display: inline-block;">
-                <img src="assets/img/features/feature-06.jpg" class="img-fluid" alt="Feature">
-                <p>Medical</p>
-                </div></div></div></div></div><ul class="slick-dots" role="tablist"><li class="slick-active" role="presentation"><button type="button" role="tab" id="slick-slide-control20" aria-controls="slick-slide20" aria-label="1 of 2" tabindex="0" aria-selected="true">1</button></li><li role="presentation"><button type="button" role="tab" id="slick-slide-control21" aria-controls="slick-slide21" aria-label="2 of 2" tabindex="-1">2</button></li><li role="presentation"><button type="button" role="tab" id="slick-slide-control22" aria-controls="slick-slide22" aria-label="3 of 2" tabindex="-1">3</button></li><li role="presentation"><button type="button" role="tab" id="slick-slide-control23" aria-controls="slick-slide23" aria-label="4 of 2" tabindex="-1">4</button></li><li role="presentation"><button type="button" role="tab" id="slick-slide-control24" aria-controls="slick-slide24" aria-label="5 of 2" tabindex="-1">5</button></li><li role="presentation"><button type="button" role="tab" id="slick-slide-control25" aria-controls="slick-slide25" aria-label="6 of 2" tabindex="-1">6</button></li></ul></div>
-                </div>
-       </div>
-    </div>
-</section>		
-<!-- /Availabe Features -->
 
 <!-- Blog Section -->
-<section class="section section-blogs">
+<section class="section section-features">
     <div class="container-fluid">
     
         <!-- Section Header -->
         <div class="section-header text-center">
             <h2>Blogs and News</h2>
-            <p class="sub-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </div>
         <!-- /Section Header -->
         

@@ -32,7 +32,11 @@ export class DoctorService {
   }
 
   getAll(page?: string): Observable<Doctor[]> {
-    return this.http.get<Doctor[]>(`${basePath}/doctors?page=${page}`);
+    let params: HttpParams = new HttpParams();
+    if (page) {
+      params = params.set('page',page)
+    }
+    return this.http.get<Doctor[]>(`${basePath}/doctors`, {params});
   }
 
   getDoctorById(id: string): Observable<Doctor> {

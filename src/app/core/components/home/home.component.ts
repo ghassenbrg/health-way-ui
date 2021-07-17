@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  doctors: any = [1, 2, 3, 4];
+  doctors: any;
   specialities: Speciality[];
   responsiveOptions: any = [
     {
@@ -56,6 +56,7 @@ export class HomeComponent implements OnInit {
   getDoctors() {
     this._doctorService.getAll().subscribe(res => {
       this.doctors = res;
+      console.log(this.doctors)
     }, err => {
 
     })
@@ -63,6 +64,10 @@ export class HomeComponent implements OnInit {
 
   viewDoctorProfile(id: number) {
     this.router.navigate(['/doctor-profile', { identifier: id }]);
+  }
+
+  bookAppointment(id: number) {
+    this.router.navigate(['/booking', { identifier: id }]);
   }
 
 }
