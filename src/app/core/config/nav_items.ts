@@ -9,7 +9,7 @@ export const DOCOTR_DASHBOARD_ITEMS: NavItemChild[] = [
     icon: 'fas fa-columns',
   },
   {
-    label: 'Appointments',
+    label: 'All appointments',
     subPath: 'appointments',
     path: 'doctor-dashboard/appointments',
     icon: 'fas fa-calendar-check',

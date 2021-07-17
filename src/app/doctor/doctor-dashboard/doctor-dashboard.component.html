@@ -95,12 +95,12 @@
                     <tr *ngFor="let appointment of upcomingAppointmentsList">
                       <td>
                         <h2 class="table-avatar">
-                          <a class="avatar avatar-sm mr-2">
+                          <a class="avatar avatar-sm mr-2" (click)="viewAppointment(appointment)">
                             <img class="avatar-img rounded-circle"
                               src="/assets/img/patients/patient_{{appointment.patient.gender.toLowerCase()}}.png"
                               alt="User Image">
                           </a>
-                          <a>
+                          <a (click)="viewAppointment(appointment)">
                             <span>{{appointment.patient.firstName + ' ' + appointment.patient.lastName}}</span>
                             <span>#ID{{appointment.patient.id}}</span>
                           </a>
@@ -119,18 +119,25 @@
                       </td>
                       <td class="text-center">80 TND</td>
                       <td class="text-right">
-                        <div class="table-action" *ngIf="appointment.status.toLowerCase() == 'pending'">
-                          <a class="btn btn-sm bg-success-light" style="margin-right: 15px;" (click)="approveAppointment(appointment)">
-                            <i class="fas fa-check"></i> Accept
+                        <div class="table-action">
+                          <a class="btn btn-sm bg-info-light" style="margin-right: 15px;"
+                            (click)="viewAppointment(appointment)">
+                            <i class="far fa-eye"></i> View
                           </a>
-                          <a class="btn btn-sm bg-danger-light" (click)="rejectAppointment(appointment)">
-                            <i class="fas fa-times"></i> Cancel
-                          </a>
-                        </div>
-                        <div class="table-action" *ngIf="appointment.status.toLowerCase() == 'approved'">
-                          <a class="btn btn-sm bg-success-light" style="margin-right: 15px; cursor: default;">
-                            <i class="far fa-smile"></i> Approved
-                          </a>
+                          <span *ngIf="appointment.status.toLowerCase() == 'pending'">
+                            <a class="btn btn-sm bg-success-light" style="margin-right: 15px;"
+                              (click)="approveAppointment(appointment)">
+                              <i class="fas fa-check"></i> Accept
+                            </a>
+                            <a class="btn btn-sm bg-danger-light" (click)="rejectAppointment(appointment)">
+                              <i class="fas fa-times"></i> Cancel
+                            </a>
+                          </span>
+                          <span *ngIf="appointment.status.toLowerCase() == 'approved'">
+                            <a class="btn btn-sm bg-success-light" style="margin-right: 15px; cursor: default;">
+                              <i class="far fa-smile"></i> Approved
+                            </a>
+                          </span>
                         </div>
                       </td>
                     </tr>
@@ -168,10 +175,12 @@
                     <tr *ngFor="let appointment of todayAppointmentsList">
                       <td>
                         <h2 class="table-avatar">
-                          <a routerLink="patient-profile" class="avatar avatar-sm mr-2"><img
-                              class="avatar-img rounded-circle" src="/assets/img/patients/patient_male.png"
-                              alt="User Image"></a>
-                          <a routerLink="patient-profile">
+                          <a class="avatar avatar-sm mr-2" (click)="viewAppointment(appointment)">
+                            <img class="avatar-img rounded-circle"
+                              src="/assets/img/patients/patient_{{appointment.patient.gender.toLowerCase()}}.png"
+                              alt="User Image">
+                          </a>
+                          <a (click)="viewAppointment(appointment)">
                             <span>{{appointment.patient.firstName + ' ' + appointment.patient.lastName}}</span>
                             <span>#ID{{appointment.patient.id}}</span>
                           </a>
@@ -180,20 +189,35 @@
                       <td>{{ appointment.date | date: 'MMM d, y' }} <span
                           class="d-block text-info">{{appointment.startTime}}</span></td>
                       <td>General</td>
-                      <td>New Patient</td>
-                      <td class="text-center">$150</td>
+                      <td>
+                        <div class="d-flex flex-row align-items-center">
+                          <img class="avatar-img" width="25" height="25" style="margin-right: 10px;"
+                            src="/assets/img/doctors/doctor-dashboard/{{oldPatients['patient_' + appointment.patient.id] ? '002-badge.png' : '003-new.png'}}"
+                            alt="User Image">
+                          <span>{{oldPatients['patient_' + appointment.patient.id] ? 'Registered Patient' : 'New Patient'}}</span>
+                        </div>
+                      </td>
+                      <td class="text-center">80 TND</td>
                       <td class="text-right">
                         <div class="table-action">
-                          <a routerLink="javascript:void(0);" class="btn btn-sm bg-info-light">
+                          <a class="btn btn-sm bg-info-light" style="margin-right: 15px;"
+                            (click)="viewAppointment(appointment)">
                             <i class="far fa-eye"></i> View
                           </a>
-
-                          <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
-                            <i class="fas fa-check"></i> Accept
-                          </a>
-                          <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
-                            <i class="fas fa-times"></i> Cancel
-                          </a>
+                          <span *ngIf="appointment.status.toLowerCase() == 'pending'">
+                            <a class="btn btn-sm bg-success-light" style="margin-right: 15px;"
+                              (click)="approveAppointment(appointment)">
+                              <i class="fas fa-check"></i> Accept
+                            </a>
+                            <a class="btn btn-sm bg-danger-light" (click)="rejectAppointment(appointment)">
+                              <i class="fas fa-times"></i> Cancel
+                            </a>
+                          </span>
+                          <span *ngIf="appointment.status.toLowerCase() == 'approved'">
+                            <a class="btn btn-sm bg-success-light" style="margin-right: 15px; cursor: default;">
+                              <i class="far fa-smile"></i> Approved
+                            </a>
+                          </span>
                         </div>
                       </td>
                     </tr>
@@ -215,3 +239,37 @@
     </div>
   </div>
 </div>
+
+
+<!-- patient popup -->
+<p-dialog header="Patient {{selectedPatient ? ': ' + selectedPatient.firstName + ' ' + selectedPatient.lastName : ''}}"
+  [(visible)]="displayPatientPopup" [modal]="true" [style]="{width: 'auto'}" [baseZIndex]="10000" [draggable]="false"
+  [resizable]="false">
+  <div *ngIf="selectedPatient">
+    <div class="appointment-list">
+      <div class="profile-info-widget">
+        <a routerLink="patient-profile" class="booking-doc-img">
+          <img src="/assets/img/patients/patient_{{selectedPatient.gender.toLowerCase()}}.png" alt="User Image">
+        </a>
+        <div class="profile-det-info">
+          <h3><a routerLink="patient-profile"
+              style="margin-right: 10px;">{{selectedPatient.firstName + ' ' + selectedPatient.lastName}}</a></h3>
+          <div class="patient-details">
+            <h5><i class="far fa-clock"
+                style="margin-right: 10px;"></i>{{ selectedAppontment.date | date: 'EEEE, MMMM d, y, h:mm:ss a'}}</h5>
+            <h5><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i>
+              {{selectedPatient.address ? selectedPatient.address : 'Not mentioned'}}</h5>
+            <h5><i class="fas fa-envelope"
+                style="margin-right: 10px;"></i>{{selectedPatient.email ? selectedPatient.email : 'Not mentioned'}}</h5>
+            <h5 class="mb-0"><i class="fas fa-phone"
+                style="margin-right: 10px;"></i>{{selectedPatient.phoneNumber ? selectedPatient.phoneNumber : 'Not mentioned'}}
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" (click)="displayPatientPopup=false" label="Ok" styleClass="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>

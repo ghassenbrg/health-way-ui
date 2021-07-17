@@ -1,365 +1,132 @@
-<div class="appointments">
+<div class="row">
+  <div class="col-md-12">
+    <h4>Patient Appoinment</h4>
+    <span style="font-size: 0.9em;">{{appointmentsList ? appointmentsList.length: '0'}}
+      element(s)</span>
+    <div class="appointment-tab">
 
-  <!-- Appointment List -->
-  <div class="appointment-list">
-    <div class="profile-info-widget">
-      <a routerLink="patient-profile" class="booking-doc-img">
-        <img src="assets/img/patients/patient.jpg" alt="User Image">
-      </a>
-      <div class="profile-det-info">
-        <h3><a routerLink="patient-profile">Richard Wilson</a></h3>
-        <div class="patient-details">
-          <h5><i class="far fa-clock"></i> 14 Nov 2019, 10.00 AM</h5>
-          <h5><i class="fas fa-map-marker-alt"></i> Newyork, United States</h5>
-          <h5><i class="fas fa-envelope"></i> richard@example.com</h5>
-          <h5 class="mb-0"><i class="fas fa-phone"></i> +1 923 782 4575</h5>
+      <div class="tab-content">
+        <!-- Appointment Tab -->
+        <div class="tab-pane show active" id="upcoming-appointments">
+          <div class="card card-table mb-0">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-hover table-center mb-0">
+                  <thead>
+                    <tr>
+                      <th>Patient Name</th>
+                      <th>Appt Date</th>
+                      <th>Purpose</th>
+                      <th>Type</th>
+                      <th class="text-center">Paid Amount</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let appointment of appointmentsList">
+                      <td>
+                        <h2 class="table-avatar">
+                          <a class="avatar avatar-sm mr-2" (click)="viewAppointment(appointment)">
+                            <img class="avatar-img rounded-circle"
+                              src="/assets/img/patients/patient_{{appointment.patient.gender.toLowerCase()}}.png"
+                              alt="User Image">
+                          </a>
+                          <a (click)="viewAppointment(appointment)">
+                            <span>{{appointment.patient.firstName + ' ' + appointment.patient.lastName}}</span>
+                            <span>#ID{{appointment.patient.id}}</span>
+                          </a>
+                        </h2>
+                      </td>
+                      <td>{{ appointment.date | date: 'MMM d, y' }} <span
+                          class="d-block text-info">{{appointment.startTime}}</span></td>
+                      <td>General</td>
+                      <td>
+                        <div class="d-flex flex-row align-items-center">
+                          <img class="avatar-img" width="25" height="25" style="margin-right: 10px;"
+                            src="/assets/img/doctors/doctor-dashboard/{{oldPatients['patient_' + appointment.patient.id] ? '002-badge.png' : '003-new.png'}}"
+                            alt="User Image">
+                          <span>{{oldPatients['patient_' + appointment.patient.id] ? 'Registered Patient' : 'New Patient'}}</span>
+                        </div>
+                      </td>
+                      <td class="text-center">80 TND</td>
+                      <td class="text-right">
+                        <div class="table-action">
+                          <a class="btn btn-sm bg-info-light" style="margin-right: 15px;"
+                            (click)="viewAppointment(appointment)">
+                            <i class="far fa-eye"></i> View
+                          </a>
+                          <span *ngIf="appointment.status.toLowerCase() == 'pending'">
+                            <a class="btn btn-sm bg-success-light" style="margin-right: 15px;"
+                              (click)="approveAppointment(appointment)">
+                              <i class="fas fa-check"></i> Accept
+                            </a>
+                            <a class="btn btn-sm bg-danger-light" (click)="rejectAppointment(appointment)">
+                              <i class="fas fa-times"></i> Cancel
+                            </a>
+                          </span>
+                          <span *ngIf="appointment.status.toLowerCase() == 'approved'">
+                            <a class="btn btn-sm bg-success-light" style="margin-right: 15px; cursor: default;">
+                              <i class="far fa-smile"></i> Approved
+                            </a>
+                          </span>
+                          <span *ngIf="appointment.status.toLowerCase() == 'canceled'">
+                            <a class="btn btn-sm bg-danger-light" style="margin-right: 15px; cursor: default;">
+                              <i class="far fa-frown"></i> Canceled
+                            </a>
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="no-data" *ngIf="!appointmentsList || appointmentsList.length == 0">
+                  <br>
+                  <div><img class="avatar-img" width="60" height="60"
+                      src="/assets/img/doctors/doctor-dashboard/checklist.png" alt="User Image"></div>
+                  <div>No remaining appointments</div>
+                  <br>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+        <!-- /Appointment Tab -->
+        <!-- /Today Appointment Tab -->
       </div>
     </div>
-    <div class="appointment-action">
-      <a class="btn btn-sm bg-info-light" data-toggle="modal" data-target="#appt_details">
-        <i class="far fa-eye"></i> View
-      </a>
-      <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
-        <i class="fas fa-check"></i> Accept
-      </a>
-      <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
-        <i class="fas fa-times"></i> Cancel
-      </a>
-    </div>
   </div>
-  <!-- /Appointment List -->
-
-  <!-- Appointment List -->
-  <div class="appointment-list">
-    <div class="profile-info-widget">
-      <a routerLink="patient-profile" class="booking-doc-img">
-        <img src="assets/img/patients/patient1.jpg" alt="User Image">
-      </a>
-      <div class="profile-det-info">
-        <h3><a routerLink="patient-profile">Charlene Reed </a></h3>
-        <div class="patient-details">
-          <h5><i class="far fa-clock"></i> 12 Nov 2019, 5.00 PM</h5>
-          <h5><i class="fas fa-map-marker-alt"></i> North Carolina, United States</h5>
-          <h5><i class="fas fa-envelope"></i> charlenereed@example.com</h5>
-          <h5 class="mb-0"><i class="fas fa-phone"></i> +1 828 632 9170</h5>
-        </div>
-      </div>
-    </div>
-    <div class="appointment-action">
-      <a class="btn btn-sm bg-info-light" data-toggle="modal" data-target="#appt_details">
-        <i class="far fa-eye"></i> View
-      </a>
-      <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
-        <i class="fas fa-check"></i> Accept
-      </a>
-      <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
-        <i class="fas fa-times"></i> Cancel
-      </a>
-    </div>
-  </div>
-  <!-- /Appointment List -->
-
-  <!-- Appointment List -->
-  <div class="appointment-list">
-    <div class="profile-info-widget">
-      <a routerLink="patient-profile" class="booking-doc-img">
-        <img src="assets/img/patients/patient2.jpg" alt="User Image">
-      </a>
-      <div class="profile-det-info">
-        <h3><a routerLink="patient-profile">Travis Trimble</a></h3>
-
-        <div class="patient-details">
-          <h5><i class="far fa-clock"></i> 11 Nov 2019, 8.00 PM</h5>
-          <h5><i class="fas fa-map-marker-alt"></i> Maine, United States</h5>
-          <h5><i class="fas fa-envelope"></i> travistrimble@example.com</h5>
-          <h5 class="mb-0"><i class="fas fa-phone"></i> +1 207 729 9974</h5>
-        </div>
-      </div>
-    </div>
-    <div class="appointment-action">
-      <a class="btn btn-sm bg-info-light" data-toggle="modal" data-target="#appt_details">
-        <i class="far fa-eye"></i> View
-      </a>
-
-      <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
-        <i class="fas fa-check"></i> Accept
-      </a>
-      <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
-        <i class="fas fa-times"></i> Cancel
-      </a>
-    </div>
-  </div>
-  <!-- /Appointment List -->
-
-  <!-- Appointment List -->
-  <div class="appointment-list">
-    <div class="profile-info-widget">
-      <a routerLink="patient-profile" class="booking-doc-img">
-        <img src="assets/img/patients/patient3.jpg" alt="User Image">
-      </a>
-      <div class="profile-det-info">
-        <h3><a routerLink="patient-profile">Carl Kelly</a></h3>
-        <div class="patient-details">
-          <h5><i class="far fa-clock"></i> 9 Nov 2019, 9.00 AM</h5>
-          <h5><i class="fas fa-map-marker-alt"></i> Newyork, United States</h5>
-          <h5><i class="fas fa-envelope"></i> carlkelly@example.com</h5>
-          <h5 class="mb-0"><i class="fas fa-phone"></i> +1 260 724 7769</h5>
-        </div>
-      </div>
-    </div>
-    <div class="appointment-action">
-      <a class="btn btn-sm bg-info-light" data-toggle="modal" data-target="#appt_details">
-        <i class="far fa-eye"></i> View
-      </a>
-      <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
-        <i class="fas fa-check"></i> Accept
-      </a>
-      <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
-        <i class="fas fa-times"></i> Cancel
-      </a>
-    </div>
-  </div>
-  <!-- /Appointment List -->
-
-  <!-- Appointment List -->
-  <div class="appointment-list">
-    <div class="profile-info-widget">
-      <a routerLink="patient-profile" class="booking-doc-img">
-        <img src="assets/img/patients/patient4.jpg" alt="User Image">
-      </a>
-      <div class="profile-det-info">
-        <h3><a routerLink="patient-profile">Michelle Fairfax</a></h3>
-        <div class="patient-details">
-          <h5><i class="far fa-clock"></i> 9 Nov 2019, 1.00 PM</h5>
-          <h5><i class="fas fa-map-marker-alt"></i> Indiana, United States</h5>
-          <h5><i class="fas fa-envelope"></i> michellefairfax@example.com</h5>
-          <h5 class="mb-0"><i class="fas fa-phone"></i> +1 504 368 6874</h5>
-        </div>
-      </div>
-    </div>
-    <div class="appointment-action">
-      <a class="btn btn-sm bg-info-light" data-toggle="modal" data-target="#appt_details">
-        <i class="far fa-eye"></i> View
-      </a>
-      <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
-        <i class="fas fa-check"></i> Accept
-      </a>
-      <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
-        <i class="fas fa-times"></i> Cancel
-      </a>
-    </div>
-  </div>
-  <!-- /Appointment List -->
-
-  <!-- Appointment List -->
-  <div class="appointment-list">
-    <div class="profile-info-widget">
-      <a routerLink="patient-profile" class="booking-doc-img">
-        <img src="assets/img/patients/patient5.jpg" alt="User Image">
-      </a>
-      <div class="profile-det-info">
-        <h3><a routerLink="patient-profile">Gina Moore</a></h3>
-        <div class="patient-details">
-          <h5><i class="far fa-clock"></i> 8 Nov 2019, 3.00 PM</h5>
-          <h5><i class="fas fa-map-marker-alt"></i> Florida, United States</h5>
-          <h5><i class="fas fa-envelope"></i> ginamoore@example.com</h5>
-          <h5 class="mb-0"><i class="fas fa-phone"></i> +1 954 820 7887</h5>
-        </div>
-      </div>
-    </div>
-    <div class="appointment-action">
-      <a class="btn btn-sm bg-info-light" data-toggle="modal" data-target="#appt_details">
-        <i class="far fa-eye"></i> View
-      </a>
-      <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
-        <i class="fas fa-check"></i> Accept
-      </a>
-      <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
-        <i class="fas fa-times"></i> Cancel
-      </a>
-    </div>
-  </div>
-  <!-- /Appointment List -->
-
-  <!-- Appointment List -->
-  <div class="appointment-list">
-    <div class="profile-info-widget">
-      <a routerLink="patient-profile" class="booking-doc-img">
-        <img src="assets/img/patients/patient6.jpg" alt="User Image">
-      </a>
-      <div class="profile-det-info">
-        <h3><a routerLink="patient-profile">Elsie Gilley</a></h3>
-        <div class="patient-details">
-          <h5><i class="far fa-clock"></i> 6 Nov 2019, 9.00 AM</h5>
-          <h5><i class="fas fa-map-marker-alt"></i> Kentucky, United States</h5>
-          <h5><i class="fas fa-envelope"></i> elsiegilley@example.com</h5>
-          <h5 class="mb-0"><i class="fas fa-phone"></i> +1 315 384 4562</h5>
-        </div>
-      </div>
-    </div>
-    <div class="appointment-action">
-      <a class="btn btn-sm bg-info-light" data-toggle="modal" data-target="#appt_details">
-        <i class="far fa-eye"></i> View
-      </a>
-      <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
-        <i class="fas fa-check"></i> Accept
-      </a>
-      <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
-        <i class="fas fa-times"></i> Cancel
-      </a>
-    </div>
-  </div>
-  <!-- /Appointment List -->
-
-  <!-- Appointment List -->
-  <div class="appointment-list">
-    <div class="profile-info-widget">
-      <a routerLink="patient-profile" class="booking-doc-img">
-        <img src="assets/img/patients/patient7.jpg" alt="User Image">
-      </a>
-      <div class="profile-det-info">
-        <h3><a routerLink="patient-profile">Joan Gardner</a></h3>
-        <div class="patient-details">
-          <h5><i class="far fa-clock"></i> 5 Nov 2019, 12.00 PM</h5>
-          <h5><i class="fas fa-map-marker-alt"></i> California, United States</h5>
-          <h5><i class="fas fa-envelope"></i> joangardner@example.com</h5>
-          <h5 class="mb-0"><i class="fas fa-phone"></i> +1 707 2202 603</h5>
-        </div>
-      </div>
-    </div>
-    <div class="appointment-action">
-      <a class="btn btn-sm bg-info-light" data-toggle="modal" data-target="#appt_details">
-        <i class="far fa-eye"></i> View
-      </a>
-      <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
-        <i class="fas fa-check"></i> Accept
-      </a>
-      <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
-        <i class="fas fa-times"></i> Cancel
-      </a>
-    </div>
-  </div>
-  <!-- /Appointment List -->
-
-  <!-- Appointment List -->
-  <div class="appointment-list">
-    <div class="profile-info-widget">
-      <a routerLink="patient-profile" class="booking-doc-img">
-        <img src="assets/img/patients/patient8.jpg" alt="User Image">
-      </a>
-      <div class="profile-det-info">
-        <h3><a routerLink="patient-profile">Daniel Griffing</a></h3>
-        <div class="patient-details">
-          <h5><i class="far fa-clock"></i> 5 Nov 2019, 7.00 PM</h5>
-          <h5><i class="fas fa-map-marker-alt"></i> New Jersey, United States</h5>
-          <h5><i class="fas fa-envelope"></i> danielgriffing@example.com</h5>
-          <h5 class="mb-0"><i class="fas fa-phone"></i> +1 973 773 9497</h5>
-        </div>
-      </div>
-    </div>
-    <div class="appointment-action">
-      <a class="btn btn-sm bg-info-light" data-toggle="modal" data-target="#appt_details">
-        <i class="far fa-eye"></i> View
-      </a>
-      <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
-        <i class="fas fa-check"></i> Accept
-      </a>
-      <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
-        <i class="fas fa-times"></i> Cancel
-      </a>
-    </div>
-  </div>
-  <!-- /Appointment List -->
-
-  <!-- Appointment List -->
-  <div class="appointment-list">
-    <div class="profile-info-widget">
-      <a routerLink="patient-profile" class="booking-doc-img">
-        <img src="assets/img/patients/patient9.jpg" alt="User Image">
-      </a>
-      <div class="profile-det-info">
-        <h3><a routerLink="patient-profile">Walter Roberson</a></h3>
-        <div class="patient-details">
-          <h5><i class="far fa-clock"></i> 4 Nov 2019, 10.00 AM</h5>
-          <h5><i class="fas fa-map-marker-alt"></i> Florida, United States</h5>
-          <h5><i class="fas fa-envelope"></i> walterroberson@example.com</h5>
-          <h5 class="mb-0"><i class="fas fa-phone"></i> +1 850 358 4445</h5>
-        </div>
-      </div>
-    </div>
-    <div class="appointment-action">
-      <a class="btn btn-sm bg-info-light" data-toggle="modal" data-target="#appt_details">
-        <i class="far fa-eye"></i> View
-      </a>
-      <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
-        <i class="fas fa-check"></i> Accept
-      </a>
-      <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
-        <i class="fas fa-times"></i> Cancel
-      </a>
-    </div>
-  </div>
-  <!-- /Appointment List -->
-
-  <!-- Appointment List -->
-  <div class="appointment-list">
-    <div class="profile-info-widget">
-      <a routerLink="patient-profile" class="booking-doc-img">
-        <img src="assets/img/patients/patient10.jpg" alt="User Image">
-      </a>
-      <div class="profile-det-info">
-        <h3><a routerLink="patient-profile">Robert Rhodes</a></h3>
-        <div class="patient-details">
-          <h5><i class="far fa-clock"></i> 4 Nov 2019, 11.00 AM</h5>
-          <h5><i class="fas fa-map-marker-alt"></i> California, United States</h5>
-          <h5><i class="fas fa-envelope"></i> robertrhodes@example.com</h5>
-          <h5 class="mb-0"><i class="fas fa-phone"></i> +1 858 259 5285</h5>
-        </div>
-      </div>
-    </div>
-    <div class="appointment-action">
-      <a class="btn btn-sm bg-info-light" data-toggle="modal" data-target="#appt_details">
-        <i class="far fa-eye"></i> View
-      </a>
-      <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
-        <i class="fas fa-check"></i> Accept
-      </a>
-      <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
-        <i class="fas fa-times"></i> Cancel
-      </a>
-    </div>
-  </div>
-  <!-- /Appointment List -->
-
-  <!-- Appointment List -->
-  <div class="appointment-list">
-    <div class="profile-info-widget">
-      <a routerLink="patient-profile" class="booking-doc-img">
-        <img src="assets/img/patients/patient11.jpg" alt="User Image">
-      </a>
-      <div class="profile-det-info">
-        <h3><a routerLink="patient-profile">Harry Williams</a></h3>
-        <div class="patient-details">
-          <h5><i class="far fa-clock"></i> 3 Nov 2019, 6.00 PM</h5>
-          <h5><i class="fas fa-map-marker-alt"></i> Colorado, United States</h5>
-          <h5><i class="fas fa-envelope"></i> harrywilliams@example.com</h5>
-          <h5 class="mb-0"><i class="fas fa-phone"></i> +1 303 607 7075</h5>
-        </div>
-      </div>
-    </div>
-    <div class="appointment-action">
-      <a class="btn btn-sm bg-info-light" data-toggle="modal" data-target="#appt_details">
-        <i class="far fa-eye"></i> View
-      </a>
-      <a routerLink="javascript:void(0);" class="btn btn-sm bg-success-light">
-        <i class="fas fa-check"></i> Accept
-      </a>
-      <a routerLink="javascript:void(0);" class="btn btn-sm bg-danger-light">
-        <i class="fas fa-times"></i> Cancel
-      </a>
-    </div>
-  </div>
-  <!-- /Appointment List -->
-
 </div>
+
+
+<!-- patient popup -->
+<p-dialog header="Patient {{selectedPatient ? ': ' + selectedPatient.firstName + ' ' + selectedPatient.lastName : ''}}"
+  [(visible)]="displayPatientPopup" [modal]="true" [style]="{width: 'auto'}" [baseZIndex]="10000" [draggable]="false"
+  [resizable]="false">
+  <div *ngIf="selectedPatient">
+    <div class="appointment-list">
+      <div class="profile-info-widget">
+        <a routerLink="patient-profile" class="booking-doc-img">
+          <img src="/assets/img/patients/patient_{{selectedPatient.gender.toLowerCase()}}.png" alt="User Image">
+        </a>
+        <div class="profile-det-info">
+          <h3><a routerLink="patient-profile"
+              style="margin-right: 10px;">{{selectedPatient.firstName + ' ' + selectedPatient.lastName}}</a></h3>
+          <div class="patient-details">
+            <h5><i class="far fa-clock"
+                style="margin-right: 10px;"></i>{{ selectedAppontment.date | date: 'EEEE, MMMM d, y, h:mm:ss a'}}</h5>
+            <h5><i class="fas fa-map-marker-alt" style="margin-right: 10px;"></i>
+              {{selectedPatient.address ? selectedPatient.address : 'Not mentioned'}}</h5>
+            <h5><i class="fas fa-envelope"
+                style="margin-right: 10px;"></i>{{selectedPatient.email ? selectedPatient.email : 'Not mentioned'}}</h5>
+            <h5 class="mb-0"><i class="fas fa-phone"
+                style="margin-right: 10px;"></i>{{selectedPatient.phoneNumber ? selectedPatient.phoneNumber : 'Not mentioned'}}
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" (click)="displayPatientPopup=false" label="Ok" styleClass="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>

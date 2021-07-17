@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Appointment } from '@models/appointment.model';
+import { Patient } from '@models/patient.model';
 import { AppointmentService } from '@services-api/appointment.service';
+import { PatientService } from '@services-api/patient.service';
 import { DoctorDashboardContainerComponent } from '../doctor-dashboard-container/doctor-dashboard-container.component';
 
 @Component({
@@ -17,8 +19,12 @@ export class DoctorDashboardComponent implements OnInit {
   currentDate: Date = new Date();
   statics = { totalPatients: 0, todayPatients: 0, appoinments: 0 };
   oldPatients = {};
+  selectedPatient: Patient;
+  selectedAppontment: Appointment;
+  displayPatientPopup: boolean;
   constructor(
     private _doctorDashboard: DoctorDashboardContainerComponent,
+    private _patientService: PatientService,
     private _appointmentService: AppointmentService
   ) {}
 
@@ -110,6 +116,20 @@ export class DoctorDashboardComponent implements OnInit {
           (element, index, self) => index === self.indexOf(element)
         ).length;
     }
+  }
+
+  viewAppointment(appointment: Appointment) {
+    this.selectedAppontment = appointment;
+    this._patientService
+      .getPatientById(appointment.patient.id)
+      .subscribe((patient) => {
+        this.selectedPatient = patient;
+        this.displayPatientPopup = true;
+      });
+  }
+
+  hidePatientPopup() {
+    this.displayPatientPopup = false;
   }
 
   approveAppointment(appointment: Appointment) {
