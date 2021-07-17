@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '@auth/_services/authentication.service';
-import { LoaderService } from '@services/loader.service';
 import { ToastService } from './../../core/services/toast.service';
 
 @Component({
@@ -16,7 +15,6 @@ export class LoginComponent implements OnInit {
   };
 
   constructor(
-    private _loader: LoaderService,
     private _auth: AuthenticationService,
     private _toastService: ToastService,
     private router: Router,

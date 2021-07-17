@@ -15,8 +15,20 @@ const basePath = environment.basePath;
 export class DoctorService {
   constructor(private http: HttpClient) {}
 
-  createDoctor(doctor: Doctor | User) {
+  createDoctor(doctor: Doctor | User): Observable<Doctor> {
     return this.http.post<Doctor>(`${basePath}/doctors`, doctor);
+  }
+
+  updateDoctor(doctor: Doctor | User, id: string): Observable<Doctor> {
+    return this.http.put<Doctor>(`${basePath}/doctors/${id}`, doctor);
+  }
+
+  createTimesheet(timesheet: TimeSheet): Observable<TimeSheet> {
+    return this.http.post<TimeSheet>(`${basePath}/time_sheets`, timesheet);
+  }
+
+  updateTimesheet(timesheet: TimeSheet, id): Observable<TimeSheet> {
+    return this.http.put<TimeSheet>(`${basePath}/time_sheets/${id}`, timesheet);
   }
 
   getAll(): Observable<Doctor[]> {
