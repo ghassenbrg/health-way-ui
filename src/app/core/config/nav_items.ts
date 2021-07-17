@@ -69,16 +69,7 @@ export const NAV_ITEMS: NavItem[] = [
   {
     label: 'Patient workspace',
     authorizedRoles: [roles.ROLE_PATIENT],
-    children: [
-      {
-        label: 'Patient Dashboard',
-        path: 'patient-dashboard',
-      },
-      {
-        label: 'Favourites',
-        path: 'favourites',
-      },
-    ],
+    path: 'patient-dashboard'
   },
   {
     label: 'Search Doctor',

@@ -28,4 +28,8 @@ export class PatientService {
   getPatientsByMail(mail: string): Observable<Patient[]> {
     return this.http.get<Patient[]>(`${basePath}/patients?email=${mail}`);
   }
+
+  updatePatient(patient: Patient | User, id: string): Observable<Patient> {
+    return this.http.put<Patient>(`${basePath}/patients/${id}`, patient);
+  }
 }

@@ -53,12 +53,6 @@
                                             <span>Dashboard</span>
                                         </a>
                                     </li>
-                                    <li [ngClass]="{'active': favouritesDisplayed}">
-                                        <a (click)="displayFavourites()">
-                                            <i class="fas fa-bookmark"></i>
-                                            <span>Favourites</span>
-                                        </a>
-                                    </li> 
                                     <li [ngClass]="{'active': profileSettingsDisplayed}">
                                         <a (click)="displayProfileSettings()">
                                             <i class="fas fa-user-cog"></i>
@@ -81,8 +75,8 @@
                 
                 <div class="col-md-7 col-lg-8 col-xl-9">
                     <app-patient-summary *ngIf="patientSummaryDisplayed"></app-patient-summary>
-                    <app-favourites *ngIf="favouritesDisplayed"></app-favourites>
-                    <app-profile-settings *ngIf="profileSettingsDisplayed" [currentUser]="currentUser"></app-profile-settings>
+                    <app-profile-settings *ngIf="profileSettingsDisplayed" [currentUser]="currentUser"
+                        (onSubmitPatient)="updatePatient($event)"></app-profile-settings>
                     <app-change-password *ngIf="changePasswordDisplayed"></app-change-password>
                 </div>
             </div>
