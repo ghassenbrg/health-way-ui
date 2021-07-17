@@ -99,11 +99,6 @@ export const NAV_ITEMS: NavItem[] = [
     ],
   },
   {
-    label: 'My Appointments',
-    authorizedRoles: [roles.ROLE_PATIENT],
-    path: 'patient-dashboard',
-  },
-  {
     label: 'Search Doctor',
     children: [
       {
