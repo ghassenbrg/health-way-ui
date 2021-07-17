@@ -1,3 +1,4 @@
+import { TimeSheet } from './../../core/models/timeSheet.model';
 import { Insurance } from './../../core/models/insurance.model';
 import { Speciality } from '@models/specialty.model';
 import { Feedback } from './../../core/models/feedback.model';
@@ -28,6 +29,10 @@ export class DoctorProfileComponent implements OnInit {
   raiting: number;
   feedback: Feedback = new Feedback();;
   feedbackComment: string;
+  timeSheet: TimeSheet[];
+  businesHours: any[] = [];
+  newDate: Date = new Date();
+  todayBusinesHours: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -49,6 +54,28 @@ export class DoctorProfileComponent implements OnInit {
       this.prepareSpecialities();
       this.prepareInsurances();
       this.getDoctorReviews(this.doctorIdentifier);
+      this.getDoctorTimeSheet(this.doctorIdentifier);
+    }, err => {
+
+    })
+  }
+  
+  getDoctorTimeSheet(identifier) {
+    let daysOfWeeks: string[] = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+    let daysFromSunday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    this._doctorService.getDoctorTimeSheet(identifier).subscribe(res => {
+      this.timeSheet = res;
+      daysOfWeeks.forEach(dayy => {
+        if (this.timeSheet.find(timesheet => timesheet.day == dayy)) {
+          this.businesHours.push(this.timeSheet.find(timesheet => timesheet.day == dayy));
+        }
+        else {
+          this.businesHours.push({day: dayy});
+        }
+      })
+      let today = daysFromSunday[this.newDate.getDay()];
+      this.todayBusinesHours = this.businesHours.find(businesHour => businesHour.day == today);
+
     }, err => {
 
     })
@@ -115,8 +142,8 @@ export class DoctorProfileComponent implements OnInit {
   }
 
   addReview() {
-    this.feedback.doctor = this.doctorIdentifier;
-    this.feedback.patient = this.currentUserIdentifier;
+    this.feedback.doctor = +this.doctorIdentifier;
+    this.feedback.patient = +this.currentUserIdentifier;
     this._doctorService.addFeedback(this.feedback).subscribe(res => {
       this.feedback = new Feedback();
       this.getDoctorReviews(this.doctorIdentifier);

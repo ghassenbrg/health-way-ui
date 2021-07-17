@@ -40,7 +40,7 @@
                                     <i class="fas fa-star" [ngClass]="ratingAverage >= 3 ? 'filled' : ''"></i>
                                     <i class="fas fa-star" [ngClass]="ratingAverage >= 4 ? 'filled' : ''"></i>
                                     <i class="fas fa-star" [ngClass]="ratingAverage >= 5 ? 'filled' : ''"></i>
-                                    <span class="d-inline-block average-rating">({{doctor.feedbacks.length}})</span>
+                                    <span class="d-inline-block average-rating" *ngIf="feedbacks && feedbacks.length > 0">({{feedbacks.length}})</span>
                                 </div>
                                 <div class="clinic-details">
                                     <p class="doc-location"><i class="fas fa-map-marker-alt"></i>
@@ -117,13 +117,7 @@
                     <nav class="user-tabs mb-4">
                         <ul class="nav nav-tabs nav-tabs-bottom nav-justified">
                             <li class="nav-item">
-                                <a class="nav-link active" href="#doc_overview" data-toggle="tab">Overview</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#doc_locations" data-toggle="tab">Locations</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#doc_reviews" data-toggle="tab">Reviews</a>
+                                <a class="nav-link active" href="#doc_reviews" data-toggle="tab">Reviews</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#doc_business_hours" data-toggle="tab">Business Hours</a>
@@ -135,345 +129,11 @@
                     <!-- Tab Content -->
                     <div class="tab-content pt-0">
 
-                        <!-- Overview Content -->
-                        <div role="tabpanel" id="doc_overview" class="tab-pane fade show active">
-                            <div class="row">
-                                <div class="col-md-12 col-lg-9">
-
-                                    <!-- About Details -->
-                                    <div class="widget about-widget">
-                                        <h4 class="widget-title">About Me</h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                    </div>
-                                    <!-- /About Details -->
-
-                                    <!-- Education Details -->
-                                    <div class="widget education-widget">
-                                        <h4 class="widget-title">Education</h4>
-                                        <div class="experience-box">
-                                            <ul class="experience-list">
-                                                <li>
-                                                    <div class="experience-user">
-                                                        <div class="before-circle"></div>
-                                                    </div>
-                                                    <div class="experience-content">
-                                                        <div class="timeline-content">
-                                                            <a routerLink="#/" class="name">American Dental Medical University</a>
-                                                            <div>BDS</div>
-                                                            <span class="time">1998 - 2003</span>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="experience-user">
-                                                        <div class="before-circle"></div>
-                                                    </div>
-                                                    <div class="experience-content">
-                                                        <div class="timeline-content">
-                                                            <a routerLink="#/" class="name">American Dental Medical University</a>
-                                                            <div>MDS</div>
-                                                            <span class="time">2003 - 2005</span>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <!-- /Education Details -->
-
-                                    <!-- Experience Details -->
-                                    <div class="widget experience-widget">
-                                        <h4 class="widget-title">Work & Experience</h4>
-                                        <div class="experience-box">
-                                            <ul class="experience-list">
-                                                <li>
-                                                    <div class="experience-user">
-                                                        <div class="before-circle"></div>
-                                                    </div>
-                                                    <div class="experience-content">
-                                                        <div class="timeline-content">
-                                                            <a routerLink="#/" class="name">Glowing Smiles Family Dental Clinic</a>
-                                                            <span class="time">2010 - Present (5 years)</span>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="experience-user">
-                                                        <div class="before-circle"></div>
-                                                    </div>
-                                                    <div class="experience-content">
-                                                        <div class="timeline-content">
-                                                            <a routerLink="#/" class="name">Comfort Care Dental Clinic</a>
-                                                            <span class="time">2007 - 2010 (3 years)</span>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="experience-user">
-                                                        <div class="before-circle"></div>
-                                                    </div>
-                                                    <div class="experience-content">
-                                                        <div class="timeline-content">
-                                                            <a routerLink="#/" class="name">Dream Smile Dental Practice</a>
-                                                            <span class="time">2005 - 2007 (2 years)</span>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <!-- /Experience Details -->
-
-                                    <!-- Awards Details -->
-                                    <div class="widget awards-widget">
-                                        <h4 class="widget-title">Awards</h4>
-                                        <div class="experience-box">
-                                            <ul class="experience-list">
-                                                <li>
-                                                    <div class="experience-user">
-                                                        <div class="before-circle"></div>
-                                                    </div>
-                                                    <div class="experience-content">
-                                                        <div class="timeline-content">
-                                                            <p class="exp-year">July 2019</p>
-                                                            <h4 class="exp-title">Humanitarian Award</h4>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="experience-user">
-                                                        <div class="before-circle"></div>
-                                                    </div>
-                                                    <div class="experience-content">
-                                                        <div class="timeline-content">
-                                                            <p class="exp-year">March 2011</p>
-                                                            <h4 class="exp-title">Certificate for International Volunteer Service</h4>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="experience-user">
-                                                        <div class="before-circle"></div>
-                                                    </div>
-                                                    <div class="experience-content">
-                                                        <div class="timeline-content">
-                                                            <p class="exp-year">May 2008</p>
-                                                            <h4 class="exp-title">The Dental Professional of The Year Award</h4>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a ipsum tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <!-- /Awards Details -->
-
-                                    <!-- Services List -->
-                                    <div class="service-list">
-                                        <h4>Services</h4>
-                                        <ul class="clearfix">
-                                            <li>Tooth cleaning </li>
-                                            <li>Root Canal Therapy</li>
-                                            <li>Implants</li>
-                                            <li>Composite Bonding</li>
-                                            <li>Fissure Sealants</li>
-                                            <li>Surgical Extractions</li>
-                                        </ul>
-                                    </div>
-                                    <!-- /Services List -->
-
-                                    <!-- Specializations List -->
-                                    <div class="service-list">
-                                        <h4>Specializations</h4>
-                                        <ul class="clearfix">
-                                            <li>Children Care</li>
-                                            <li>Dental Care</li>
-                                            <li>Oral and Maxillofacial Surgery </li>
-                                            <li>Orthodontist</li>
-                                            <li>Periodontist</li>
-                                            <li>Prosthodontics</li>
-                                        </ul>
-                                    </div>
-                                    <!-- /Specializations List -->
-
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /Overview Content -->
-
-                        <!-- Locations Content -->
-                        <div role="tabpanel" id="doc_locations" class="tab-pane fade">
-
-                            <!-- Location List -->
-                            <div class="location-list">
-                                <div class="row">
-
-                                    <!-- Clinic Content -->
-                                    <div class="col-md-6">
-                                        <div class="clinic-content">
-                                            <h4 class="clinic-name"><a >Smile Cute Dental Care Center</a></h4>
-                                            <p class="doc-speciality">MDS - Periodontology and Oral Implantology, BDS</p>
-                                            <div class="rating">
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star"></i>
-                                                <span class="d-inline-block average-rating">(4)</span>
-                                            </div>
-                                            <div class="clinic-details mb-0">
-                                                <h5 class="clinic-direction"> <i class="fas fa-map-marker-alt"></i> 2286  Sundown Lane, Austin, Texas 78749, USA <br><a routerLink="javascript:void(0);">Get Directions</a></h5>
-                                                <ul>
-                                                    <li>
-                                                        <a routerLink="assets/img/features/feature-01.jpg" data-fancybox="gallery2">
-                                                            <img src="assets/img/features/feature-01.jpg" alt="Feature Image">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a routerLink="assets/img/features/feature-02.jpg" data-fancybox="gallery2">
-                                                            <img src="assets/img/features/feature-02.jpg" alt="Feature Image">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a routerLink="assets/img/features/feature-03.jpg" data-fancybox="gallery2">
-                                                            <img src="assets/img/features/feature-03.jpg" alt="Feature Image">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a routerLink="assets/img/features/feature-04.jpg" data-fancybox="gallery2">
-                                                            <img src="assets/img/features/feature-04.jpg" alt="Feature Image">
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- /Clinic Content -->
-
-                                    <!-- Clinic Timing -->
-                                    <div class="col-md-4">
-                                        <div class="clinic-timing">
-                                            <div>
-                                                <p class="timings-days">
-                                                    <span> Mon - Sat </span>
-                                                </p>
-                                                <p class="timings-times">
-                                                    <span>10:00 AM - 2:00 PM</span>
-                                                    <span>4:00 PM - 9:00 PM</span>
-                                                </p>
-                                            </div>
-                                            <div>
-                                            <p class="timings-days">
-                                                <span>Sun</span>
-                                            </p>
-                                            <p class="timings-times">
-                                                <span>10:00 AM - 2:00 PM</span>
-                                            </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- /Clinic Timing -->
-
-                                    <div class="col-md-2">
-                                        <div class="consult-price">
-                                            $250
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /Location List -->
-
-                            <!-- Location List -->
-                            <div class="location-list">
-                                <div class="row">
-
-                                    <!-- Clinic Content -->
-                                    <div class="col-md-6">
-                                        <div class="clinic-content">
-                                            <h4 class="clinic-name"><a >The Family Dentistry Clinic</a></h4>
-                                            <p class="doc-speciality">MDS - Periodontology and Oral Implantology, BDS</p>
-                                            <div class="rating">
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star filled"></i>
-                                                <i class="fas fa-star"></i>
-                                                <span class="d-inline-block average-rating">(4)</span>
-                                            </div>
-                                            <div class="clinic-details mb-0">
-                                                <p class="clinic-direction"> <i class="fas fa-map-marker-alt"></i> 2883  University Street, Seattle, Texas Washington, 98155 <br><a routerLink="javascript:void(0);">Get Directions</a></p>
-                                                <ul>
-                                                    <li>
-                                                        <a routerLink="assets/img/features/feature-01.jpg" data-fancybox="gallery2">
-                                                            <img src="assets/img/features/feature-01.jpg" alt="Feature Image">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a routerLink="assets/img/features/feature-02.jpg" data-fancybox="gallery2">
-                                                            <img src="assets/img/features/feature-02.jpg" alt="Feature Image">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a routerLink="assets/img/features/feature-03.jpg" data-fancybox="gallery2">
-                                                            <img src="assets/img/features/feature-03.jpg" alt="Feature Image">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a routerLink="assets/img/features/feature-04.jpg" data-fancybox="gallery2">
-                                                            <img src="assets/img/features/feature-04.jpg" alt="Feature Image">
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <!-- /Clinic Content -->
-
-                                    <!-- Clinic Timing -->
-                                    <div class="col-md-4">
-                                        <div class="clinic-timing">
-                                            <div>
-                                                <p class="timings-days">
-                                                    <span> Tue - Fri </span>
-                                                </p>
-                                                <p class="timings-times">
-                                                    <span>11:00 AM - 1:00 PM</span>
-                                                    <span>6:00 PM - 11:00 PM</span>
-                                                </p>
-                                            </div>
-                                            <div>
-                                                <p class="timings-days">
-                                                    <span>Sat - Sun</span>
-                                                </p>
-                                                <p class="timings-times">
-                                                    <span>8:00 AM - 10:00 AM</span>
-                                                    <span>3:00 PM - 7:00 PM</span>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- /Clinic Timing -->
-
-                                    <div class="col-md-2">
-                                        <div class="consult-price">
-                                            $350
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /Location List -->
-
-                        </div>
-                        <!-- /Locations Content -->
-
                         <!-- Reviews Content -->
-                        <div role="tabpanel" id="doc_reviews" class="tab-pane fade">
+                        <div role="tabpanel" id="doc_reviews" class="tab-pane fade show active">
 
                             <!-- Review Listing -->
-                            <div class="widget review-listing">
+                            <div class="widget review-listing" *ngIf="feedbacks && feedbacks.length > 0">
                                 <ul class="comments-list">
 
                                     <!-- Comment List -->
@@ -495,7 +155,9 @@
                                                             <i class="fas fa-star" [ngClass]="{'filled': feedback.rating >= 5}"></i>
                                                         </div>
                                                     </div>
-                                                    <p class="recommended"><i class="far fa-thumbs-up"></i> I recommend the doctor</p>
+                                                    <p class="recommended" *ngIf="feedback.rating >= 3">
+                                                        <i class="far fa-thumbs-up"></i> I recommend the doctor
+                                                    </p>
                                                     <p class="comment-content">
                                                         {{feedback.comment}}
                                                     </p>
@@ -575,56 +237,34 @@
                                 <div class="col-md-6 offset-md-3">
 
                                     <!-- Business Hours Widget -->
-                                    <div class="widget business-widget">
+                                    <div class="widget business-widget" *ngIf="businesHours && businesHours.length > 0">
                                         <div class="widget-content">
                                             <div class="listing-hours">
                                                 <div class="listing-day current">
-                                                    <div class="day">Today <span>5 Nov 2019</span></div>
+                                                    <div class="day">Today <span>{{newDate | date: 'mediumDate'}}</span></div>
                                                     <div class="time-items">
-                                                        <span class="open-status"><span class="badge bg-success-light">Open Now</span></span>
-                                                        <span class="time">07:00 AM - 09:00 PM</span>
+                                                        <span class="open-status">
+                                                            <span class="badge bg-success-light" *ngIf="todayBusinesHours.startTime && todayBusinesHours.endTime">
+                                                                Open Now
+                                                            </span>
+                                                            <span class="badge bg-danger-light" *ngIf="!todayBusinesHours.startTime && !todayBusinesHours.endTime">
+                                                                Closed
+                                                            </span>
+                                                        </span>
+                                                        <span class="time" *ngIf="todayBusinesHours.startTime && todayBusinesHours.endTime">
+                                                            {{todayBusinesHours.startTime.slice(0,5)}} - {{todayBusinesHours.endTime.slice(0,5)}}
+                                                        </span>
                                                     </div>
                                                 </div>
-                                                <div class="listing-day">
-                                                    <div class="day">Monday</div>
+                                                <div class="listing-day" *ngFor="let businesHour of businesHours">
+                                                    <div class="day">{{businesHour.day}}</div>
                                                     <div class="time-items">
-                                                        <span class="time">07:00 AM - 09:00 PM</span>
-                                                    </div>
-                                                </div>
-                                                <div class="listing-day">
-                                                    <div class="day">Tuesday</div>
-                                                    <div class="time-items">
-                                                        <span class="time">07:00 AM - 09:00 PM</span>
-                                                    </div>
-                                                </div>
-                                                <div class="listing-day">
-                                                    <div class="day">Wednesday</div>
-                                                    <div class="time-items">
-                                                        <span class="time">07:00 AM - 09:00 PM</span>
-                                                    </div>
-                                                </div>
-                                                <div class="listing-day">
-                                                    <div class="day">Thursday</div>
-                                                    <div class="time-items">
-                                                        <span class="time">07:00 AM - 09:00 PM</span>
-                                                    </div>
-                                                </div>
-                                                <div class="listing-day">
-                                                    <div class="day">Friday</div>
-                                                    <div class="time-items">
-                                                        <span class="time">07:00 AM - 09:00 PM</span>
-                                                    </div>
-                                                </div>
-                                                <div class="listing-day">
-                                                    <div class="day">Saturday</div>
-                                                    <div class="time-items">
-                                                        <span class="time">07:00 AM - 09:00 PM</span>
-                                                    </div>
-                                                </div>
-                                                <div class="listing-day closed">
-                                                    <div class="day">Sunday</div>
-                                                    <div class="time-items">
-                                                        <span class="time"><span class="badge bg-danger-light">Closed</span></span>
+                                                        <span class="time" *ngIf="businesHour.startTime && businesHour.endTime">
+                                                            {{businesHour.startTime.slice(0,5)}} - {{businesHour.endTime.slice(0,5)}}
+                                                        </span>
+                                                        <span class="time" *ngIf="!businesHour.startTime && !businesHour.endTime">
+                                                            <span class="badge bg-danger-light">Closed</span>
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
