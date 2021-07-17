@@ -37,4 +37,12 @@ export class PharmacySearchComponent implements OnInit {
   loadMore() {
     this.pageSize = this.pageSize + 2;
   }
+  booking:any []
+  bookingPcr(event) {
+    console.log(event);
+this.booking = event
+  }
+ /*  confirmPcr(){
+    this.servicesP.createPcr().subscribe
+  } */
 }

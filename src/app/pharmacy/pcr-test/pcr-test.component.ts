@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-pcr-test',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pcr-test.component.scss']
 })
 export class PcrTestComponent implements OnInit {
+  @Output() pcr: EventEmitter<any> = new EventEmitter();
 time :string;
 date : any;
 lname:string;
@@ -15,5 +16,9 @@ cin: number;
 
   ngOnInit(): void {
   }
-
+bookingPcr(){
+  this.pcr.emit({
+    time:this.time, date:this.date, lname:this.lname, fname:this.fname, cin: this.cin
+  })
+}
 }

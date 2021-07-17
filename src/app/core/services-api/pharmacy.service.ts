@@ -15,6 +15,9 @@ export class PharmacyService {
   createPharmacy(doctor: any): Observable<Pharmacy> {
     return this.http.post<Pharmacy>(`${basePath}/pharmacies`, doctor);
   }
+  createPcr(body): Observable<any> {
+    return this.http.post<any>(`${basePath}/api/reservations`,body );
+  }
 
   updatePharmacy(doctor: Pharmacy, id: string): Observable<Pharmacy> {
     return this.http.put<Pharmacy>(`${basePath}/pharmacies/${id}`, doctor);
