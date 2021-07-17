@@ -1,0 +1,53 @@
+<!-- Main Wrapper -->
+<div class="main-wrapper">
+
+
+  <!-- Breadcrumb -->
+
+  <!-- /Breadcrumb -->
+
+  <!-- Page Content -->
+  <div class="content">
+      <div class="container-fluid">
+
+          <div class="row">
+              <div class="col-md-12 col-lg-6 col-xl-4 theiaStickySidebar">
+
+                  <!-- Search Filter -->
+
+                  <!-- /Search Filter -->
+
+              </div>
+
+              <div class="col-md-12 col-lg-6   col-xl-5">
+
+                  <!-- Doctor Widget -->
+
+                    <div class="card">
+                      <div class="card-body">
+                        <ngx-charts-pie-grid
+                        [view]="view"
+                        [scheme]="colorScheme"
+                        [results]="single"
+                        (select)="onSelect($event)">
+                      </ngx-charts-pie-grid>
+                      </div>
+                  </div>
+
+                  <!-- /Doctor Widget -->
+
+
+
+
+
+
+              </div>
+          </div>
+
+      </div>
+
+  </div>
+  <!-- /Page Content -->
+
+</div>
+<!-- /Main Wrapper -->

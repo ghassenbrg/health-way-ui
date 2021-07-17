@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BlogDetailsComponent } from './blog/blog-details/blog-details.component';
 import { BlogGridComponent } from './blog/blog-grid/blog-grid.component';
 import { BlogListComponent } from './blog/blog-list/blog-list.component';
+import { BloodBankComponent } from './blood-bank/blood-bank.component';
 import { CalendarComponent } from './common/calendar/calendar.component';
 import { ChatComponent } from './common/chat/chat.component';
 import { ComponentsComponent } from './common/components/components.component';
@@ -118,6 +119,9 @@ const routes: Routes = [
       { path: 'cart', component: CartComponent },
       { path: 'product-checkout', component: ProductCheckoutComponent },
       { path: 'payment-success', component: PaymentSuccessComponent },
+
+      { path: 'blood-bank', component: BloodBankComponent },
+
 
       // Blog
       { path: 'blog-list', component: BlogListComponent },

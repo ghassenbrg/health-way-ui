@@ -123,10 +123,24 @@
                                     </div>
                                 </div>
                                 <div class="doc-info-right">
-                                    <div class="clinic-booking">
-                                        <a class="view-pro-btn" routerLink="pharmacy-details">PCR test</a>
-                                        <a class="apt-btn" routerLink="product-all">Vaccination</a>
-                                    </div>
+                                  <div class="clinic-booking">
+                                    <p-button icon="pi pi-calendar" (click)="showPcrDialog()" label="PCR test"></p-button><br><br><br>
+                                    <p-button icon="pi pi-calendar" (click)="showPcrDialogVacc()" label="Vaccination"></p-button>
+
+
+                                    <p-dialog header="Header" [(visible)]="displayBasic" [style]="{width: '50vw'}" [baseZIndex]="10000">
+                                        <app-pcr-test></app-pcr-test>
+                                        <ng-template pTemplate="footer">
+                                            <p-button icon="pi pi-check" (click)="displayBasic=false" label="Ok" styleClass="p-button-text"></p-button>
+                                        </ng-template>
+                                    </p-dialog>
+                                    <p-dialog header="Header" [(visible)]="displayBasicVacc" [style]="{width: '50vw'}" [baseZIndex]="10000">
+                                      <app-vaccination></app-vaccination>
+                                      <ng-template pTemplate="footer">
+                                          <p-button icon="pi pi-check" (click)="displayBasicVacc=false" label="Ok" styleClass="p-button-text"></p-button>
+                                      </ng-template>
+                                  </p-dialog>
+                                </div>
                                 </div>
                             </div>
                         </div>

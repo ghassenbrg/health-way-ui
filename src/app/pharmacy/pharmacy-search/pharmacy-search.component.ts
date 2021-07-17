@@ -11,6 +11,8 @@ export class PharmacySearchComponent implements OnInit {
   selectedCity: any;
   items: any[];
   constructor(private service : CommonService) { }
+  displayBasic:boolean=false;
+  displayBasicVacc:boolean=false;
 
   ngOnInit(): void {
     this.service.getCities().subscribe(cities =>{
@@ -18,5 +20,11 @@ export class PharmacySearchComponent implements OnInit {
 
     })
   }
+  showPcrDialog() {
+    this.displayBasic = true;
+}
+showPcrDialogVacc() {
+  this.displayBasicVacc = true;
+}
 
 }

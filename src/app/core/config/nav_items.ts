@@ -115,6 +115,10 @@ export const NAV_ITEMS: NavItem[] = [
     label: 'Pharmacy',
     path: 'pharmacy-search',
   },
+  {
+    label: 'Blood bank',
+    path: 'blood-bank',
+  },
 ];
 
 export const USER_MENU_ITEMS: NavItem[] = [
