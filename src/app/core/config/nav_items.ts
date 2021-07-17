@@ -27,34 +27,16 @@ export const DOCOTR_DASHBOARD_ITEMS: NavItemChild[] = [
     icon: 'fas fa-hourglass-start',
   },
   {
-    label: 'Invoices',
-    subPath: 'invoices',
-    path: 'doctor-dashboard/invoices',
-    icon: 'fas fa-file-invoice',
-  },
-  {
     label: 'Reviews',
     subPath: 'reviews',
     path: 'doctor-dashboard/reviews',
     icon: 'fas fa-star',
   },
   {
-    label: 'Message',
-    subPath: 'chat-doctor',
-    path: 'doctor-dashboard/chat-doctor',
-    icon: 'fas fa-comments',
-  },
-  {
     label: 'Profile Settings',
     subPath: 'doctor-profile-settings',
     path: 'doctor-dashboard/doctor-profile-settings',
     icon: 'fas fa-user-cog',
-  },
-  {
-    label: 'Social Media',
-    subPath: 'social-media',
-    path: 'doctor-dashboard/social-media',
-    icon: 'fas fa-share-alt',
   },
   {
     label: 'Change Password',
