@@ -11,26 +11,15 @@
       </div>
       <div class="pro-content">
           <h3 class="title">
-              <a routerLink="doctor-profile">Dr. {{doctor.firstName}} {{doctor.lastName}}</a>
+              <a (click)="viewDoctorProfile(doctor.id)">Dr. {{doctor.firstName}} {{doctor.lastName}}</a>
               <i class="fas fa-check-circle verified"></i>
           </h3>
           <p class="speciality">{{doctor.jobTitle}}</p>
-          <div class="rating">
-              <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 1 ? 'filled' : ''"></i>
-              <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 2 ? 'filled' : ''"></i>
-              <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 3 ? 'filled' : ''"></i>
-              <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 4 ? 'filled' : ''"></i>
-              <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 5 ? 'filled' : ''"></i>
-              <span class="d-inline-block average-rating">({{doctor.feedbacks.length}})</span>
-          </div>
           <ul class="available-info">
               <li>
                   <i class="fas fa-map-marker-alt"></i>
-                  <span *ngIf="doctor.city"> {{doctor.cityName}}</span>
-                  <span *ngIf="!doctor.city"> Address not mentioned</span>
-              </li>
-              <li>
-                  <i class="far fa-clock"></i> Available on Fri, 22 Mar
+                  <span *ngIf="doctor.cityName"> {{doctor.cityName}}</span>
+                  <span *ngIf="!doctor.cityName"> Address not mentioned</span>
               </li>
               <li>
                 <i class="fas fa-hand-holding-usd"></i>
@@ -43,6 +32,7 @@
                     No insurances defined
                 </span>
               </li>
+              <li><i class="far fa-comment"></i> {{doctor.feedbacks.length}} Feedback</li>
           </ul>
           <div class="row row-sm">
               <div class="col-6">

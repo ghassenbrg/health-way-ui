@@ -15,18 +15,18 @@
                         </h4>
                         <p class="doc-department">{{doctor.jobTitle}}</p>
                         <!-- <h5 class="doc-department"><img src="assets/img/specialities/specialities-05.png" class="img-fluid" alt="Speciality">Dentist</h5> -->
-                        <div class="rating">
+                        <!-- <div class="rating">
                             <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 1 ? 'filled' : ''"></i>
                             <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 2 ? 'filled' : ''"></i>
                             <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 3 ? 'filled' : ''"></i>
                             <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 4 ? 'filled' : ''"></i>
                             <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 5 ? 'filled' : ''"></i>
                             <span class="d-inline-block average-rating">({{doctor.feedbacks.length}})</span>
-                        </div>
+                        </div> -->
                         <div class="clinic-details">
                             <p class="doc-location"><i class="fas fa-map-marker-alt"></i>
-                                <span *ngIf="doctor.city"> {{doctor.cityName}}</span>
-                                <span *ngIf="!doctor.city"> Address not mentioned</span>
+                                <span *ngIf="doctor.cityName"> {{doctor.cityName}}</span>
+                                <span *ngIf="!doctor.cityName"> Address not mentioned</span>
                             </p>
                             <ul class="clinic-gallery">
                                 <li>
@@ -52,7 +52,7 @@
                             </ul>
                         </div>
                         <div class="clinic-services">
-                            <span *ngFor="let speciality of doctor.specialties">{{speciality.name}}</span>
+                            <span *ngFor="let speciality of doctor.specialtyNames">{{speciality}}</span>
                         </div>
                     </div>
                 </div>
@@ -61,8 +61,8 @@
                         <ul>
                             <li><i class="far fa-comment"></i> {{doctor.feedbacks.length}} Feedback</li>
                             <li><i class="fas fa-map-marker-alt"></i>
-                                <span *ngIf="doctor.city"> {{doctor.city}}</span>
-                                <span *ngIf="!doctor.city"> Address not mentioned</span></li>
+                                <span *ngIf="doctor.cityName"> {{doctor.cityName}}</span>
+                                <span *ngIf="!doctor.cityName"> Address not mentioned</span></li>
                             <li>
                                 <i class="fas fa-hand-holding-usd"></i>
                                 <span *ngIf="doctor.insuranceNames && doctor.insuranceNames.length > 0">

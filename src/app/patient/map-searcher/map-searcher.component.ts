@@ -1,3 +1,4 @@
+import { Speciality } from '@models/specialty.model';
 import { Insurance } from './../../core/models/insurance.model';
 import { CommonService } from './../../core/services/common.service';
 import { DOCTORS_MOCK } from '../../common/mocks/doctor.mock';
@@ -17,17 +18,12 @@ export class MapSearcherComponent implements OnInit {
   doctors: Doctor[];
   lat = 35.720065;
   lng = 10.649893;
-  filters: any[] = [
-    { name: 'Rating', code: 'NY' },
-    { name: 'Popular', code: 'RM' },
-    { name: 'Latest', code: 'LDN' },
-    { name: 'Free', code: 'IST' },
-  ];
   isListMode: boolean = false;
-  pageSize: number = 5;
+  pageSize: number = 6;
   cities: City[];
   insurances: Insurance[];
   citiesLocation: any = (cities as any).default;
+  specialities: Speciality[];
 
   constructor(
     private _commonService: CommonService,
@@ -42,6 +38,7 @@ export class MapSearcherComponent implements OnInit {
       this.doctors = res;
       this.prepareCities();
       this.prepareInsurances();
+      this.prepareSpecialities();
       this.initializeRating();
     }, err => {
 
@@ -71,13 +68,41 @@ export class MapSearcherComponent implements OnInit {
           this.doctors[i].insuranceNames = [];
           this.doctors[i].insurances.forEach(insurance => {
             insurance = this.getInsuranceId(insurance);
-            this.doctors[i].insuranceNames.push(this.insurances.find(insurance => insurance.id == +insurance).name);
+            if (this.insurances.find(insurance => insurance.id == +insurance)) {
+              this.doctors[i].insuranceNames.push(this.insurances.find(insurance => insurance.id == +insurance).name);
+            }
           })
         }
       }
     }, err => {
 
     })
+  }
+
+  prepareSpecialities() {
+    if (!this.specialities) {
+      this._commonService.getSpecialities().subscribe(res => {
+        this.specialities = res;
+        this.initializeSpeciality();
+      }, err => {
+
+      })
+    }
+    else {
+      this.initializeSpeciality();
+    }
+  }
+
+  initializeSpeciality() {
+    for (let i = 0; i < this.doctors.length; i++) {
+      if (this.doctors[i].specialties && this.doctors[i].specialties.length > 0) {
+        this.doctors[i].specialtyNames = [];
+        this.doctors[i].specialties.forEach(speciality => {
+          speciality = this.getSpecialityId(speciality);
+          this.doctors[i].specialtyNames.push(this.specialities.find(specialityDef => specialityDef.id == +speciality).name);
+        })
+      }
+    }
   }
 
   prepareCityLatLng() {
@@ -123,6 +148,15 @@ export class MapSearcherComponent implements OnInit {
   getInsuranceId(cityId) {
     if (cityId.includes('/api/insurances/')) {
       return cityId.replace('/api/insurances/', '');
+    }
+    else {
+      return cityId;
+    }
+  }
+
+  getSpecialityId(cityId) {
+    if (cityId.includes('/api/specialties/')) {
+      return cityId.replace('/api/specialties/', '');
     }
     else {
       return cityId;

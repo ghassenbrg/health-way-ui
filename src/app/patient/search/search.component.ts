@@ -20,12 +20,6 @@ export class SearchComponent implements OnInit {
   doctors: Doctor[];
   allDoctors: Doctor[];
   pageSize: number = 5;
-  filters: any[] = [
-    { name: 'Rating', code: 'NY' },
-    { name: 'Popular', code: 'RM' },
-    { name: 'Latest', code: 'LDN' },
-    { name: 'Free', code: 'IST' },
-  ];
   genders: any = [{name: 'Male', isSelected: false},{name: 'Female', isSelected: false}]
   maleCriteria: boolean;
   femaleCriteria: boolean;
