@@ -1,4 +1,4 @@
-<!-- <form>
+<!--
   <div class="row">
     <div class="col 12">
       <span class="p-float-label">
@@ -24,8 +24,9 @@
       </span>
     </div>
   </div>
-</form>
+
  -->
+ <form>
  <div class="card" >
   <div class="card-body">
       <div class="doctor-widget">
@@ -33,7 +34,7 @@
 
               <div class="doc-info-cont">
                 <span class="p-float-label">
-                  <input id="float-input" [(ngModel)]="cin" type="text" pInputText />
+                  <input id="float-input" (change)="bookingPcr()" [(ngModel)]="cin" [ngModelOptions]="{standalone: true}" type="text" pInputText />
                   <label for="float-input" >CIN</label>
                 </span><br>
 
@@ -41,18 +42,18 @@
                       <div class="clini-infos pt-3">
 
                         <span class="p-float-label">
-                          <input id="float-input" [(ngModel)]="fname" type="text" pInputText />
+                          <input id="float-input" (change)="bookingPcr()" [(ngModel)]="fname" [ngModelOptions]="{standalone: true}" type="text" pInputText />
                           <label for="float-input" >First Name</label>
                         </span><br>
                         <span class="p-float-label">
-                          <input id="float-input" [(ngModel)]="lname" type="text" pInputText />
+                          <input id="float-input" (change)="bookingPcr()" [(ngModel)]="lname" [ngModelOptions]="{standalone: true}" type="text" pInputText />
                           <label for="float-input" >Last Name</label>
                         </span><br>
                         <span class="p-float-label">
-                          <input id="float-input" [(ngModel)]="date" type="date" pInputDate />
+                          <input id="float-input" (change)="bookingPcr()" [(ngModel)]="date" [ngModelOptions]="{standalone: true}" type="date" pInputDate />
 
 
-                          <input id="float-input" [(ngModel)]="time" type="time" pInputText />
+                          <input id="float-input" (change)="bookingPcr()" [(ngModel)]="time" [ngModelOptions]="{standalone: true}" type="time" pInputText />
 
                         </span><br><br><br>
 
@@ -64,3 +65,4 @@
           </div>
       </div>
   </div>
+</form>

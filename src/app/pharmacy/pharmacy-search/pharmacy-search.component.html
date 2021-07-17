@@ -118,7 +118,7 @@
 
 
                                     <p-dialog header="Header" [(visible)]="displayBasic" [style]="{width: '50vw'}" [baseZIndex]="10000">
-                                        <app-pcr-test></app-pcr-test>
+                                        <app-pcr-test (pcr)="bookingPcr($event)"></app-pcr-test>
                                         <ng-template pTemplate="footer">
 
                                             <p-button icon="pi pi-check" (click)="displayBasic=false" label="Cancel" styleClass="p-button-text"></p-button>
