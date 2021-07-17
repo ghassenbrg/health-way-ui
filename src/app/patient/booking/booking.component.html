@@ -60,18 +60,13 @@
                             <h4 class="mb-1">{{newDate | date : 'longDate'}}</h4>
                             <p class="text-muted">{{newDate | date : 'EEEE'}}</p>
                         </div>
-                        <!-- <div class="col-12 col-sm-8 col-md-6 text-sm-right">
-                            <p-calendar [minDate]="newDate" [disabledDays]="[0,6]"
-                                [(ngModel)]="bookingDate" placeholder="Booking Date"
-                                [showIcon]="true" name="bookingDate"></p-calendar>
-                        </div> -->
                     </div>
                     <!-- Schedule Widget -->
-                    <div class="card booking-schedule schedule-widget">
+                    <div class="card booking-schedule schedule-widget" *ngIf="timeSheet && timeSheet.length > 0">
 
                         <!-- Schedule Header -->
                         <div class="schedule-header">
-                            <div class="row">
+                            <div class="row"  >
                                 <div class="col-md-12">
                                     <ul *ngIf="calendar && calendar.length > 0">
                                         <p-carousel [value]="calendar" [numVisible]="7" [numScroll]="1" [showIndicators]="false">
@@ -98,8 +93,12 @@
                                     </ul>
                                 </div>
                             </div>
+
                         </div>
 
+                    </div>
+                    <div class="no-data" *ngIf="!timeSheet || timeSheet.length == 0">
+                        No Timesheet Available
                     </div>
                     <!-- /Schedule Widget -->
 

@@ -15,4 +15,8 @@ export class AppointmentService {
   getAppointmentsByDoctor(doctorId: string): Observable<Appointment[]> {
     return this.http.get<Appointment[]>(`${basePath}/appointments?doctor.id=${doctorId}`);
   }
+
+  getAppointmentsByPatient(patientId: string): Observable<Appointment[]> {
+    return this.http.get<Appointment[]>(`${basePath}/appointments?patient.id=${patientId}`);
+  }
 }
