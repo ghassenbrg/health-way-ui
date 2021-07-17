@@ -122,7 +122,7 @@
                                         <ng-template pTemplate="footer">
 
                                             <p-button icon="pi pi-check" (click)="displayBasic=false" label="Cancel" styleClass="p-button-text"></p-button>
-                                            <p-button label="Submit" icon="pi pi-check"></p-button>
+                                            <p-button label="Submit" (click)="confirmPcr(pharmacie.id)" icon="pi pi-check"></p-button>
                                           </ng-template>
                                     </p-dialog>
                                     <p-dialog header="Header" [(visible)]="displayBasicVacc" [style]="{width: '50vw'}" [baseZIndex]="10000">
@@ -142,7 +142,7 @@
 
 
 
-                    <div class="load-more text-center" *ngIf="pharmacies.length > pageSize">
+                    <div class="load-more text-center" *ngIf="pharmacies && pharmacies.length > pageSize">
                         <a class="btn btn-primary btn-md" (click)="loadMore()">Load More</a>
                     </div>
                 </div>
