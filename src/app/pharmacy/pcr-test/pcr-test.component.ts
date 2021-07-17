@@ -6,7 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./pcr-test.component.scss']
 })
 export class PcrTestComponent implements OnInit {
-
+time :string;
+date : any;
+lname:string;
+fname: string;
+cin: number;
   constructor() { }
 
   ngOnInit(): void {
