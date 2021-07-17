@@ -14,14 +14,6 @@
                     </nav>
                     <h2 class="breadcrumb-title" *ngIf="doctors">{{doctors.length}} matches found</h2>
                 </div>
-                <div class="col-md-4 col-12 d-md-block d-none">
-                    <div class="sort-by">
-                        <span class="sort-title">Sort by</span>
-                        <span class="sortby-fliter">
-                            <p-dropdown [options]="filters" optionLabel="name" ></p-dropdown>
-                        </span>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -42,9 +34,9 @@
                         <div class="card-body">
                         <div class="filter-widget">
                             <h4>First Name</h4>
-                            <input type="text" [(ngModel)]="searchByFirstName" name="searchByFirstName" class="form-control floating">
+                            <input type="text" [(ngModel)]="searchByFirstName" placeholder="Search By First Name" name="searchByFirstName" class="form-control floating">
                             <h4 style="margin-top: 20px;">Last Name</h4>
-                            <input type="text" [(ngModel)]="searchByLastName" name="searchByLastName" class="form-control floating">
+                            <input type="text" [(ngModel)]="searchByLastName" placeholder="Search By Last Name" name="searchByLastName" class="form-control floating">
                         </div>
                         <div class="filter-widget">
                             <h4>Gender</h4>
@@ -98,14 +90,14 @@
                                             <!-- <h5 class="doc-department"><img src="assets/img/specialities/specialities-05.png" class="img-fluid" alt="Speciality">
                                                 Dentist
                                             </h5> -->
-                                            <div class="rating">
+                                            <!-- <div class="rating">
                                                 <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 1 ? 'filled' : ''"></i>
                                                 <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 2 ? 'filled' : ''"></i>
                                                 <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 3 ? 'filled' : ''"></i>
                                                 <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 4 ? 'filled' : ''"></i>
                                                 <i class="fas fa-star" [ngClass]="doctor.ratingAverage >= 5 ? 'filled' : ''"></i>
                                                 <span class="d-inline-block average-rating">({{doctor.feedbacks.length}})</span>
-                                            </div>
+                                            </div> -->
                                             <div class="clinic-details">
                                                 <p class="doc-location">
                                                     <i class="fas fa-map-marker-alt"></i>

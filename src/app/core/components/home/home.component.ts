@@ -44,7 +44,6 @@ export class HomeComponent implements OnInit {
     if (!this.specialities) {
       this._commonService.getSpecialities().subscribe(res => {
         this.specialities = res;
-        console.log(this.specialities)
       }, err => {
 
       })
@@ -56,7 +55,6 @@ export class HomeComponent implements OnInit {
   getDoctors() {
     this._doctorService.getAll().subscribe(res => {
       this.doctors = res;
-      console.log(this.doctors)
     }, err => {
 
     })

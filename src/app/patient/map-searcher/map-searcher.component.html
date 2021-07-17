@@ -22,9 +22,6 @@
                                         <i class="fas fa-bars"></i>
                                     </a>
                                 </div>
-                                <div class="sort-by d-sm-block d-none">
-                                    <p-dropdown [options]="filters" optionLabel="name" ></p-dropdown>
-                                </div>
                             </div>
                         </div>
 
@@ -32,7 +29,7 @@
                         <app-doctor-searcher-list *ngIf="isListMode" [doctors]="doctors" [pageSize]="pageSize"></app-doctor-searcher-list>
 
                         <div class="load-more text-center">
-                            <a class="btn btn-primary btn-sm" (click)="loadMore()" *ngIf="doctors.length + 1 != pageSize">Load More</a>
+                            <a class="btn btn-primary btn-sm" (click)="loadMore()" *ngIf="doctors.length > pageSize">Load More</a>
                         </div>
                     </div>
                     <div *ngIf="!doctors || (doctors && doctors.length == 0)" class="no-data">
@@ -56,7 +53,29 @@
                                 [label]="doctor.cityName">
         
                                 <agm-info-window>
-                                    <strong>InfoWindow content</strong>
+                                    <div class="doc-info-cont">
+                                        <a>Dr. {{doctor.firstName}} {{doctor.lastName}}</a>
+                                        <i class="fas fa-check-circle verified"  style="color: green; margin-left: 5px;"></i>
+                                        <p class="speciality">{{doctor.jobTitle}}</p>
+                                    </div>
+                                    <ul class="available-info">
+                                        <li>
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <span *ngIf="doctor.city"> {{doctor.cityName}}</span>
+                                            <span *ngIf="!doctor.city"> Address not mentioned</span>
+                                        </li>
+                                        <li>
+                                          <i class="fas fa-hand-holding-usd"></i>
+                                          <span *ngIf="doctor.insuranceNames && doctor.insuranceNames.length > 0">
+                                            <span *ngFor="let insurance of doctor.insuranceNames; let j = index">
+                                                {{insurance.name}}<span *ngIf="j < doctor.insuranceNames.length - 1">,</span>
+                                            </span>
+                                          </span>
+                                          <span *ngIf="!doctor.insuranceNames || (doctor.insuranceNames && doctor.insuranceNames.length == 0)">
+                                              No insurances defined
+                                          </span>
+                                        </li>
+                                    </ul>
                                 </agm-info-window>
 
                             </agm-marker>

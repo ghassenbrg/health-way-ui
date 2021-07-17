@@ -34,4 +34,27 @@ export class AppointmentService {
       `${basePath}/appointments?patient.id=${patientId}`
     );
   }
+
+  approveAppointment(appointment: Appointment, id): Observable<Appointment> {
+    const body: Appointment = this.clone(appointment);
+    body.patient = body.patient.id;
+    body.doctor = body.doctor.id;
+    body.status = 'Approved';
+    return this.http.put<Appointment>(`${basePath}/appointments/${id}`, body);
+  }
+
+  rejectAppointment(appointment: Appointment, id): Observable<Appointment> {
+    const body: Appointment = this.clone(appointment);
+    body.patient = body.patient.id;
+    body.doctor = body.doctor.id;
+    body.status = 'canceled';
+    return this.http.put<Appointment>(`${basePath}/appointments/${id}`, body);
+  }
+
+  clone(obj: any): any {
+    if (obj) {
+      return JSON.parse(JSON.stringify(obj));
+    }
+    return undefined;
+  }
 }
