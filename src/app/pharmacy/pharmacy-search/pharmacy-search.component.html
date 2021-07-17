@@ -97,7 +97,8 @@
                 <div class="col-md-12 col-lg-8 col-xl-9">
 
                     <!-- Doctor Widget -->
-                    <div class="card">
+                    <div  *ngFor="let pharmacie of pharmacies ; let i = index">
+                    <div class="card" *ngIf="i < pageSize">
                         <div class="card-body">
                             <div class="doctor-widget">
                                 <div class="doc-info-left">
@@ -107,16 +108,17 @@
                                         </a>
                                     </div>
                                     <div class="doc-info-cont">
-                                        <h4 class="doc-name mb-2"><a routerLink="pharmacy-details">pharmacy.name}}</a></h4>
+                                        <h4 class="doc-name mb-2"><a routerLink="pharmacy-details">{{pharmacie.name}}</a></h4>
 
                                         <div class="clinic-details">
                                             <div class="clini-infos pt-3">
 
-                                            <p class="doc-location mb-2"><i class="fas fa-phone-volume mr-1"></i> pharmacy.phone}}</p>
-                                            <p class="doc-location mb-2 text-ellipse"><i class="fas fa-map-marker-alt mr-1"></i> pharmacy.city}} </p>
-                                            <p class="doc-location mb-2 text-ellipse"><i class="fas fa-map-marker-alt mr-1"></i> pharmacy.adress}} </p>
+                                            <p class="doc-location mb-2"><i class="fas fa-phone-volume mr-1"></i> {{pharmacie.phoneNumber}}</p>
+                                            <p class="doc-location mb-2 text-ellipse"><i class="fas fa-map-marker-alt mr-1"></i> {{pharmacie.city}} </p>
+                                            <p class="doc-location mb-2 text-ellipse"><i class="fas fa-map-marker-alt mr-1"></i> {{pharmacie.address}} </p>
 
-                                            <p class="doc-location mb-2"><i class="fas fa-chevron-right mr-1"></i> pharmacy.timesheet}}</p>
+                                            <p class="doc-location mb-2"><i class="fas fa-chevron-right mr-1"></i> Open time: {{pharmacie.startTime}}</p>
+                                            <p class="doc-location mb-2"><i class="fas fa-sign-out-alt mr-1"></i> Close time: {{pharmacie.endTime}}</p>
 
                                             </div>
                                         </div>
@@ -144,15 +146,15 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div></div>
                     <!-- /Doctor Widget -->
 
 
 
 
 
-                    <div class="load-more text-center">
-                        <a class="btn btn-primary btn-md" routerLink="javascript:void(0);">Load More</a>
+                    <div class="load-more text-center" *ngIf="pharmacies.length > pageSize">
+                        <a class="btn btn-primary btn-md" (click)="loadMore()">Load More</a>
                     </div>
                 </div>
             </div>
